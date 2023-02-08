@@ -1,0 +1,142 @@
+\PassOptionsToPackage{table}{xcolor}
+\documentclass{article}
+\usepackage[colorlinks]{hyperref}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,tikz}
+\usepackage[final]{microtype}
+\usepackage{libertine}
+\usepackage[varqu]{zi4}
+\usepackage[libertine]{newtxmath}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{tabto}
+\usepackage[normalem]{ulem}
+
+\usetikzlibrary{shapes.multipart}
+
+% Seven colors safe for use color blindness.
+% Colors taken from doi:10.1038/nmeth.1618.
+\definecolor{cbOrange}{RGB}{230,159,0}
+\definecolor{cbSkyBlue}{RGB}{86,180,233}
+\definecolor{cbBluishGreen}{RGB}{0,158,115}
+\definecolor{cbBlue}{RGB}{0,114,178}
+\definecolor{cbVermillion}{RGB}{213,94,0}
+\definecolor{cbReddischPurple}{RGB}{204,121,167}
+\definecolor{cbYellow}{RGB}{240,228,66}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newenvironment{questions}{\begin{enumerate}
+\renewcommand{\theenumi}{P\arabic{problem}.\arabic{enumi}}}{\end{enumerate}}
+\newcommand{\HL}[1]{\textcolor{cbReddischPurple}{#1}}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\OOG}[1]{\mathord{\sim}#1}
+\DeclareMathOperator{\bdiv}{div}
+
+\newcommand{\BigO}[1]{\mathcal{O}\left(#1\right)}
+\newcommand{\BigOmega}[1]{\Omega\left(#1\right)}
+\newcommand{\BigTheta}[1]{\Theta\left(#1\right)}
+
+
+\newcommand{\True}{\texttt{true}}
+\newcommand{\False}{\texttt{false}}
+
+%% Tikz
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.pathreplacing,shapes.geometric,shapes.multipart,overlay-beamer-styles}
+\tikzset{
+    >=Stealth,
+    dot/.style={circle,scale=0.35,draw=black,fill=black},
+    stacked/.style={above,rectangle split,draw,rectangle split parts=#1,font=\strut,rectangle split part fill={none,black!10}},
+    centered/.append style={align=center}
+}
+
+
+% Algorithm
+\usepackage{algorithmic}
+\newcommand{\GETS}{:=}
+\newcommand{\VAR}[1]{\textit{#1\/}}
+\newcommand{\AName}[1]{\textsc{#1}}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Result:}}
+\newcommand{\CMT}[1]{\text{``#1''}}
+\renewcommand{\algorithmiccomment}[1]{\CMT{#1}}
+\newcommand{\INV}[1]{\emph{inv: } #1}
+\newcommand{\VF}[1]{\emph{bf: } #1}
+\makeatletter
+\newlength{\Algo@MyTabLength}
+\newcommand{\AlgoTabTo}[1]{%
+    \setlength{\Algo@MyTabLength}{#1}%
+    \addtolength{\Algo@MyTabLength}{-\ALC@tlm}%
+    \tabto{\Algo@MyTabLength}%
+}
+\newenvironment{myonlyalgo}[1][0]{
+    \vskip 5pt
+    \hrule
+    \smallskip
+    \begin{algorithmic}[1]
+    \setcounter{ALC@line}{#1}
+}{
+    \end{algorithmic}
+    \hrule
+    \vskip 5pt
+}
+\newenvironment{myalgo}[2][0]{
+    \vskip 5pt
+    \hrule
+    \smallskip
+    \noindent{\textbf{Algorithm} #2\textbf{:}}
+    \begin{algorithmic}[1]
+    \setcounter{ALC@line}{#1}
+}{
+    \end{algorithmic}
+    \hrule
+    \vskip 5pt
+}
+
+
+
+
+
+
+
+%% Metadata
+\newcommand{\Assignment}[1]{
+    \title{\vskip-2em%The standard article.cls package puts 2em whitespace on top of the title, undo this.
+           Assignment #1\\{\Large SFWRENG 2CO3: Data Structures and Algorithms--Winter 2023}}}
+\newcommand{\Deadline}[1]{
+    \author{Deadline: #1}
+}
+\date{{\normalsize
+    Department of Computing and Software\\
+    McMaster University
+}}
+
+\newcommand{\Warning}[1]{\textbf{\textcolor{red!80!black}{#1}}}
+\renewcommand{\labelitemi}{$\blacktriangleright$}
+
+\newcommand{\DEFAULTMSG}{
+Please read the \emph{Course Outline} for the general policies related to assignments.
+\begin{center}
+\Warning{Plagiarism is a \underline{\textit{\vphantom{y}serious academic offense}} and will be handled accordingly.}\\
+\Warning{All suspicions will be reported to the \underline{\textit{Office of Academic Integrity}}\\(in accordance with the \href{https://secretariat.mcmaster.ca/app/uploads/Academic-Integrity-Policy-1-1.pdf}{Academic Integrity Policy}).}
+\end{center}
+
+This assignment is an \emph{individual} assignment: do not submit work of others. All parts of your submission \emph{must} be your own work and be based on your own ideas and conclusions. Only \emph{discuss or share} any parts of your submissions with your TA or instructor.  You are \emph{responsible for protecting} your work: you are strongly advised to password-protect and lock your electronic devices (e.g., laptop) and to not share your logins with partners or friends! If you \emph{submit} work, then you are certifying that you have completed the work for this assignment by yourself. By submitting work, you agree to automated and manual plagiarism checking of all submitted work.
+
+\emph{Late submission policy}. Late submissions will receive a late penalty of 20\% on the score per day late (with a five hour grace period on the first day, e.g., to deal with technical issues) and submissions five days (or more) past the due date are not accepted. In case of technical issues while submitting, contact the instructor \emph{before} the deadline.}
+
+\newcommand{\SUBMITMSG}{\section*{Assignment Details}
+Write a report in which you solve each of the above problems. Your submission:
+\begin{enumerate}
+\item must be a \texttt{PDF} file;
+\item must have clearly labeled solutions to each of the stated problems;
+\item must be clearly presented;
+\item must \emph{not} be hand-written: prepare your report in \LaTeX{} or in a word processor such as Microsoft Word (that can print or exported to \texttt{PDF}).
+\end{enumerate}
+\Warning{Submissions that do not follow the above requirements will get a grade of zero.}}
+
+\newcommand{\DEFAULTGRADING}{\section*{Grading}
+Each problem counts equally toward the final grade of this assignment.
+}

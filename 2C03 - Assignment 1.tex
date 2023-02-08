@@ -49,9 +49,8 @@
  
  \usepackage{fancyhdr}
 \fancypagestyle{plain}{%  the preset of fancyhdr 
-    \fancyhf{} % clear all header and footer fields
-    \fancyfoot[L]{\thedate}
-    \fancyhead[L]{January 29th, 2023}
+    \fancyhead{} % clear all header fields
+    \fancyhead[L]{\thedate}
     \fancyhead[R]{\theauthor}
 }
 \makeatletter
@@ -177,7 +176,7 @@ def ListLength(L):
         # Base case: len = 0 and L is an empty list implies inv. (|L| = len = 0)
         # inv: |L| >= len >= 0
         while Exists(L, len) do # bf: |L| - len
-            # Given: invariant and Exists(L, len) -> L[len]
+            # Given: invariant and Exists(L, len) -> L[len] exists
             len = len + 1
             # Known: |L| >= len and |L| > len_old
         end while
@@ -200,7 +199,7 @@ def ListLength(L):
 \end{lstlisting}
 
 \noindent Every loop would be 4 operations, then +2 operations for the whole function.
-Therefore, complexity would be \\4N + 2, which is $\sim N$\\
+Therefore, complexity would be \\4N + 2, which is $\sim N$, where N = $|L|$\\
 
 \textbf{P2.2.} Sketch an algorithm that can determine the length of list \textit{L} in $\sim log _2
 (|L|)$ time. Include an argument as to why your algorithm is correct and terminates.\\
@@ -230,7 +229,8 @@ def BetterListLength(L):
 To begin, for loop 1, its complexity is $\sim\log_2 |L|$ since end doubles every time until it's larger than $|L|$
 
 For loop 2, its complexity would also be $\sim\log_2 |L|$, since it is similar to binary search. The difference between Loop 2 and binary search is the start and end values, and the conditional.
-Based on loop 1, we know $2^{i-1} < |L| <= 2^{i}$, where $i >= 0$ and $i \in \mathbb{N}$. And based off loop 1 we know $start = 2^{i-1}$ and $end = 2^{i}$. Due to this, we can say $end - start < |L|$.
+Based off loop 1 we know $start = 2^{i-1}$ and $end = 2^{i}$.
+We also know $2^{i-1} < |L| <= 2^{i}$, where $i >= 0$ and $i \in \mathbb{N}$, so $start < |L| <= end$. And due to this, we can say $end - start < |L|$ as long as $|L| >= 0$.
 Now, given a start and end, we check if the middle value exists in the list. If it does, then we get rid of the first half of the values we are checking (by setting start = middle), else we get rid of the second half of the values we are checking (by setting end = middle).
 In that case, we are always dividing the values we are checking in half, which is a $\sim\log_2 |L|$ algorithm.\\
 
@@ -322,13 +322,28 @@ holding all values originally in $B_1$ and $B_2$ (possibly destroying $B_1$ and 
 
 \noindent \textbf{Answer: }\\
 The bag can be implemented using a singly linked list, with both a first and last pointer.
-In order to define SetUnion, you would just need one assignment operation that assigns $B_1.last.next$ to $B_2.first$. This would make it have a complexity of constant time as there are only 2 operations in the whole function. The function would look similar to:
+In order to define SetUnion, you would just need one assignment operation that assigns $B_1.last.next$ to $B_2.first$, and one assignment to make $B_2.last$ be $B_1.last$ now. This would make it have a complexity of constant time as there are only 2 operations in the whole function. The function would look similar to:
 
+\pagebreak
+\textbf{Assuming B1 and B2 won't be destroyed}
 \begin{lstlisting}[language=Python]
     def SetUnion(B1, B2):
         B1.last.next = B2.first
+        B1.last = B2.last
         return B1
 \end{lstlisting}
+
+\textbf{Assuming B1 and B2 may be destroyed}
+\begin{lstlisting}[language=Python]
+    def SetUnion(B1, B2):
+        B3 = new LinkedList();
+        B3.first = B1.first
+        B1.last.next = B2.first
+        B3.last = B2.last
+        return B3
+\end{lstlisting}
+
+\textbf{Note:} I defined a new LinkedList as in the question, it mentions B1 or B2 can be destroyed, so setting it to a new B3 will ensure the return value will not be destroyed.
 
 \section*{Problem 4}
 The main difference between an array and a linked list is that arrays support random access
@@ -360,7 +375,7 @@ NOTE: N = i where i is the i-th value passed in.\\
 \noindent \textbf{Answer: }
 
 \begin{lstlisting}[language=Python]
-def BinarySearch:
+def BinarySearch(L, start, end, v):
     if start + 1 = end then
         return start if L[start] = v
     else
@@ -371,8 +386,21 @@ def BinarySearch:
             return BinarySearch(L, start, mid, v)
 \end{lstlisting}
 
-BinarySearch has a time complexity of $\sim \log_2n$. In this case, we have nested an N time complexity algorithm in it to get L[mid], so it would be $\sim \log_2N *N$ which is $\sim N\log_2N$
+BinarySearch has a time complexity of $\sim \log_2N$, where N = $|L|$ (length of the list). In this case, we have nested 
+an n (where n is the index you pass into the Get method) time complexity algorithm in it to get L[mid], so it would be 
+$\sim (mid)*\log_2|L|$, where mid is some constant times $|L|$.\\
 
-Look into the proability mid is anywhere in the list and then sum them up.
+\noindent Outer loop average case complexity = $\sim \log_2n$\\
+\noindent Inner loop (The Get(L,i) function) = \\
+\vspace*{5pt}$ \sum_{i=0}^{|L|-1} $ p(i is @ n-th value of array) * (complexity of one Get(L,i) call)\\
+\vspace*{5pt}$ = \sum_{i=0}^{|L|-1} \frac{1}{|L|} * (5i + 3)$\\
+\vspace*{5pt}$ = \frac{5}{|L|}*\sum_{i=0}^{|L|-1}i + \frac{1}{|L|}*\sum_{i=0}^{|L|-1}3$\\
+\vspace*{5pt}$ = \frac{5}{|L|}*\frac{|L|(|L|-1)}{2} + \frac{1}{|L|}*3(|L|)$\\
+\vspace*{5pt}$ = \frac{5(|L|-1)}{2} + 3$\\
+\vspace*{5pt}$ \sim |L|$\\
+
+Since the inner loop is nested within the outer loop, we multiply the two complexities to find the complexity of our algorithm, which will give us 
+$(\frac{5(|L|-1)}{2} + 3)\log|L| \sim |L|\log|L|$.
+
 
 \end{document}

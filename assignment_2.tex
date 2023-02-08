@@ -1,0 +1,133 @@
+\input{preamble.tex}
+\usepackage{forest}
+
+\Assignment{2}
+\Deadline{February 12, 2023}
+\begin{document}
+\maketitle
+\DEFAULTMSG{}
+
+\begin{problem}
+Assume we have a computer with infinite processor cores that can all operate at the same time. In an attempt to sort \emph{as fast as possible}, we make a \emph{parallelized} version of \AName{MergeSort} that uses multiple processor cores at the same time. To achieve this, we change the top-down merge-sort algorithm as follows:
+\begin{myalgo}{\AName{ParallelMergeSort}($L[\VAR{start}\dots\VAR{end})$)}
+    \IF{$\VAR{start} + 1 < \VAR{end}$}
+        \STATE $\VAR{mid} \GETS (start + end) \bdiv 2$.
+        \STATE Start \AName{ParallelMergeSort}($L[\VAR{start},\VAR{mid})$) on a fresh processor core $C$.
+        \STATE $L_2 \GETS \AName{ParallelMergeSort}(L[\VAR{mid}\dots\VAR{end}))$.
+        \STATE Wait until $C$ finished \AName{ParallelMergeSort}($L[\VAR{start},\VAR{mid})$), resulting in $L_1$.
+        \RETURN \AName{Merge}($L_1, L_2$).
+    \ELSE
+        \RETURN $L$.
+    \ENDIF
+\end{myalgo}
+Let $n = \abs{L}$ be the length of the list being sorted by \AName{ParallelMergeSort}.
+\begin{questions}
+\item Give a recurrence $T(n)$ for the runtime complexity of \AName{ParallelMergeSort} and solve the recurrence $T(n)$ by proving that $T(n) \OOG{e(n)}$ for some expression $e$ that uses $n$.\\
+\textbf{Answer:}\\
+\begin{center}
+\begin{forest}
+    for tree={
+      draw,
+      align=center
+    }
+    [N
+      [$\frac{N}{2}$
+        [$\frac{N}{4}$
+          [...]
+        ]
+        [$\frac{N}{4}$
+          [...]
+        ]
+      ]
+      [$\frac{N}{2}$
+        [$\frac{N}{4}$
+            [...]
+        ]
+        [$\frac{N}{4}$
+            [...]
+        ]
+      ]
+    ]
+  \end{forest}
+  \quad
+  \begin{tabular}{ c c c }
+    Number & Cost & Total\\
+    1 & $N$ & $1*N$\\
+    1 & $\frac{N}{2}$ & $1*\frac{N}{2}$\\
+    1 & $\frac{N}{4}$ & $1*\frac{N}{4}$\\
+    ... & ... & ...\\
+    1 & $\frac{N}{2^i}$ & $1*\frac{N}{2^i}$\\
+    --- & --- & ---\\
+     & & $2N$
+  \end{tabular}
+\end{center}
+
+As you can see, the tree shows that each step has $\frac{N}{2^i}$ cost. There is only 1 counted as they all occur in parallel, so unlike the cost complexity, the time complexity is as if the step is just run once. When you go to sum up all the steps, you can see that the steps will converge to 2N which is $\sim$ N. Note: $N + \frac{N}{2} + \frac{N}{4} + \frac{N}{8} +... = 2N$. Given N is not always a power of 2, we know that $O(N)$ is upper bounded by 2N and it must be lower bounded by N since the first step will always have a cost of N. This is enough to prove that the algorithm is $\sim N$.
+
+\item Provide a strict bound on the number of processor cores that \AName{ParallelMergeSort} uses (hence, how many different processor cores are used by \AName{ParallelMergeSort} at the same time).\\
+\textbf{Answer:}\\
+The number of processors is $2^{\log_2 N} = N$. This is because the recurrance tree proves to be $\log_2N$ height and each step has double the processors of the last step. On the last reccurance level, it will terminate as there is only 1 element in the List, so it will hit the else statement (rather than the if condition) and return the List. This is an assumption that N is a power of 2. Given N is not always a power of 2, we know the number of processors is in the range of $2^{\log_2 N-1} <= processors <= N$, which contains the min and max number of processors needed per level on the reccurance tree.
+\end{questions}
+\end{problem}
+
+\begin{problem}
+Consider the following recursive sorting algorithm.
+\begin{myalgo}{\AName{WeirdSort}($L$, $\VAR{start}$, $\VAR{end}$)}
+    \IF{$\VAR{end} - \VAR{start} = 2$}
+        \IF{$L[\VAR{start}] \geq L[\VAR{start} + 1]$}
+            \STATE Exchange $L[\VAR{start}]$ and $L[\VAR{start} + 1]$.
+        \ENDIF
+    \ELSIF{$\VAR{end} - \VAR{start} > 2$}
+        \STATE $k \GETS (\VAR{end} - \VAR{start}) \bdiv 3$.
+        \STATE \AName{WeirdSort}($L$, $\VAR{start}$, $\VAR{end} - k$).
+        \STATE \AName{WeirdSort}($L$, $\VAR{start} + k$, $\VAR{end}$).
+        \STATE \AName{WeirdSort}($L$, $\VAR{start}$, $\VAR{end} - k$).
+    \ENDIF
+\end{myalgo}
+Let $n = \abs{L}$ be the length of the list being sorted by \AName{WeirdSort}.
+
+\begin{questions}
+\item Is \AName{WeirdSort} a \emph{stable} sort algorithm? If yes, explain why. If no, show why not and indicate whether the algorithm can be made stable.
+\item Prove via induction that \AName{WeirdSort} will sort list $L$.
+\item Give a recurrence $T(n)$ for the runtime complexity of \AName{WeirdSort} and solve the recurrence $T(n)$ by proving that $T(n) \OOG{e(n)}$ for some expression $e$ that uses $n$.
+\end{questions}
+\end{problem}
+
+\begin{problem}
+Consider the following \AName{Partition} algorithm used by \AName{QuickSort} (this version of \AName{Partition} is based on the algorithm from the slides with the for-loop replaced by a while-loop).
+\begin{myalgo}{\AName{Partition}($L$, $\VAR{start}$, $\VAR{end}$)}
+    \STATE $v, i, j \GETS L[\VAR{start}], \VAR{start}, \VAR{start + 1}$.
+    \WHILE{$j \neq \VAR{end}$}\label{alg:while}
+        \IF{$L[j] \leq v$}
+            \STATE $i \GETS i + 1$.
+            \STATE Exchange $L[i]$ and $L[j]$.
+        \ENDIF
+        \STATE $j \GETS j + 1$.
+    \ENDWHILE
+    \STATE Exchange $L[i]$ and $L[\VAR{start}]$
+    \RETURN $i$.
+\end{myalgo}
+
+\begin{questions}
+    \item Illustrate the operations performed by \AName{Partition} on the array $A = [21, 45, 7, 12, 28, 11, 17]$. Show the content of $A$ after each execution of the loop body.
+    \item Provide pre-conditions and post-conditions for \AName{Partition} and provide an invariant and bound function for the while-loop at Line~\ref*{alg:while}. Prove the correctness of \AName{Partition}.
+    \item Argue how \AName{Partition} can be adjusted to run on singly linked lists $L$, while keeping a running time of $\OOG{\abs{L}}$.
+\end{questions}
+\end{problem}
+
+\begin{problem}
+Consider pairs $(x_i, y_i)$ such that $x_i$ is the time at which person $i = 0, 1, 2 , \dots$ enters the museum and $y_i$ is the time at which person $i$ leaves the museum.  You may assume that consecutive people enter the museum in order of increasing time ($x_0 \leq x_1 \leq \dots$).
+\begin{questions}
+\item Provide an algorithm \AName{MaxVisitors} that takes as input $L = [(x_0, y_0), \dots, (x_{N-1}, y_{N-1})]$ and computes in $\OOG{N \log N}$ the maximum number of visitors in the museum at any time.
+\item Argue why your algorithm \AName{MaxVisitors} is correct and has a runtime complexity of $\OOG{N \log N}$.
+\item Assume that the museum has a maximum capacity of $M$. Provide a datastructure with an operation \AName{PersonEnters}($x_i$, $y_i$) that computes in at-most $\OOG{\log M}$ the number of visitors in the museum when person $i$ enters the museum (for any number of persons).
+\item Argue why your algorithm \AName{PersonEnters} is correct and has a runtime complexity of $\OOG{\log M}$.
+\end{questions}
+
+\end{problem}
+
+
+\SUBMITMSG{}
+\DEFAULTGRADING{}
+
+\end{document}
