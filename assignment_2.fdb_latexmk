@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1675875986 "c:/Users/hadyi/Documents/coding/latex/assignment_2.tex" "assignment_2.pdf" "assignment_2" 1675875989 0
+["pdflatex"] 1675884979 "c:/Users/hadyi/Documents/coding/latex/assignment_2.tex" "assignment_2.pdf" "assignment_2" 1675884982 0
   "C:/Users/hadyi/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1675873682 178458 8bfd53e82ddc2877994aa831a9b74a4b ""
   "C:/Users/hadyi/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1673978299 10788010 a10daea7488c3b8878009af959880011 ""
   "C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/inconsolata/i4-t1-4.enc" 1557958141 7693 0f2dce6d313c82989ec3a67fc24df2a0 ""
@@ -114,6 +114,8 @@
   "C:/Users/hadyi/AppData/Local/Programs/MiKTeX/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex" 1621073245 5493 23e371e6fe3e7e42533d6d6c15662e0d ""
   "C:/Users/hadyi/AppData/Local/Programs/MiKTeX/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathreplacing.code.tex" 1621073245 1319 0b2de5126c6cbc295f0eb77f7344b34d ""
   "C:/Users/hadyi/AppData/Local/Programs/MiKTeX/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryfit.code.tex" 1621073245 3643 e2a4190a002bc73963fd3145b05b6002 ""
+  "C:/Users/hadyi/AppData/Local/Programs/MiKTeX/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarymatrix.code.tex" 1621073245 4202 b95061a2334c704bfa941fb8d5c0d0a2 ""
+  "C:/Users/hadyi/AppData/Local/Programs/MiKTeX/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex" 1621073245 3937 3f208572dd82c71103831da976d74f1a ""
   "C:/Users/hadyi/AppData/Local/Programs/MiKTeX/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.arrows.code.tex" 1621073245 410 048d1174dabde96757a5387b8f23d968 ""
   "C:/Users/hadyi/AppData/Local/Programs/MiKTeX/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.callouts.code.tex" 1621073245 1201 8bd51e254d3ecf0cd2f21edd9ab6f1bb ""
   "C:/Users/hadyi/AppData/Local/Programs/MiKTeX/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.code.tex" 1621073245 494 8de62576191924285b021f4fc4292e16 ""
@@ -267,10 +269,10 @@
   "C:/Users/hadyi/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/hadyi/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1656236890 56148 51a9a8571c07b9921892ae11063ae853 ""
   "C:/Users/hadyi/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
-  "assignment_2.aux" 1675875989 602 8984b3a82c3a4bdfb72a849ba02858c9 "pdflatex"
-  "assignment_2.out" 1675875988 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "assignment_2.tex" 1675875986 7146 f98d204c39807eea3ff64b24a6779c4b ""
-  "c:/Users/hadyi/Documents/coding/latex/assignment_2.tex" 1675875986 7146 f98d204c39807eea3ff64b24a6779c4b ""
+  "assignment_2.aux" 1675884982 602 f103651b68d66de3ac0bb2ea1dd6520b "pdflatex"
+  "assignment_2.out" 1675884981 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "assignment_2.tex" 1675884977 11939 a1cc62c86301cda3f07188f17b7c2608 ""
+  "c:/Users/hadyi/Documents/coding/latex/assignment_2.tex" 1675884977 11939 a1cc62c86301cda3f07188f17b7c2608 ""
   "preamble.tex" 1675873700 5673 d9ae028c83466b8f8f774f47dfcdfc94 ""
   (generated)
   "assignment_2.aux"

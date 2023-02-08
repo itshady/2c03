@@ -1370,6 +1370,10 @@ INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\Li
 INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\fonts\vf\public\newtx\ntxsy7.vf
 INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\txsys.tfm
 INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\txex-bar.tfm
+INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibrarypositioning.code.tex
+INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibrarypositioning.code.tex
+INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibrarymatrix.code.tex
+INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibrarymatrix.code.tex
 INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTB-tlf-t1.tfm
 INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex\latex\inconsolata\t1zi4.fd
 INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex\latex\inconsolata\t1zi4.fd
