@@ -116,8 +116,14 @@ Start of function
 
 \begin{tikzpicture}
 \matrix (A) [matrix of nodes, nodes={draw, minimum size=8mm},
-    column sep=-\pgflinewidth]{
+    column sep=-\pgflinewidth,
+    nodes={fill=gray!20},
+    column 1/.style={red!50, nodes={fill=yellow!20}},]{
     21 & 45 & 7 & 12 & 28 & 11 & 17\\};
+
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"v"}] in {1}
+    \draw [{Stealth}-, red!70] (A-1-\ni.north)--++(90:5mm) node[above] {\ntext};
     
     \foreach \i [evaluate=\i as \ni using {int(\i)},
     evaluate=\i as \ntext using {"i"}] in {1}
@@ -129,14 +135,22 @@ Start of function
 
 \end{tikzpicture}
 \\
-constant v = 21\\
 
-Start of loop\\
-\\Loop 1\\
+Start of loop\\\\
+Did not enter if statement\\
+End Loop 1\\
 \begin{tikzpicture}
 \matrix (A) [matrix of nodes, nodes={draw, minimum size=8mm},
-    column sep=-\pgflinewidth]{
+    column sep=-\pgflinewidth,
+    nodes={fill=gray!20},
+    column 1/.style={red!50, nodes={fill=yellow!20}},
+    column 2/.style={black, nodes={fill=blue!20}},
+    ]{
     21 & 45 & 7 & 12 & 28 & 11 & 17\\};
+
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"v"}] in {1}
+    \draw [{Stealth}-, red!70] (A-1-\ni.north)--++(90:5mm) node[above] {\ntext};
     
     \foreach \i [evaluate=\i as \ni using {int(\i)},
     evaluate=\i as \ntext using {"i"}] in {1}
@@ -148,11 +162,20 @@ Start of loop\\
 
 \end{tikzpicture}
 
-Loop 2\\
+Entered if statement\\
+End Loop 2\\
 \begin{tikzpicture}
 \matrix (A) [matrix of nodes, nodes={draw, minimum size=8mm},
-    column sep=-\pgflinewidth]{
+    column sep=-\pgflinewidth,
+    nodes={fill=gray!20},
+    column 1/.style={red!50, nodes={fill=yellow!20}},
+    column 2/.style={black, nodes={fill=green!20}},
+    column 3/.style={black, nodes={fill=blue!20}},]{
     21 & 7 & 45 & 12 & 28 & 11 & 17\\};
+    
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"v"}] in {1}
+    \draw [{Stealth}-, red!70] (A-1-\ni.north)--++(90:5mm) node[above] {\ntext};
     
     \foreach \i [evaluate=\i as \ni using {int(\i)},
     evaluate=\i as \ntext using {"i"}] in {2}
@@ -164,11 +187,21 @@ Loop 2\\
 
 \end{tikzpicture}
 
-Loop 3\\
+Entered if statement\\
+End Loop 3\\
 \begin{tikzpicture}
 \matrix (A) [matrix of nodes, nodes={draw, minimum size=8mm},
-    column sep=-\pgflinewidth]{
+    column sep=-\pgflinewidth,
+    nodes={fill=gray!20},
+    column 1/.style={red!50, nodes={fill=yellow!20}},
+    column 2/.style={black, nodes={fill=green!20}},
+    column 3/.style={black, nodes={fill=green!20}},
+    column 4/.style={black, nodes={fill=blue!20}},]{
     21 & 7 & 12 & 45 & 28 & 11 & 17\\};
+
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"v"}] in {1}
+    \draw [{Stealth}-, red!70] (A-1-\ni.north)--++(90:5mm) node[above] {\ntext};
     
     \foreach \i [evaluate=\i as \ni using {int(\i)},
     evaluate=\i as \ntext using {"i"}] in {3}
@@ -180,11 +213,22 @@ Loop 3\\
 
 \end{tikzpicture}
 
-Loop 4\\
+Did not enter if statement\\
+End Loop 4\\
 \begin{tikzpicture}
 \matrix (A) [matrix of nodes, nodes={draw, minimum size=8mm},
-    column sep=-\pgflinewidth]{
+    column sep=-\pgflinewidth,
+    nodes={fill=gray!20},
+    column 1/.style={red!50, nodes={fill=yellow!20}},
+    column 2/.style={black, nodes={fill=green!20}},
+    column 3/.style={black, nodes={fill=green!20}},
+    column 4/.style={black, nodes={fill=blue!20}},
+    column 5/.style={black, nodes={fill=blue!20}},]{
     21 & 7 & 12 & 45 & 28 & 11 & 17\\};
+
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"v"}] in {1}
+    \draw [{Stealth}-, red!70] (A-1-\ni.north)--++(90:5mm) node[above] {\ntext};
     
     \foreach \i [evaluate=\i as \ni using {int(\i)},
     evaluate=\i as \ntext using {"i"}] in {3}
@@ -196,12 +240,24 @@ Loop 4\\
 
 \end{tikzpicture}
 
-Loop 5\\
+Entered if statement\\
+End Loop 5\\
 \begin{tikzpicture}
 \matrix (A) [matrix of nodes, nodes={draw, minimum size=8mm},
-    column sep=-\pgflinewidth]{
+    column sep=-\pgflinewidth,
+    nodes={fill=gray!20},
+    column 1/.style={red!50, nodes={fill=yellow!20}},
+    column 2/.style={black, nodes={fill=green!20}},
+    column 3/.style={black, nodes={fill=green!20}},
+    column 4/.style={black, nodes={fill=green!20}},
+    column 5/.style={black, nodes={fill=blue!20}},
+    column 6/.style={black, nodes={fill=blue!20}},]{
     21 & 7 & 12 & 11 & 28 & 45 & 17\\};
     
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"v"}] in {1}
+    \draw [{Stealth}-, red!70] (A-1-\ni.north)--++(90:5mm) node[above] {\ntext};
+
     \foreach \i [evaluate=\i as \ni using {int(\i)},
     evaluate=\i as \ntext using {"i"}] in {4}
     \draw [{Stealth}-, red!70] (A-1-\ni.south west)--++(-90:5mm) node[below] {\ntext};
@@ -212,11 +268,24 @@ Loop 5\\
 
 \end{tikzpicture}
 
-Loop 6\\
+Entered if statement\\
+End Loop 6\\
 \begin{tikzpicture}
 \matrix (A) [matrix of nodes, nodes={draw, minimum size=8mm},
-    column sep=-\pgflinewidth]{
+    column sep=-\pgflinewidth,
+    nodes={fill=gray!20},
+    column 1/.style={red!50, nodes={fill=yellow!20}},
+    column 2/.style={black, nodes={fill=green!20}},
+    column 3/.style={black, nodes={fill=green!20}},
+    column 4/.style={black, nodes={fill=green!20}},
+    column 5/.style={black, nodes={fill=green!20}},
+    column 6/.style={black, nodes={fill=blue!20}},
+    column 7/.style={black, nodes={fill=blue!20}},]{
     21 & 7 & 12 & 11 & 17 & 45 & 28\\};
+
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"v"}] in {1}
+    \draw [{Stealth}-, red!70] (A-1-\ni.north)--++(90:5mm) node[above] {\ntext};
     
     \foreach \i [evaluate=\i as \ni using {int(\i)},
     evaluate=\i as \ntext using {"i"}] in {5}
@@ -232,8 +301,20 @@ End of loop\\
 Exchange L[i] and L[start]\\
 \begin{tikzpicture}
 \matrix (A) [matrix of nodes, nodes={draw, minimum size=8mm},
-    column sep=-\pgflinewidth]{
+    column sep=-\pgflinewidth,
+    nodes={fill=gray!20},
+    column 5/.style={red!50, nodes={fill=yellow!20}},
+    column 2/.style={black, nodes={fill=green!20}},
+    column 3/.style={black, nodes={fill=green!20}},
+    column 4/.style={black, nodes={fill=green!20}},
+    column 1/.style={black, nodes={fill=green!20}},
+    column 6/.style={black, nodes={fill=blue!20}},
+    column 7/.style={black, nodes={fill=blue!20}},]{
     17 & 7 & 12 & 11 & 21 & 45 & 28\\};
+
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"v"}] in {5}
+    \draw [{Stealth}-, red!70] (A-1-\ni.north)--++(90:5mm) node[above] {\ntext};
     
     \foreach \i [evaluate=\i as \ni using {int(\i)},
     evaluate=\i as \ntext using {"i"}] in {5}
@@ -246,11 +327,22 @@ Exchange L[i] and L[start]\\
 \end{tikzpicture}
 
 
+    \item Provide pre-conditions and post-conditions for \AName{Partition} and provide an invariant and bound function for the while-loop at Line~\ref*{alg:while}. Prove the correctness of \AName{Partition}.\\
+Pre-condition:
+\begin{enumerate}
+    \item[-] $|L| > 1$, else L[start] would error
+\end{enumerate}
+Post-condition:
+\begin{enumerate}
+    \item[-] All elements to the left of v are smaller than or equal to v, all elements to the right of v are larger than v, v is in the middle of the smaller and larger elements.
+    \item[-] The input array is the same length as the output array and contains the same values (not necessarily in the same order)
+\end{enumerate}
+Loop Invariant:
+\begin{enumerate}
+    \item[-] All elements to the left of v are smaller than or equal to v, all elements to the right of v are larger than v, v is in the middle of the smaller and larger elements.
+    \item[-] The input array is the same length as the output array and contains the same values (not necessarily in the same order)
+\end{enumerate}
 
-
-
-    
-    \item Provide pre-conditions and post-conditions for \AName{Partition} and provide an invariant and bound function for the while-loop at Line~\ref*{alg:while}. Prove the correctness of \AName{Partition}.
     \item Argue how \AName{Partition} can be adjusted to run on singly linked lists $L$, while keeping a running time of $\OOG{\abs{L}}$.
 \end{questions}
 \end{problem}
