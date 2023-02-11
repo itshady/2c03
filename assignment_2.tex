@@ -1,5 +1,15 @@
 \input{preamble.tex}
 \usepackage{forest}
+\usepackage{graphicx}
+\definecolor{cbOrange}{RGB}{230,159,0}
+\definecolor{cbSkyBlue}{RGB}{86,180,233}
+\definecolor{cbBluishGreen}{RGB}{0,158,115}
+\definecolor{cbBlue}{RGB}{0,114,178}
+\definecolor{cbVermillion}{RGB}{213,94,0}
+\definecolor{cbReddischPurple}{RGB}{204,121,167}
+\definecolor{cbYellow}{RGB}{240,228,66}
+\usetikzlibrary{positioning,matrix, arrows.meta}
+
 
 \Assignment{2}
 \Deadline{February 12, 2023}
@@ -87,9 +97,307 @@ Consider the following recursive sorting algorithm.
 Let $n = \abs{L}$ be the length of the list being sorted by \AName{WeirdSort}.
 
 \begin{questions}
-\item Is \AName{WeirdSort} a \emph{stable} sort algorithm? If yes, explain why. If no, show why not and indicate whether the algorithm can be made stable.
-\item Prove via induction that \AName{WeirdSort} will sort list $L$.
-\item Give a recurrence $T(n)$ for the runtime complexity of \AName{WeirdSort} and solve the recurrence $T(n)$ by proving that $T(n) \OOG{e(n)}$ for some expression $e$ that uses $n$.
+\item Is \AName{WeirdSort} a \emph{stable} sort algorithm? If yes, explain why. If no, show why not and indicate whether the algorithm can be made stable.\\
+\textbf{Answer:}\\
+This is not a stable sort algorithm as in line 2, if the earlier element is equal to the next element, they get swapped. To make this a stable algorithm, change $\geq$ to $>$.
+\item Prove via induction that \AName{WeirdSort} will sort list $L$.\\
+\textbf{Answer:}\\
+\includegraphics[scale=0.5]{question2.png}
+
+Base case 1: $0<= end - start = 2$ values\\
+In this case, it will hit the first if statement and sort the 2 values based on which is largest, then return. There is no recursion in this case.\\
+
+Base case 2: $0<= end - start = 3$ values\\
+This is the lowest amount of values where there will be recursion. This will result in $k = (3-0)/3 = 1$\\
+Induction Hypothesis: WeirdSort sorts $0<= end - start < n$ values correct.\\
+Induction Step: Prove WeirdSort sorts $end - start = n$ values\\
+
+To start, assume $|L| = 3n, n \in \mathbb{N}, n > 0$ ($|L|$ is a multiple of 3). k will always give us $\frac{1}{3} |L|$, so each WeirdSort call will be $\frac{2}{3}$ of L. Since our base case 2 shows that $k>=1$ always, this means the lists drawn for the 3 WeirdSort calls will be at least 1 smaller than the input array. Given this, we can see that, assuming WeirdSort can sort $<n$ values via IH, WeirdSort call 1 will sort the largest $\frac{1}{3}$ values of L into the middle third of L (second half of L in WeirdSort call 1). WeirdSort call 2 will then take those largest numbers sorted in the first call and sort then with the remaining $\frac{1}{3}$ values. By the end of this call, the largest $\frac{1}{3}$ values in L will be sorted at the end of the list. WeirdSort call 3 will then sort the last (and smallest) $\frac{2}{3}$ values.\\
+
+The following is looking at the case where the largest values are at the start of the list and the smallest at the end (assume reverse ordered list). You can see that there are enough of the largest values moved to the end of the first WeirdSort call, so that they can be sorted to the end of the list. This is because as seen by the final WeirdSort call, you only need to move the $\frac{1}{3}$ largest values to the last $\frac{2}{3}$ of the list, in order for them to be sorted to the end of the list. The final WeirdSort call will handle the rest.\\
+
+Start of WeirdSort call 1\\
+\begin{tikzpicture}
+\matrix (A) [matrix of nodes, nodes={draw, minimum size=8mm},
+    column sep=-\pgflinewidth,
+    nodes={fill=gray!20},
+    column 1/.style={blue, nodes={fill=teal!20}},
+    column 2/.style={blue, nodes={fill=teal!20}},
+    column 3/.style={blue, nodes={fill=teal!20}},
+    column 4/.style={blue, nodes={fill=teal!20}},
+    column 5/.style={blue, nodes={fill=teal!20}},
+    column 6/.style={blue, nodes={fill=teal!20}},
+    ]{
+    9 & 8 & 7 & 6 & 5 & 4 & 3 & 2 & 1\\};
+
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"end-k"}] in {6}
+    \draw [{Stealth}-, red!70] (A-1-\ni.north east)--++(90:5mm) node[above] {\ntext};
+    
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"start"}] in {1}
+    \draw [{Stealth}-, red!70] (A-1-\ni.south west)--++(-90:5mm) node[below] {\ntext};
+
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"end"}] in {9}
+    \draw [{Stealth}-, red!70] (A-1-\ni.south east)--++(-90:5mm) node[below] {\ntext};
+
+\end{tikzpicture}
+
+End of WeirdSort call 1\\
+\begin{tikzpicture}
+\matrix (A) [matrix of nodes, nodes={draw, minimum size=8mm},
+    column sep=-\pgflinewidth,
+    nodes={fill=gray!20},
+    column 1/.style={blue, nodes={fill=teal!20}},
+    column 2/.style={blue, nodes={fill=teal!20}},
+    column 3/.style={blue, nodes={fill=teal!20}},
+    column 4/.style={blue, nodes={fill=teal!20}},
+    column 5/.style={blue, nodes={fill=teal!20}},
+    column 6/.style={blue, nodes={fill=teal!20}},
+    ]{
+    4 & 5 & 6 & 7 & 8 & 9 & 3 & 2 & 1\\};
+
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"end-k"}] in {6}
+    \draw [{Stealth}-, red!70] (A-1-\ni.north east)--++(90:5mm) node[above] {\ntext};
+    
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"start"}] in {1}
+    \draw [{Stealth}-, red!70] (A-1-\ni.south west)--++(-90:5mm) node[below] {\ntext};
+
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"end"}] in {9}
+    \draw [{Stealth}-, red!70] (A-1-\ni.south east)--++(-90:5mm) node[below] {\ntext};
+
+\end{tikzpicture}
+
+Start of WeirdSort call 2\\
+\begin{tikzpicture}
+\matrix (A) [matrix of nodes, nodes={draw, minimum size=8mm},
+    column sep=-\pgflinewidth,
+    nodes={fill=gray!20},
+    column 9/.style={blue, nodes={fill=teal!20}},
+    column 8/.style={blue, nodes={fill=teal!20}},
+    column 7/.style={blue, nodes={fill=teal!20}},
+    column 4/.style={blue, nodes={fill=teal!20}},
+    column 5/.style={blue, nodes={fill=teal!20}},
+    column 6/.style={blue, nodes={fill=teal!20}},
+    ]{
+    4 & 5 & 6 & 7 & 8 & 9 & 3 & 2 & 1\\};
+
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"start+k"}] in {3}
+    \draw [{Stealth}-, red!70] (A-1-\ni.north east)--++(90:5mm) node[above] {\ntext};
+    
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"start"}] in {1}
+    \draw [{Stealth}-, red!70] (A-1-\ni.south west)--++(-90:5mm) node[below] {\ntext};
+
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"end"}] in {9}
+    \draw [{Stealth}-, red!70] (A-1-\ni.south east)--++(-90:5mm) node[below] {\ntext};
+
+\end{tikzpicture}
+
+End of WeirdSort call 2\\
+\begin{tikzpicture}
+\matrix (A) [matrix of nodes, nodes={draw, minimum size=8mm},
+    column sep=-\pgflinewidth,
+    nodes={fill=gray!20},
+    column 9/.style={blue, nodes={fill=teal!20}},
+    column 8/.style={blue, nodes={fill=teal!20}},
+    column 7/.style={blue, nodes={fill=teal!20}},
+    column 4/.style={blue, nodes={fill=teal!20}},
+    column 5/.style={blue, nodes={fill=teal!20}},
+    column 6/.style={blue, nodes={fill=teal!20}},
+    ]{
+    4 & 5 & 6 & 1 & 2 & 3 & 7 & 8 & 9\\};
+
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"start+k"}] in {3}
+    \draw [{Stealth}-, red!70] (A-1-\ni.north east)--++(90:5mm) node[above] {\ntext};
+    
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"start"}] in {1}
+    \draw [{Stealth}-, red!70] (A-1-\ni.south west)--++(-90:5mm) node[below] {\ntext};
+
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"end"}] in {9}
+    \draw [{Stealth}-, red!70] (A-1-\ni.south east)--++(-90:5mm) node[below] {\ntext};
+
+\end{tikzpicture}
+
+Start of WeirdSort call 3\\
+\begin{tikzpicture}
+\matrix (A) [matrix of nodes, nodes={draw, minimum size=8mm},
+    column sep=-\pgflinewidth,
+    nodes={fill=gray!20},
+    column 1/.style={blue, nodes={fill=teal!20}},
+    column 2/.style={blue, nodes={fill=teal!20}},
+    column 3/.style={blue, nodes={fill=teal!20}},
+    column 4/.style={blue, nodes={fill=teal!20}},
+    column 5/.style={blue, nodes={fill=teal!20}},
+    column 6/.style={blue, nodes={fill=teal!20}},
+    ]{
+    4 & 5 & 6 & 1 & 2 & 3 & 7 & 8 & 9\\};
+
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"end-k"}] in {6}
+    \draw [{Stealth}-, red!70] (A-1-\ni.north east)--++(90:5mm) node[above] {\ntext};
+    
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"start"}] in {1}
+    \draw [{Stealth}-, red!70] (A-1-\ni.south west)--++(-90:5mm) node[below] {\ntext};
+
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"end"}] in {9}
+    \draw [{Stealth}-, red!70] (A-1-\ni.south east)--++(-90:5mm) node[below] {\ntext};
+
+\end{tikzpicture}
+
+End of WeirdSort call 3\\
+\begin{tikzpicture}
+\matrix (A) [matrix of nodes, nodes={draw, minimum size=8mm},
+    column sep=-\pgflinewidth,
+    nodes={fill=gray!20},
+    column 1/.style={blue, nodes={fill=teal!20}},
+    column 2/.style={blue, nodes={fill=teal!20}},
+    column 3/.style={blue, nodes={fill=teal!20}},
+    column 4/.style={blue, nodes={fill=teal!20}},
+    column 5/.style={blue, nodes={fill=teal!20}},
+    column 6/.style={blue, nodes={fill=teal!20}},
+    ]{
+    1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9\\};
+
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"end-k"}] in {6}
+    \draw [{Stealth}-, red!70] (A-1-\ni.north east)--++(90:5mm) node[above] {\ntext};
+    
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"start"}] in {1}
+    \draw [{Stealth}-, red!70] (A-1-\ni.south west)--++(-90:5mm) node[below] {\ntext};
+
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"end"}] in {9}
+    \draw [{Stealth}-, red!70] (A-1-\ni.south east)--++(-90:5mm) node[below] {\ntext};
+
+\end{tikzpicture}
+
+Now given that $|L|$ is not a multiple of 3, there are two cases: $|L|=3n+1$ and $|L|=3n+2$. For both of these cases, there will be more values pushed to the end of the list in WeirdSort call 1, for WerirdSort call 2 to move to the end of the list. This is because k always rounds down, so the subsequent lists from WeirdSort calls will be bigger. More formally, for this to occur $|L[start+k,end-k)| >= L[end-k,end)$ An example can be seen below given\\
+
+$|L|=3n+1$\\
+\begin{tikzpicture}
+\matrix (A) [matrix of nodes, nodes={draw, minimum size=8mm},
+    column sep=-\pgflinewidth,
+    nodes={fill=gray!20},
+    ]{
+    1 & 2 & 3 & 4 & 5 & 6 & 7\\};
+
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"start+k"}] in {2}
+    \draw [{Stealth}-, red!70] (A-1-\ni.north east)--++(90:5mm) node[above] {\ntext};
+    
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"end-k"}] in {5}
+    \draw [{Stealth}-, red!70] (A-1-\ni.north east)--++(90:5mm) node[above] {\ntext};
+    
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"start"}] in {1}
+    \draw [{Stealth}-, red!70] (A-1-\ni.south west)--++(-90:5mm) node[below] {\ntext};
+
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"end"}] in {7}
+    \draw [{Stealth}-, red!70] (A-1-\ni.south east)--++(-90:5mm) node[below] {\ntext};
+
+\end{tikzpicture}
+
+$|L|=3n+2$\\
+\begin{tikzpicture}
+\matrix (A) [matrix of nodes, nodes={draw, minimum size=8mm},
+    column sep=-\pgflinewidth,
+    nodes={fill=gray!20},
+    ]{
+    1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\};
+
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"start+k"}] in {2}
+    \draw [{Stealth}-, red!70] (A-1-\ni.north east)--++(90:5mm) node[above] {\ntext};
+    
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"end-k"}] in {6}
+    \draw [{Stealth}-, red!70] (A-1-\ni.north east)--++(90:5mm) node[above] {\ntext};
+    
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"start"}] in {1}
+    \draw [{Stealth}-, red!70] (A-1-\ni.south west)--++(-90:5mm) node[below] {\ntext};
+
+    \foreach \i [evaluate=\i as \ni using {int(\i)},
+    evaluate=\i as \ntext using {"end"}] in {8}
+    \draw [{Stealth}-, red!70] (A-1-\ni.south east)--++(-90:5mm) node[below] {\ntext};
+
+\end{tikzpicture}
+
+\begin{tikzpicture}[xscale=1.1]
+    \draw (0, -0.25) rectangle (10, 0.25);
+    \draw (0, -0.25) -- (0, 0.75);
+    \draw (10, -0.25) -- (10, 0.75);
+    \node[below right] at (  0, 0.85) {\VAR{start}};
+    \node[below right] at ( 10, 0.85) {\VAR{end}};
+
+    \draw[thick] (3.33, -0.25) -- (3.33, 0.75);
+    \draw[thick] (6.66, -0.25) -- (6.66, 0.75);
+    \node[below right] at (3.33, 0.85) {${\color{cbBluishGreen} \VAR{k}} \GETS (\VAR{end} - \VAR{start}) \bdiv 3$};
+
+    \draw[thick,->] (0.5, -0.25) -- (0.5, -0.75);
+    \node[right] at (0.5, -0.5) {$\AName{WeirdSort}({\color{cbSkyBlue} L[\VAR{start}\dots{\color{cbBluishGreen}\VAR{end-k}})})$};
+    \draw[thick,->] (5.5, -0.25) -- (5.5, -0.75);
+    \node[right] at (5.5, -0.5) {$\AName{WeirdSort}({\color{cbVermillion} L[{\color{cbBluishGreen}\VAR{start+k}}\dots\VAR{end})})$};
+
+    \node[left,shape=rectangle,thick,draw,draw=cbOrange] at (13.5, -0.5) {$\VAR{start} < {\color{cbBluishGreen} \VAR{mid}} < \VAR{end}$};
+
+    \node at (0.5, -1) {IH};
+    \node at (5.5, -1) {IH};
+
+    \draw[thick,->] (0.5, -1.25) -- (0.5, -1.5);
+    \draw[thick,->] (5.5, -1.25) -- (5.5, -1.5);
+
+    \draw[cbSkyBlue,fill=cbSkyBlue!10] (0, -2) rectangle (6.66, -1.5);
+    \node at (2.25, -1.75) {$L_1$: ${\color{cbSkyBlue} L[\VAR{start}\dots{\color{cbBluishGreen}\VAR{end-k}})}$, but sorted};
+    
+    
+    \node[right] at (0, -2.25) {where the largest $\frac{1}{3}$ values are at the end of the list};
+    \node[right] at (0, -2.75) {where the largest $\frac{1}{3}$ values are at the end of the list};
+
+    \draw[cbVermillion,fill=cbVermillion!10] (5.25, -3.5) rectangle (10.25, -3);
+    \node at (7.75, -3.25) {$L_2$: ${\color{cbVermillion} L[{\color{cbBluishGreen}\VAR{mid}}\dots\VAR{end})}$, but sorted};
+
+    % \draw[thick] (4.75, -1.75) -- (5.25, -1.75);
+    % \draw[thick,->] (5, -1.75) -- (5, -3);
+    % \node[right] at (5, -2.5) {\textcolor{cbReddischPurple}{Merge}};
+
+    \draw (0, -5) rectangle (10, -5.5);
+    \node[left,shape=rectangle,thick,draw,draw=cbOrange] at (13.75, -2.5) {Assumption: \textcolor{cbReddischPurple}{Merge} is correct};
+    \node at (5, -5.25) {Values in $L_1$ (${\color{cbSkyBlue} L[\VAR{start}\dots{\color{cbBluishGreen}\VAR{end-k}})}$) and $L_2$ (${\color{cbVermillion} L[{\color{cbBluishGreen}\VAR{mid}}\dots\VAR{end})}$), sorted};
+\end{tikzpicture}
+
+
+\item Give a recurrence $T(n)$ for the runtime complexity of \AName{WeirdSort} and solve the recurrence $T(n)$ by proving that $T(n) \OOG{e(n)}$ for some expression $e$ that uses $n$.\\
+\textbf{Answer:}\\
+
+\begin{equation}
+    T(N) = 
+    \left\{
+        \begin{array}{lr}
+            0, & \text{if } N = 1\\ 
+            1, & \text{if } N = 2\\
+            T(\frac{2N}{3}) + T(\frac{2N}{3}) + T(\frac{2N}{3}) + 3, & \text{if } N > 2 
+        \end{array}
+    \right\}
+\end{equation} \\
+
+Using Master Theorem, we have $a=3$, $b=1.5$, $f(n)=3 \sim 1=N^{\log_{1.5}(1.5)}=\mathcal{O}(N^{\log_{1.5}(3-\epsilon)})$ where $\epsilon=1.5 > 0$, which is case 1 in Master Theorem. This means $T(N) \sim N^{\log_{1.5}(3)} \approx N^{2.71}$.
+
 \end{questions}
 \end{problem}
 
@@ -105,14 +413,13 @@ Consider the following \AName{Partition} algorithm used by \AName{QuickSort} (th
         \STATE $j \GETS j + 1$.
     \ENDWHILE
     \STATE Exchange $L[i]$ and $L[\VAR{start}]$
-    \RETURN $i$.
+    \RETURN $L$.
 \end{myalgo}
 
 \begin{questions}
     \item Illustrate the operations performed by \AName{Partition} on the array $A = [21, 45, 7, 12, 28, 11, 17]$. Show the content of $A$ after each execution of the loop body.\\
 \textbf{Answer:}\\
 Start of function 
-\usetikzlibrary{positioning,matrix, arrows.meta}
 
 \begin{tikzpicture}
 \matrix (A) [matrix of nodes, nodes={draw, minimum size=8mm},
@@ -330,7 +637,7 @@ Exchange L[i] and L[start]\\
     \item Provide pre-conditions and post-conditions for \AName{Partition} and provide an invariant and bound function for the while-loop at Line~\ref*{alg:while}. Prove the correctness of \AName{Partition}.\\
 Pre-condition:
 \begin{enumerate}
-    \item[-] $|L| > 1$, else L[start] would error
+    \item[-] $|L| > 0$, else L[start] would error
 \end{enumerate}
 Post-condition:
 \begin{enumerate}
@@ -339,9 +646,40 @@ Post-condition:
 \end{enumerate}
 Loop Invariant:
 \begin{enumerate}
-    \item[-] All elements to the left of v are smaller than or equal to v, all elements to the right of v are larger than v, v is in the middle of the smaller and larger elements.
-    \item[-] The input array is the same length as the output array and contains the same values (not necessarily in the same order)
+    \item[-] All entries in A[$start+1$...$i$] are $<=$ pivot.
+    \item[-] All entries in A[$i + 1$...$j$) are $>$ pivot.
+    \item[-] A[start] = pivot.
 \end{enumerate}
+Bound function:
+\begin{enumerate}
+    \item[-] $end-j$, this is because when $end = j$, this means $end-j=0$ and the loop will terminate
+\end{enumerate}
+
+\begin{myalgo}{\AName{Partition}($L$, $\VAR{start}$, $\VAR{end}$)}
+    \STATE $v, i, j \GETS L[\VAR{start}], \VAR{start}, \VAR{start + 1}$.\\
+    Base case: v=L[start] (pivot) and i=0 and j=1 implies invariant (L1 and L2 are both empty because their range is out of bounds) \\
+    Given the invariant is: \\
+    All entries in L1 = L[$start+1$...$i$] are $<=$ pivot.\\
+    All entries in L2 = L[$i + 1$...$j$) are $>$ pivot.\\
+    Induction hypothesis: The invariant holds at every step in the loop.\\
+    Induction step: Prove that the invariant holds at every step in the loop.\\
+    \WHILE{$j \neq \VAR{end}$}\label{alg:while}
+    \STATE Known: $j \neq end$
+        \IF{$L[j] \leq v$}
+            \STATE $i \GETS i + 1$.
+            \STATE Known: $L[j] \leq pivot$, L[$i_{new}$] is $\geq$ pivot because $i_{old}$ is always 1 cell behind the first element in L1
+            \STATE Exchange $L[i]$ and $L[j]$.
+            \STATE Known: j isn't at end of list yet. L[$start+1$...$i$] are all smaller than or equal to pivot and L[$i + 1$...$j-1$) are all larger than pivot 
+    
+        \ENDIF
+        \STATE $j \GETS j + 1$.
+        \STATE $j_{new} = j_{old} + 1$ meaning L[$i + 1$...$j_{new}$) are all larger than pivot, which is our invariant.
+    \ENDWHILE
+    \STATE Known: We know that L[$start+1$...$i$] are all smaller or equal to pivot and L[$i + 1$...$j$) are all larger than pivot. We know that the $i^{th}$ value is the last value included in L1 and everything past the $i^{th}$ value is part of L2, so we can swap it with the start value (pivot), making the new list have all smaller or equal values to the left of the pivot and all larger to the right.
+    \STATE Exchange $L[i]$ and $L[\VAR{start}]$
+    \\Known: L is a list where L[start...i) values are smaller than or equal to the pivot, L[i] is the pivot value, L[i+1...end) are all values larger than pivot.
+    \RETURN $L$.
+\end{myalgo}
 
     \item Argue how \AName{Partition} can be adjusted to run on singly linked lists $L$, while keeping a running time of $\OOG{\abs{L}}$.
 \end{questions}
