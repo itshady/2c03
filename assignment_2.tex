@@ -102,7 +102,78 @@ Let $n = \abs{L}$ be the length of the list being sorted by \AName{WeirdSort}.
 This is not a stable sort algorithm as in line 2, if the earlier element is equal to the next element, they get swapped. To make this a stable algorithm, change $\geq$ to $>$.
 \item Prove via induction that \AName{WeirdSort} will sort list $L$.\\
 \textbf{Answer:}\\
-\includegraphics[scale=0.5]{question2.png}
+% \includegraphics[scale=0.5]{question2.png}
+
+\begin{tikzpicture}[xscale=1.1]
+    \draw (0, -0.25) rectangle (10, 0.25);
+    \draw[thick, color=blue] (0, -0.25) -- (0, 0.75);
+    \draw[thick, color=red] (10, -0.25) -- (10, 0.75);
+    \node[below right] at (  0, 0.85) {\VAR{start}};
+    \node[below right] at ( 10, 0.85) {\VAR{end}};
+
+    \draw[thick, color=red] (3.33, 0.25) -- (3.33, 0.75);
+    \draw[thick, color=blue] (6.66, 0.25) -- (6.66, 0.75);
+    \node[below right] at (3.33, 0.85) {${\color{cbBluishGreen} \VAR{k}} \GETS (\VAR{end} - \VAR{start})/3$};
+
+    \draw[thick,->] (0.5, -0.25) -- (0.5, -0.75);
+    \node[right] at (0.5, -0.5) {1. $\AName{WeirdSort}({\color{cbSkyBlue} L[\VAR{start}\dots{\color{cbBluishGreen}\VAR{end-k}})})$};
+    \draw[thick,->] (7, -0.25) -- (7, -1.25);
+    \node[right] at (7, -0.5) {2. $\AName{WeirdSort}({\color{cbVermillion} L[{\color{cbBluishGreen}\VAR{start+k}}\dots\VAR{end})})$};
+
+    \node[left,shape=rectangle,thick,draw,draw=cbOrange] at (13, -1.5) {$\VAR{start} < {\color{cbBluishGreen} \VAR{k}} < \VAR{end}$};
+
+    \node at (0.5, -1) {IH};
+    \node at (7, -1.5) {IH};
+
+    \draw[thick,->] (0.5, -1.25) -- (0.5, -1.5);
+    \draw[thick,->] (7, -1.75) -- (7, -2.75);
+
+    \draw[cbSkyBlue,fill=cbSkyBlue!10] (0, -2.5) rectangle (6.66, -1.5);
+    \node[right] at (0.1, -1.8) {$\frac{1}{2}$ smallest numbers in};
+    \node[right] at (0.1, -2.25) {${\color{cbSkyBlue} L[\VAR{start}\dots{\color{cbBluishGreen}\VAR{end-k}})}$};
+
+    \draw[thick, color=cbSkyBlue] (3.33, -1.5) -- (3.33, -2.5);
+
+    \node[right] at (3.4, -1.8) {$\frac{1}{2}$ largest numbers in};
+    \node[right] at (3.4, -2.25) {${\color{cbSkyBlue} L[\VAR{start}\dots{\color{cbBluishGreen}\VAR{end-k}})}$};
+    
+    
+    % \node[right] at (0, -2.25) {where the largest $\frac{1}{3}$ values are at the end of the list};
+    % \node[right] at (0, -2.75) {where the largest $\frac{1}{3}$ values are at the end of the list};
+
+    \draw[cbVermillion,fill=cbVermillion!10] (3.33, -3.8) rectangle (10, -2.80);
+    \node[right] at (3.33, -3.1) {$\frac{1}{2}$ smallest numbers in};
+    \node[right] at (3.33, -3.55) {${\color{cbVermillion} L[{\color{cbBluishGreen}\VAR{start+k}}\dots\VAR{end})}$};
+
+    \draw[thick, color=cbVermillion] (6.66, -2.8) -- (6.66, -3.8);
+
+    \node[right] at (6.9, -3.1) {Largest $\frac{1}{3}$ values in};
+    \node[right] at (6.9, -3.55) {${\color{cbVermillion} L[{\color{cbBluishGreen}\VAR{start}}\dots\VAR{end})}$};
+
+    \node[right] at (3.9, 0) {{\color{cbSkyBlue} L[\VAR{start}\dots{\color{cbBluishGreen}\VAR{end}})}};
+
+    \draw[thick] (0, 0) -- (-1, 0);
+    \draw[thick,->] (-1, 0) -- (-1, -2.25);
+    \node at (-1, -2.5) {IH};
+    \draw[thick] (-1, -2.75) -- (-1, -4.5);
+    \draw[thick,->] (-1, -4.5) -- (0, -4.5);
+    \node[right] at (-1, -4) {3. $\AName{WeirdSort}({\color{cbSkyBlue} L[\VAR{start}\dots{\color{cbBluishGreen}\VAR{end-k}})})$};
+
+    \draw[thick,->] (5, -5) -- (5, -5.8);
+    \node[right] at (5, -5.4) {4. \AName{Termination}};
+    
+
+    \draw[cbSkyBlue,fill=cbSkyBlue!10] (0, -5) rectangle (6.66, -4.3);
+    \node[right] at (0.1, -4.6) {Smallest $\frac{2}{3}$ numbers in ${\color{cbSkyBlue} L[\VAR{start}\dots{\color{cbBluishGreen}\VAR{end-k}})}$ sorted};
+
+    % \draw[thick] (4.75, -1.75) -- (5.25, -1.75);
+    % \draw[thick,->] (5, -1.75) -- (5, -3);
+    % \node[right] at (5, -2.5) {\textcolor{cbReddischPurple}{Merge}};
+
+    \draw (0, -5.8) rectangle (10, -6.3);
+    % \node[left,shape=rectangle,thick,draw,draw=cbOrange] at (13.75, -2.5) {Assumption: \textcolor{cbReddischPurple}{WeirdSort} is correct};
+    \node at (5, -6.07) {Values in ${\color{cbSkyBlue} L[\VAR{start}\dots{\color{cbBluishGreen}\VAR{end}})}$, sorted};
+\end{tikzpicture}
 
 Base case 1: $0<= end - start = 2$ values\\
 In this case, it will hit the first if statement and sort the 2 values based on which is largest, then return. There is no recursion in this case.\\
@@ -337,50 +408,6 @@ $|L|=3n+2$\\
     \draw [{Stealth}-, red!70] (A-1-\ni.south east)--++(-90:5mm) node[below] {\ntext};
 
 \end{tikzpicture}
-
-\begin{tikzpicture}[xscale=1.1]
-    \draw (0, -0.25) rectangle (10, 0.25);
-    \draw (0, -0.25) -- (0, 0.75);
-    \draw (10, -0.25) -- (10, 0.75);
-    \node[below right] at (  0, 0.85) {\VAR{start}};
-    \node[below right] at ( 10, 0.85) {\VAR{end}};
-
-    \draw[thick] (3.33, -0.25) -- (3.33, 0.75);
-    \draw[thick] (6.66, -0.25) -- (6.66, 0.75);
-    \node[below right] at (3.33, 0.85) {${\color{cbBluishGreen} \VAR{k}} \GETS (\VAR{end} - \VAR{start}) \bdiv 3$};
-
-    \draw[thick,->] (0.5, -0.25) -- (0.5, -0.75);
-    \node[right] at (0.5, -0.5) {$\AName{WeirdSort}({\color{cbSkyBlue} L[\VAR{start}\dots{\color{cbBluishGreen}\VAR{end-k}})})$};
-    \draw[thick,->] (5.5, -0.25) -- (5.5, -0.75);
-    \node[right] at (5.5, -0.5) {$\AName{WeirdSort}({\color{cbVermillion} L[{\color{cbBluishGreen}\VAR{start+k}}\dots\VAR{end})})$};
-
-    \node[left,shape=rectangle,thick,draw,draw=cbOrange] at (13.5, -0.5) {$\VAR{start} < {\color{cbBluishGreen} \VAR{mid}} < \VAR{end}$};
-
-    \node at (0.5, -1) {IH};
-    \node at (5.5, -1) {IH};
-
-    \draw[thick,->] (0.5, -1.25) -- (0.5, -1.5);
-    \draw[thick,->] (5.5, -1.25) -- (5.5, -1.5);
-
-    \draw[cbSkyBlue,fill=cbSkyBlue!10] (0, -2) rectangle (6.66, -1.5);
-    \node at (2.25, -1.75) {$L_1$: ${\color{cbSkyBlue} L[\VAR{start}\dots{\color{cbBluishGreen}\VAR{end-k}})}$, but sorted};
-    
-    
-    \node[right] at (0, -2.25) {where the largest $\frac{1}{3}$ values are at the end of the list};
-    \node[right] at (0, -2.75) {where the largest $\frac{1}{3}$ values are at the end of the list};
-
-    \draw[cbVermillion,fill=cbVermillion!10] (5.25, -3.5) rectangle (10.25, -3);
-    \node at (7.75, -3.25) {$L_2$: ${\color{cbVermillion} L[{\color{cbBluishGreen}\VAR{mid}}\dots\VAR{end})}$, but sorted};
-
-    % \draw[thick] (4.75, -1.75) -- (5.25, -1.75);
-    % \draw[thick,->] (5, -1.75) -- (5, -3);
-    % \node[right] at (5, -2.5) {\textcolor{cbReddischPurple}{Merge}};
-
-    \draw (0, -5) rectangle (10, -5.5);
-    \node[left,shape=rectangle,thick,draw,draw=cbOrange] at (13.75, -2.5) {Assumption: \textcolor{cbReddischPurple}{Merge} is correct};
-    \node at (5, -5.25) {Values in $L_1$ (${\color{cbSkyBlue} L[\VAR{start}\dots{\color{cbBluishGreen}\VAR{end-k}})}$) and $L_2$ (${\color{cbVermillion} L[{\color{cbBluishGreen}\VAR{mid}}\dots\VAR{end})}$), sorted};
-\end{tikzpicture}
-
 
 \item Give a recurrence $T(n)$ for the runtime complexity of \AName{WeirdSort} and solve the recurrence $T(n)$ by proving that $T(n) \OOG{e(n)}$ for some expression $e$ that uses $n$.\\
 \textbf{Answer:}\\
@@ -681,7 +708,12 @@ Bound function:
     \RETURN $L$.
 \end{myalgo}
 
-    \item Argue how \AName{Partition} can be adjusted to run on singly linked lists $L$, while keeping a running time of $\OOG{\abs{L}}$.
+    \item Argue how \AName{Partition} can be adjusted to run on singly linked lists $L$, while keeping a running time of $\OOG{\abs{L}}$.\\
+Instead of holding the index i and j, we need to hold the nodes right before position i and j. Holding the node before is since for a singly linked list, you can't go back, so you need to always have a reference (node.next) to the node you want to compare and swap. We also need a function to swap two nodes in the linked list. This function is constant time as it is just a few assignments. As exchanges only happen between nodes i and j, it is sufficient to keep track of only these nodes, while updating them by calling node.next whenever we need to do i++ or j++. This way, we can traverse the list once while using constant time functions in each iteration, giving us a complexity of $\sim L$.\\
+
+The while loop condition would now need to be when j.next.next = null as that is when we've reached the second last node in the list. This is when we want to terminate since we are always holding the node one before the one we want to compare (index j-1).\\
+
+Note: You don't need to hold the node at v as we only need the value for comparisons during the loop, and you can quickly access the head of a linked list when it comes to getting the value of the head at the start and exchanging it at the end of the function.
 \end{questions}
 \end{problem}
 
@@ -692,6 +724,9 @@ Consider pairs $(x_i, y_i)$ such that $x_i$ is the time at which person $i = 0, 
 \item Argue why your algorithm \AName{MaxVisitors} is correct and has a runtime complexity of $\OOG{N \log N}$.
 \item Assume that the museum has a maximum capacity of $M$. Provide a datastructure with an operation \AName{PersonEnters}($x_i$, $y_i$) that computes in at-most $\OOG{\log M}$ the number of visitors in the museum when person $i$ enters the museum (for any number of persons).
 \item Argue why your algorithm \AName{PersonEnters} is correct and has a runtime complexity of $\OOG{\log M}$.
+
+LOOK INTO MAX HEAP
+
 \end{questions}
 
 \end{problem}
