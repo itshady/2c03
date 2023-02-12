@@ -76,6 +76,8 @@ As you can see, the tree shows that each step has $\frac{N}{2^i}$ cost. There is
 
 \item Provide a strict bound on the number of processor cores that \AName{ParallelMergeSort} uses (hence, how many different processor cores are used by \AName{ParallelMergeSort} at the same time).\\
 \textbf{Answer:}\\
+Assumption: When a core calls two parallel MergeSorts, the core will handle one and delegate the other call to a new core.\\
+
 The number of processors is $2^{\log_2 N} = N$. This is because the recurrance tree proves to be $\log_2N$ height and each step has double the processors of the last step. On the last reccurance level, it will terminate as there is only 1 element in the List, so it will hit the else statement (rather than the if condition) and return the List. This is an assumption that N is a power of 2. Given N is not always a power of 2, we know the number of processors is in the range of $2^{\log_2 N-1} <= processors <= N$, which contains the min and max number of processors needed per level on the reccurance tree.
 \end{questions}
 \end{problem}
@@ -440,7 +442,7 @@ Consider the following \AName{Partition} algorithm used by \AName{QuickSort} (th
         \STATE $j \GETS j + 1$.
     \ENDWHILE
     \STATE Exchange $L[i]$ and $L[\VAR{start}]$
-    \RETURN $L$.
+    \RETURN $i$.
 \end{myalgo}
 
 \begin{questions}
@@ -705,13 +707,19 @@ Bound function:
     \STATE Known: We know that L[$start+1$...$i$] are all smaller or equal to pivot and L[$i + 1$...$j$) are all larger than pivot. We know that the $i^{th}$ value is the last value included in L1 and everything past the $i^{th}$ value is part of L2, so we can swap it with the start value (pivot), making the new list have all smaller or equal values to the left of the pivot and all larger to the right.
     \STATE Exchange $L[i]$ and $L[\VAR{start}]$
     \\Known: L is a list where L[start...i) values are smaller than or equal to the pivot, L[i] is the pivot value, L[i+1...end) are all values larger than pivot.
-    \RETURN $L$.
+    \RETURN $i$.
 \end{myalgo}
 
     \item Argue how \AName{Partition} can be adjusted to run on singly linked lists $L$, while keeping a running time of $\OOG{\abs{L}}$.\\
-Instead of holding the index i and j, we need to hold the nodes right before position i and j. Holding the node before is since for a singly linked list, you can't go back, so you need to always have a reference (node.next) to the node you want to compare and swap. We also need a function to swap two nodes in the linked list. This function is constant time as it is just a few assignments. As exchanges only happen between nodes i and j, it is sufficient to keep track of only these nodes, while updating them by calling node.next whenever we need to do i++ or j++. This way, we can traverse the list once while using constant time functions in each iteration, giving us a complexity of $\sim L$.\\
 
-The while loop condition would now need to be when j.next.next = null as that is when we've reached the second last node in the list. This is when we want to terminate since we are always holding the node one before the one we want to compare (index j-1).\\
+\textbf{Answer:}\\
+There are two methods to do this, both with the same thought process. (i) Exchange just the data between nodes. (ii) Exchange the actual nodes.\\
+
+(i) Instead of holding the index i and j, we need to hold the nodes at position i and j. v can still be the data in the head node. To start, i would hold node 1, and j would hold node 2. As you are iterating through the loop, the comparison will need to be between v and j.data. If needing to exchange the nodes, you can just exchange the data, which is a constant time operation (3 ops to be specific). The while condition would now be j.next $\neq$ null as that specifies when you are at the last node. Whenever, there is an i++ or j++, that can be changed to node.next, which is also constant time. Finally, the final exchange at the end of the loop, is also a constant time function, as aforementioned. We would still need to hold a variable p that holds the index of the pivot (previous i), that will increment by 1 every time you call node.next on the ith node. This is because the index of the pivot needs to be returned at the end. This again is constant time as it is just incrementing an integer at max once per loop. Due to everything being constant time, while we loop through the whole list (N elements), this gives us $\sim L$ time complexity.\\
+
+(ii) Instead of holding the index i and j, we need to hold the nodes right before position i and j. Holding the node before is since for a singly linked list, you can't go back, so you need to always have a reference (node.next) to the node you want to compare and swap. We also need a function to swap two nodes in the linked list. This function is constant time as it is just a few assignments. As exchanges only happen between nodes i and j, it is sufficient to keep track of only these nodes, while updating them by calling node.next whenever we need to do i++ or j++. This way, we can traverse the list once while using constant time functions in each iteration, giving us a complexity of $\sim L$.\\
+
+The while loop condition would now need to be when j.next.next = null as that is when we've reached the second last node in the list. This is when we want to terminate since we are always holding the node one before the one we want to compare (index j-1). Furthermore as mentioned in (i), we would need to hold a new variable p that holds the index of the ith node so we can return it at the end. As argued above, it is constant time, so it won't affect the time complexity.\\
 
 Note: You don't need to hold the node at v as we only need the value for comparisons during the loop, and you can quickly access the head of a linked list when it comes to getting the value of the head at the start and exchanging it at the end of the function.
 \end{questions}
@@ -720,9 +728,37 @@ Note: You don't need to hold the node at v as we only need the value for compari
 \begin{problem}
 Consider pairs $(x_i, y_i)$ such that $x_i$ is the time at which person $i = 0, 1, 2 , \dots$ enters the museum and $y_i$ is the time at which person $i$ leaves the museum.  You may assume that consecutive people enter the museum in order of increasing time ($x_0 \leq x_1 \leq \dots$).
 \begin{questions}
-\item Provide an algorithm \AName{MaxVisitors} that takes as input $L = [(x_0, y_0), \dots, (x_{N-1}, y_{N-1})]$ and computes in $\OOG{N \log N}$ the maximum number of visitors in the museum at any time.
+\item Provide an algorithm \AName{MaxVisitors} that takes as input $L = [(x_0, y_0), \dots, (x_{N-1}, y_{N-1})]$ and computes in $\OOG{N \log N}$ the maximum number of visitors in the museum at any time.\\
+\textbf{Answer:}\\
+
+\begin{myalgo}{\AName{MaxVisitors}($L$)}
+    \STATE $sortedL \GETS MergeSort(L)$ --> Assumption: MergeSort is correct, and returns a list where $x_i$ and $y_i$ are separate values, thus don't need to be consecutive. Both $x_i$ and $y_i$ have a flag that can tell if it is an entering or leaving time (ex. using a tuple (time, flag))\\
+    \STATE $bst \GETS BuildBinarySearchTree(L)$ --> Nodes in binary tree have node.value = time and node.flag = enter or leave
+    \STATE function $InOrderTraverse$(Node n, int currentVisitors, int maxVisitors) \{
+        \IF{n.left $\neq$ @null}
+            \STATE $InOrderTraverse$(n.left, currentVisitors, maxVisitors)
+        \ENDIF
+        \IF{$(n.flag == enter)$}
+            \STATE $currentVisitors++$
+        \ELSIF{$(n.flag == leave)$} 
+            \STATE $currentVisitors--$
+        \ENDIF
+        \IF{$(maxVisitors < currentVisitors)$}
+            \STATE $maxVisitors \GETS currentVisitors$
+        \ENDIF
+        \IF{n.right $\neq$ @null}
+            \STATE $InOrderTraverse$(n.right, currentVisitors, maxVisitors)
+        \ENDIF
+        \RETURN maxVisitors
+    \STATE $\}$ --> Assume when the function updates currentVisitors or maxVisitors, it updates it in main memory, so all recursions are updating the same location in memory. (ex. of this is giving the addresses of currentVisitors and maxVisitors) 
+    \STATE $maxVisitors \GETS InOrderTraverse(bst, 0, 0)$ --> InOrder traverses the binary tree and adds 1 to currentVisitors when someone enters or removes 1 when someone leaves. It keeps track of the maximum value throughout the whole traversal and returns that number. 
+    \RETURN $maxVisitors$.
+\end{myalgo}
+
 \item Argue why your algorithm \AName{MaxVisitors} is correct and has a runtime complexity of $\OOG{N \log N}$.
+
 \item Assume that the museum has a maximum capacity of $M$. Provide a datastructure with an operation \AName{PersonEnters}($x_i$, $y_i$) that computes in at-most $\OOG{\log M}$ the number of visitors in the museum when person $i$ enters the museum (for any number of persons).
+
 \item Argue why your algorithm \AName{PersonEnters} is correct and has a runtime complexity of $\OOG{\log M}$.
 
 LOOK INTO MAX HEAP
