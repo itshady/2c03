@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1676107674 "c:/Users/hadyi/Documents/coding/latex/assignment_2.tex" "assignment_2.pdf" "assignment_2" 1676107679 0
+["pdflatex"] 1676230794 "c:/Users/hadyi/Documents/coding/latex/assignment_2.tex" "assignment_2.pdf" "assignment_2" 1676230801 0
   "C:/Users/hadyi/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1675890291 180109 7d2939842966f71c68373185c1c50712 ""
   "C:/Users/hadyi/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1673978299 10788010 a10daea7488c3b8878009af959880011 ""
   "C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/inconsolata/i4-t1-4.enc" 1557958141 7693 0f2dce6d313c82989ec3a67fc24df2a0 ""
@@ -276,11 +276,11 @@
   "C:/Users/hadyi/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/hadyi/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1656236890 56148 51a9a8571c07b9921892ae11063ae853 ""
   "C:/Users/hadyi/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
-  "assignment_2.aux" 1676107679 650 39f47d78478286aa469a66956581fc0b "pdflatex"
-  "assignment_2.out" 1676107677 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "assignment_2.tex" 1676107672 35783 ffd09a29fbf4a65f4bc5a952fefc1ac9 ""
-  "c:/Users/hadyi/Documents/coding/latex/assignment_2.tex" 1676107672 35783 ffd09a29fbf4a65f4bc5a952fefc1ac9 ""
-  "preamble.tex" 1675873700 5673 d9ae028c83466b8f8f774f47dfcdfc94 ""
+  "assignment_2.aux" 1676230800 651 74c5b79d115db8fc5c8c236a5b57a925 "pdflatex"
+  "assignment_2.out" 1676230798 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "assignment_2.tex" 1676230726 44097 5f65173b4a5f800f438416f06ffd6b7a ""
+  "c:/Users/hadyi/Documents/coding/latex/assignment_2.tex" 1676230726 44097 5f65173b4a5f800f438416f06ffd6b7a ""
+  "preamble.tex" 1676230793 5696 548b0f3f783c1c33ebbf7a3af0a0a108 ""
   (generated)
   "assignment_2.aux"
   "assignment_2.log"

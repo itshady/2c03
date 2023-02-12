@@ -10,7 +10,6 @@
 \definecolor{cbYellow}{RGB}{240,228,66}
 \usetikzlibrary{positioning,matrix, arrows.meta}
 
-
 \Assignment{2}
 \Deadline{February 12, 2023}
 \begin{document}
@@ -732,36 +731,64 @@ Consider pairs $(x_i, y_i)$ such that $x_i$ is the time at which person $i = 0, 
 \textbf{Answer:}\\
 
 \begin{myalgo}{\AName{MaxVisitors}($L$)}
-    \STATE $sortedL \GETS MergeSort(L)$ --> Assumption: MergeSort is correct, and returns a list where $x_i$ and $y_i$ are separate values, thus don't need to be consecutive. Both $x_i$ and $y_i$ have a flag that can tell if it is an entering or leaving time (ex. using a tuple (time, flag))\\
-    \STATE $bst \GETS BuildBinarySearchTree(L)$ --> Nodes in binary tree have node.value = time and node.flag = enter or leave
-    \STATE function $InOrderTraverse$(Node n, int currentVisitors, int maxVisitors) \{
-        \IF{n.left $\neq$ @null}
-            \STATE $InOrderTraverse$(n.left, currentVisitors, maxVisitors)
-        \ENDIF
-        \IF{$(n.flag == enter)$}
-            \STATE $currentVisitors++$
-        \ELSIF{$(n.flag == leave)$} 
-            \STATE $currentVisitors--$
+    \STATE timesList = new List
+    \FOR{$i \in L$}
+        \STATE timesList.add(($x_i$, enter))
+        \STATE timesList.add(($y_i$, leave))
+    \ENDFOR
+    \STATE $sortedL \GETS MergeSort(timesList)$ --> Assumption: MergeSort is correct and sorts based on time (element.first)\\
+    \STATE $currentVisitors, maxVisitors \GETS \VAR{0}, \VAR{0}$\\
+    \FOR{$i \in sortedL$}
+       \STATE \COMMENT{.second gets the second element of the tuple}
+        \IF{$(i.second == enter)$} 
+            \STATE $currentVisitors = currentVisitors + 1$
+        \ELSIF{$(i.second == leave)$} 
+            \STATE $currentVisitors = currentVisitors - 1$
         \ENDIF
         \IF{$(maxVisitors < currentVisitors)$}
             \STATE $maxVisitors \GETS currentVisitors$
         \ENDIF
-        \IF{n.right $\neq$ @null}
-            \STATE $InOrderTraverse$(n.right, currentVisitors, maxVisitors)
-        \ENDIF
-        \RETURN maxVisitors
-    \STATE $\}$ --> Assume when the function updates currentVisitors or maxVisitors, it updates it in main memory, so all recursions are updating the same location in memory. (ex. of this is giving the addresses of currentVisitors and maxVisitors) 
-    \STATE $maxVisitors \GETS InOrderTraverse(bst, 0, 0)$ --> InOrder traverses the binary tree and adds 1 to currentVisitors when someone enters or removes 1 when someone leaves. It keeps track of the maximum value throughout the whole traversal and returns that number. 
+    \ENDFOR
     \RETURN $maxVisitors$.
 \end{myalgo}
 
-\item Argue why your algorithm \AName{MaxVisitors} is correct and has a runtime complexity of $\OOG{N \log N}$.
+\item Argue why your algorithm \AName{MaxVisitors} is correct and has a runtime complexity of $\OOG{N \log N}$.\\
+\textbf{Answer (time):}\\
+To begin, on line 2, I start by looping through the given list and adding the times to a new list as separate elements. This is $\mathcal{O}(N)$ as I iterate through the list once and use constant time operations per iteration.
 
-\item Assume that the museum has a maximum capacity of $M$. Provide a datastructure with an operation \AName{PersonEnters}($x_i$, $y_i$) that computes in at-most $\OOG{\log M}$ the number of visitors in the museum when person $i$ enters the museum (for any number of persons).
+Then, on line 6, I sort the new list of length 2N using MergeSort. As proven in class, this is $\sim (2N)log_2(2N) \sim \mathcal{O}(Nlog_2N)$.
 
-\item Argue why your algorithm \AName{PersonEnters} is correct and has a runtime complexity of $\OOG{\log M}$.
+Following that, I iterate through the sorted list of length 2N using constant time operations per iteration, which gives $\sim 2N \sim \mathcal{O}(N)$.
 
-LOOK INTO MAX HEAP
+Aside from these loops, there are a few constant time operations on lines 1, 7 and 19, which will not affect the overall time complexity of the algorithm as they are $\sim \mathcal{O}(1)$. As the largest time complexity of any loop in the algorithm is $\sim \mathcal{O}(N)$, that is the runtime complexity of the algorithm.
+
+\textbf{Answer (correct):}\\
+To begin, on line 2, I loop through the input List and add the values to a new array as a tuple (time, flag). Then on line 6, I sort the list so that there is a new list of the times in ascending order with entering and leaving times separated. Because consecutive people must enter in ($x_0 \leq x_1 \leq \dots$) order, we know that if we go from left to right of the sorted list, we can visualize the exact order in which people enter and leave the museum. If we add 1 to currentVisitors everytime there is an entering time and subtract 1 every time there is a leaving time, we can keep tract of the current people in the museum at one time (this is what the loop on line 8 does). Now holding the maximum value of all people in the museum at one time, we can always check if the currentVisitors is greater than the maxVisitors. If so that is our new max. We also know that currentVisitors $\geq 0$ as for each person, the time they leave is larger than the time they enter. This means for every leaving time (where we subtract 1 from currentVisitors), there was an entering time earlier (where we added 1 to currentVisitors). At the end of this loop, we can return the max knowing it holds the maximum people in the museum at once.
+
+\item Assume that the museum has a maximum capacity of $M$. Provide a datastructure with an operation \AName{PersonEnters}($x_i$, $y_i$) that computes in at-most $\OOG{\log M}$ the number of visitors in the museum when person $i$ enters the museum (for any number of persons).\\
+\textbf{Answer:}\\
+Hold two self-balancing binary search trees: one for enter times and one for exit times. The nodes for the tree will hold the number of nodes in its left subtree ($lcount$). In general the idea for \AName{PersonEnters} is the following:\\
+Assumption: People who enter at the same time count as inside the museum and people who exit at the same time someone enters counts as not in the museum.\\
+1) In the enter times tree: Search for all nodes less than or equal to the time person i entered. This will get all people who have entered before them.\\
+2) In the exit times tree: Search for all nodes less than or equal to the time person i entered. This will get all people who have exited before them.\\
+3) Subtract all the people who exited before person i from the people who entered before person i.
+
+\item Argue why your algorithm \AName{PersonEnters} is correct and has a runtime complexity of $\OOG{\log M}$.\\
+\textbf{Answer (correct):}\\
+\AName{PersonEnters} is correct as people can only enter and exit the museum in that order. We know any enter time before a given time is how many people entered the museum before that time. We also know any exit time before a given time is how many people exited the museum before a given time. To find the number of people in the museum at a given time, we need to know how many people have entered but not exited. Knowing how many entered and exited at one time, we can simply subtract all those who exited from those who entered, which will leave us with the people who have entered but not exited.\\
+
+Note: Some of the correctness proof will make more sense when reading the time part below.\\
+
+\textbf{Answer (time):}\\
+For the algorithm to be logarithmic time, (i) the time it takes to insert the new person must be $\sim \log M$ and (ii) the time it takes to count the nodes less than the current time in both binary search trees must be $\sim \log M$ individually. As these are all consecutive functions, if they are all $\sim \log M$ time, the total time complexity would be $\sim \log M$.\\
+
+(i) As seen in class, the average cost of adding values to a binary search tree is $\sim \log M$. As we are using a self-balancing tree, we can even assure that the height of the BST will be $\log N$, where N is the number of values rounded up to the nearest power of 2. The use of self-balancing BST is so that there can never be a skewed tree.
+
+The algorithm for inserting follows a normal BST inserting algorithm however, every time a node is added, as the algorithm is passing through the tree, you add 1 to the lcount on each node if the value inserting is smaller than the current node being compared. This way each node can will correctly keep $lcount$ (count of nodes in left subtree).\\
+
+(ii) The general algorithm is the following: Hold a var $\VAR{counter}$ for how many nodes are smaller than the given time. Traverse the tree starting at the root. If the current node is greater than the given time, go down the left subtree. Else if the current node is less than or equal to the given time, add $lcount+1$ to $\VAR{counter}$ (+1 is for the current node itself) of the current node and go down the right subtree. Recur through this algorithm and it will return the number of smaller values than a given time. Since at every node, you either go left or right (not both), you traverse the tree linearly downwards. The height of the tree is $\log M$, so the complexity of this algorithm is $\sim \log M$.\\
+
+Given both (i) and (ii) have been proven to be $\sim \log M$ time, and these are going to be used independently of each other, the overall time complexity of this algorithm is $\sim \log M$.
 
 \end{questions}
 
