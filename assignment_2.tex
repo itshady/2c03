@@ -70,6 +70,7 @@ Let $n = \abs{L}$ be the length of the list being sorted by \AName{ParallelMerge
      & & $2N$
   \end{tabular}
 \end{center}
+Note: the number, cost and total is meant to line up side by side with the tree. So cost N is the root of the tree, cost $\frac{N}{2}$ is the second level and so on.\\
 
 As you can see, the tree shows that each step has $\frac{N}{2^i}$ cost. There is only 1 counted as they all occur in parallel, so unlike the cost complexity, the time complexity is as if the step is just run once. When you go to sum up all the steps, you can see that the steps will converge to 2N which is $\sim$ N. Note: $N + \frac{N}{2} + \frac{N}{4} + \frac{N}{8} +... = 2N$. Given N is not always a power of 2, we know that $O(N)$ is upper bounded by 2N and it must be lower bounded by N since the first step will always have a cost of N. This is enough to prove that the algorithm is $\sim N$.
 
@@ -77,7 +78,7 @@ As you can see, the tree shows that each step has $\frac{N}{2^i}$ cost. There is
 \textbf{Answer:}\\
 Assumption: When a core calls two parallel MergeSorts, the core will handle one and delegate the other call to a new core.\\
 
-The number of processors is $2^{\log_2 N} = N$. This is because the recurrance tree proves to be $\log_2N$ height and each step has double the processors of the last step. On the last reccurance level, it will terminate as there is only 1 element in the List, so it will hit the else statement (rather than the if condition) and return the List. This is an assumption that N is a power of 2. Given N is not always a power of 2, we know the number of processors is in the range of $2^{\log_2 N-1} <= processors <= N$, which contains the min and max number of processors needed per level on the reccurance tree.
+Assume N is a power of 2. The number of processors is $2^{\log_2 N} = N$. This is because the recurrence tree proves to be $\log_2N$ height and each step has double the processors of the last step. On the last recurrence level, it will terminate as there is only 1 element in the List, so it will hit the else statement (rather than the if condition) and return the List. Given N is not always a power of 2, we know the number of processors is in the range of "the nearest power of 2 that's smaller than N" $<= processors <= N$, which contains the min and max number of processors needed per level on the recurrence tree.
 \end{questions}
 \end{problem}
 
@@ -184,7 +185,7 @@ This is the lowest amount of values where there will be recursion. This will res
 Induction Hypothesis: WeirdSort sorts $0<= end - start < n$ values correct.\\
 Induction Step: Prove WeirdSort sorts $end - start = n$ values\\
 
-To start, assume $|L| = 3n, n \in \mathbb{N}, n > 0$ ($|L|$ is a multiple of 3). k will always give us $\frac{1}{3} |L|$, so each WeirdSort call will be $\frac{2}{3}$ of L. Since our base case 2 shows that $k>=1$ always, this means the lists drawn for the 3 WeirdSort calls will be at least 1 smaller than the input array. Given this, we can see that, assuming WeirdSort can sort $<n$ values via IH, WeirdSort call 1 will sort the largest $\frac{1}{3}$ values of L into the middle third of L (second half of L in WeirdSort call 1). WeirdSort call 2 will then take those largest numbers sorted in the first call and sort then with the remaining $\frac{1}{3}$ values. By the end of this call, the largest $\frac{1}{3}$ values in L will be sorted at the end of the list. WeirdSort call 3 will then sort the last (and smallest) $\frac{2}{3}$ values.\\
+To start, assume $|L| = 3n, n \in \mathbb{N}, n > 0$ ($|L|$ is a multiple of 3). k will always give us $\frac{1}{3} |L|$, so each WeirdSort call will be $\frac{2}{3}$ of L. Since our base case 2 shows that $k>=1$ always, this means the lists drawn for the 3 WeirdSort calls will be at least 1 smaller than the input array. Given this, we can see that, assuming WeirdSort can sort $<n$ values via IH, WeirdSort call 1 will sort the largest $\frac{1}{3}$ values of L into the middle third of L (second half of L in WeirdSort call 1). WeirdSort call 2 will then take those largest numbers sorted in the first call and sort them with the remaining $\frac{1}{3}$ values. By the end of this call, the largest $\frac{1}{3}$ values in L will be sorted at the end of the list. WeirdSort call 3 will then sort the last (and smallest) $\frac{2}{3}$ values.\\
 
 The following is looking at the case where the largest values are at the start of the list and the smallest at the end (assume reverse ordered list). You can see that there are enough of the largest values moved to the end of the first WeirdSort call, so that they can be sorted to the end of the list. This is because as seen by the final WeirdSort call, you only need to move the $\frac{1}{3}$ largest values to the last $\frac{2}{3}$ of the list, in order for them to be sorted to the end of the list. The final WeirdSort call will handle the rest.\\
 
@@ -695,9 +696,9 @@ Bound function:
     \STATE Known: $j \neq end$
         \IF{$L[j] \leq v$}
             \STATE $i \GETS i + 1$.
-            \STATE Known: $L[j] \leq pivot$, L[$i_{new}$] is $\geq$ pivot because $i_{old}$ is always 1 cell behind the first element in L1
+            \STATE Known: $L[j] \leq pivot$, L[$i_{new}$] is $\geq$ pivot because $i_{old}$ is always 1 cell behind the first element in L2
             \STATE Exchange $L[i]$ and $L[j]$.
-            \STATE Known: j isn't at end of list yet. L[$start+1$...$i$] are all smaller than or equal to pivot and L[$i + 1$...$j-1$) are all larger than pivot 
+            \STATE Known: j isn't at end of list yet. Exchanged the first element in L2 with the value at L[j], which we know is $\leq$ pivot. Due to this, L[$start+1$...$i$] are all smaller than or equal to pivot and L[$i + 1$...$j-1$) are all larger than pivot 
     
         \ENDIF
         \STATE $j \GETS j + 1$.
@@ -763,7 +764,7 @@ Following that, I iterate through the sorted list of length 2N using constant ti
 Aside from these loops, there are a few constant time operations on lines 1, 7 and 19, which will not affect the overall time complexity of the algorithm as they are $\sim \mathcal{O}(1)$. As the largest time complexity of any loop in the algorithm is $\sim \mathcal{O}(N)$, that is the runtime complexity of the algorithm.
 
 \textbf{Answer (correct):}\\
-To begin, on line 2, I loop through the input List and add the values to a new array as a tuple (time, flag). Then on line 6, I sort the list so that there is a new list of the times in ascending order with entering and leaving times separated. Because consecutive people must enter in ($x_0 \leq x_1 \leq \dots$) order, we know that if we go from left to right of the sorted list, we can visualize the exact order in which people enter and leave the museum. If we add 1 to currentVisitors everytime there is an entering time and subtract 1 every time there is a leaving time, we can keep tract of the current people in the museum at one time (this is what the loop on line 8 does). Now holding the maximum value of all people in the museum at one time, we can always check if the currentVisitors is greater than the maxVisitors. If so that is our new max. We also know that currentVisitors $\geq 0$ as for each person, the time they leave is larger than the time they enter. This means for every leaving time (where we subtract 1 from currentVisitors), there was an entering time earlier (where we added 1 to currentVisitors). At the end of this loop, we can return the max knowing it holds the maximum people in the museum at once.
+To begin, on line 2, I loop through the input List and add the values to a new array as a tuple (time, flag). Then on line 6, I sort the list so that there is a new list of the times in ascending order with entering and leaving times as their own individual times. Because consecutive people must enter in ($x_0 \leq x_1 \leq \dots$) order, we know that if we go from left to right of the sorted list, we can visualize the exact order in which people enter and leave the museum. If we add 1 to currentVisitors everytime there is an entering time and subtract 1 every time there is a leaving time, we can keep tract of the current people in the museum at one time (this is what the loop on line 8 does). Now holding the maximum value of all people in the museum at one time, we can always check if the currentVisitors is greater than the maxVisitors. If $currentVisitors > maxVisitors$, we know that is our new max. We also know that currentVisitors $\geq 0$ as for each person, the time they leave is larger than the time they enter. This means for every leaving time (where we subtract 1 from currentVisitors), there was an entering time earlier (where we added 1 to currentVisitors). At the end of this loop, we can return the max knowing it holds the maximum people in the museum at once.
 
 \item Assume that the museum has a maximum capacity of $M$. Provide a datastructure with an operation \AName{PersonEnters}($x_i$, $y_i$) that computes in at-most $\OOG{\log M}$ the number of visitors in the museum when person $i$ enters the museum (for any number of persons).\\
 \textbf{Answer:}\\
@@ -771,18 +772,18 @@ Hold two self-balancing binary search trees: one for enter times and one for exi
 Assumption: People who enter at the same time count as inside the museum and people who exit at the same time someone enters counts as not in the museum.\\
 1) In the enter times tree: Search for all nodes less than or equal to the time person i entered. This will get all people who have entered before them.\\
 2) In the exit times tree: Search for all nodes less than or equal to the time person i entered. This will get all people who have exited before them.\\
-3) Subtract all the people who exited before person i from the people who entered before person i.
+3) Subtract all the people who exited before person i from the people who entered before person i. This will be our result that we can return.
 
 \item Argue why your algorithm \AName{PersonEnters} is correct and has a runtime complexity of $\OOG{\log M}$.\\
 \textbf{Answer (correct):}\\
-\AName{PersonEnters} is correct as people can only enter and exit the museum in that order. We know any enter time before a given time is how many people entered the museum before that time. We also know any exit time before a given time is how many people exited the museum before a given time. To find the number of people in the museum at a given time, we need to know how many people have entered but not exited. Knowing how many entered and exited at one time, we can simply subtract all those who exited from those who entered, which will leave us with the people who have entered but not exited.\\
+\AName{PersonEnters} is correct as people can only enter and exit the museum in that order. We know any enter time before a given time is how many people entered the museum before that time. We also know any exit time before a given time is how many people exited the museum before a given time. To find the number of people in the museum at a given time, we need to know how many people have entered but not exited. Knowing how many entered and exited before a time, we can simply subtract all those who exited from those who entered, which will leave us with the people who have entered but not exited.\\
 
 Note: Some of the correctness proof will make more sense when reading the time part below.\\
 
 \textbf{Answer (time):}\\
 For the algorithm to be logarithmic time, (i) the time it takes to insert the new person must be $\sim \log M$ and (ii) the time it takes to count the nodes less than the current time in both binary search trees must be $\sim \log M$ individually. As these are all consecutive functions, if they are all $\sim \log M$ time, the total time complexity would be $\sim \log M$.\\
 
-(i) As seen in class, the average cost of adding values to a binary search tree is $\sim \log M$. As we are using a self-balancing tree, we can even assure that the height of the BST will be $\log N$, where N is the number of values rounded up to the nearest power of 2. The use of self-balancing BST is so that there can never be a skewed tree.
+(i) As seen in class, the average cost of adding values to a binary search tree is $\sim \log M$. As we are using a self-balancing tree, we can even assure that the height of the BST will be $\log_2 N$, where N is the number of values rounded up to the nearest power of 2. The use of self-balancing BST is so that there can never be a skewed tree.
 
 The algorithm for inserting follows a normal BST inserting algorithm however, every time a node is added, as the algorithm is passing through the tree, you add 1 to the lcount on each node if the value inserting is smaller than the current node being compared. This way each node can will correctly keep $lcount$ (count of nodes in left subtree).\\
 
