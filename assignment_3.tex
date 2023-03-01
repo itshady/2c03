@@ -13,9 +13,61 @@ Consider the sequence of values $S = [12, 44, 13, 88, 23, 94, 11, 39, 20, 16, 5]
 
 \item Draw the binary search tree obtained by adding the values in $S$ in sequence.
 
+\begin{tikzpicture}
+  \node[dot] (p) at (0, 0)       {};
+  \node[dot] (l) at (-2, -1)     {}  edge[<-] (p);
+  \node[dot,cbReddischPurple] (ll) at (-3, -2)  {}  edge[<-,very thick,cbReddischPurple] (l);
+  \node[dot] (lll) at (-3.5, -3) {}  edge[<-] (ll);
+  \node[dot] (llr) at (-2.5, -3) {}  edge[<-] (ll);
+  \node[dot] (lr) at (-1, -2)  {}  edge[<-] (l);
+  \node[dot,cbReddischPurple] (lrl) at (-1.5, -3)  {}  edge[<-,very thick,cbReddischPurple] (lr);
+  \node[dot] (r) at (2, -1)     {}  edge[<-] (p);
+  \node[dot] (rl) at (1, -2)  {}  edge[<-] (r);
+  \node[dot] (rr) at (3, -2) {} edge[<-] (r);
+  \node[dot,cbReddischPurple] (rrl) at (2.5, -3) {} edge[<-,very thick,cbReddischPurple] (rr);
+
+
+  \node[above left] at (p)  {23};
+  \node[above left] at (l)  {13};
+  \node[above left] at (ll) {11};
+  \node[above left] at (lll) {5};
+  \node[above right] at (llr) {12};
+  \node[below right] at (lrl) {16};
+  \node[above right] at (lr) {20};
+  \node[above right] at (r)  {44};
+  \node[above left] at (rl) {39};
+  \node[above right] at (rr) {94};
+  \node[above left] at (rrl) {88};
+\end{tikzpicture}
 
 \item Draw the red-black tree obtained by adding the values in $S$ in sequence.
 
+\begin{tikzpicture}
+  \node[dot] (p) at (0, 0)       {};
+  \node[dot] (l) at (-2, -1)     {}  edge[<-] (p);
+  \node[dot,cbReddischPurple] (ll) at (-3, -2)  {}  edge[<-,very thick,cbReddischPurple] (l);
+  \node[dot] (lll) at (-3.5, -3) {}  edge[<-] (ll);
+  \node[dot] (llr) at (-2.5, -3) {}  edge[<-] (ll);
+  \node[dot] (lr) at (-1, -2)  {}  edge[<-] (l);
+  \node[dot,cbReddischPurple] (lrl) at (-1.5, -3)  {}  edge[<-,very thick,cbReddischPurple] (lr);
+  \node[dot] (r) at (2, -1)     {}  edge[<-] (p);
+  \node[dot] (rl) at (1, -2)  {}  edge[<-] (r);
+  \node[dot] (rr) at (3, -2) {} edge[<-] (r);
+  \node[dot,cbReddischPurple] (rrl) at (2.5, -3) {} edge[<-,very thick,cbReddischPurple] (rr);
+
+
+  \node[above left] at (p)  {23};
+  \node[above left] at (l)  {13};
+  \node[above left] at (ll) {11};
+  \node[above left] at (lll) {5};
+  \node[above right] at (llr) {12};
+  \node[below right] at (lrl) {16};
+  \node[above right] at (lr) {20};
+  \node[above right] at (r)  {44};
+  \node[above left] at (rl) {39};
+  \node[above right] at (rr) {94};
+  \node[above left] at (rrl) {88};
+\end{tikzpicture}
 
 \item Consider the hash-function $h(k) = (2k + 5) \bmod 11$ and a hash-table of $11$ table entries that uses hashing with separate chaining. Draw the hash-table obtained by adding the values in $S$ in sequence.
 
