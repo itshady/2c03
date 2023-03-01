@@ -1,4 +1,5 @@
 \input{preamble.tex}
+\usepackage{amsmath}
 
 \Assignment{3}
 \Deadline{March 5, 2023}
@@ -9,10 +10,19 @@
 \begin{problem}
 Consider the sequence of values $S = [12, 44, 13, 88, 23, 94, 11, 39, 20, 16, 5]$.
 \begin{questions}
+
 \item Draw the binary search tree obtained by adding the values in $S$ in sequence.
+
+
 \item Draw the red-black tree obtained by adding the values in $S$ in sequence.
+
+
 \item Consider the hash-function $h(k) = (2k + 5) \bmod 11$ and a hash-table of $11$ table entries that uses hashing with separate chaining. Draw the hash-table obtained by adding the values in $S$ in sequence.
+
+
 \item Consider the hash-function $h(k) = (3k + 2) \bmod 11$ and a hash-table of $11$ table entries that uses hashing with linear probing. Draw the hash-table obtained by adding the values in $S$ in sequence.
+
+
 \end{questions}
 \end{problem}
 
@@ -40,7 +50,7 @@ This function is 2-perfect for the inputs 0,...,21 since after computation, ther
   \end{tabular}
 \end{center}
 
-Rearrange to see that there are only two values per mapping:
+Rearrange to see that there are only two values per mapping. We can see that if there was 1 more value, it would no longer be 2-perfect:
 
 \begin{center}
   \begin{tabular}{||c|c|c|c|c|c|c|c||} 
@@ -56,7 +66,45 @@ Rearrange to see that there are only two values per mapping:
 
 
 \item Prove that a hash function $h : \mathcal{U} \rightarrow \mathbb{N}$ can only be $n$-perfect if $\abs{\mathcal{U}} \leq n \cdot M$.
+
+\textbf{Answer:}
+
+Assume $h : \mathcal{U} \rightarrow \mathbb{N}$ is n-perfect and let 
+$u_1, \dots, u_j$ be j distinct values in $\mathcal{U}$ such that $h(u_1) = \dots = h(u_j)$. Then we will have that $j \leq n$.
+
+$\mathcal{S}_i = \{x \in \mathcal{U}\:|\:h(x) = i\}$ --> In other words, $\mathcal{S}_i$ has elements in $\mathcal{U}$ that map to $i$
+
+This means, $\mathcal{U} = \sum_{i=0}^{M-1} \mathcal{S}_i$ where $|\mathcal{U}| = M$
+
+since $h$ is n-perfect, we know $|\mathcal{S}_i| \leq n$
+
+$\mathcal{U} = \sum_{i=0}^{M-1} \mathcal{S}_i$\\
+$|\mathcal{U}| = |\sum_{i=0}^{M-1} \mathcal{S}_i|$\\
+$ = \sum_{i=0}^{M-1} |\mathcal{S}_i|$\\
+$ \leq \sum_{i=0}^{M-1} n$\\
+$ = nM $\\
+
+In conclusion, we have proven that assuming $h : \mathcal{U} \rightarrow \mathbb{N}$ is a n-perfect hash function, then $|\mathcal{U}| \leq nM$ holds.
+
+As we provided an upper bound on the number of elements in $\mathcal{U}$ that can be hashed without collisions, we know that adding any more elements will result in more than n values being mapped to a single hash value, which violates n-perfect rules.
+
 \item Can a general purpose hash function be $n$-perfect for any $M$? Argue why or why not.
+
+\textbf{Answer: }
+
+No a general-purpose hash function cannot be n-perfect for any M because a general-purpose hash function must be able to take in any set of input and ensure each hash value contains $\leq n$ values from the input. 
+This means it needs to handle inputs such as lists that have near infinity values (huge M), which is impossible to be n-perfect as you'd have to have an unrealistic number of spots in the hash-table to put the values in.
+
+Mathematically, the Probability a value $V_r$ in the input set collides with a previously hashed value is:
+
+Probability($V_r$ collides with $V_1$) $\cdot$ Probability($V_r$ collides with $V_2$) $\cdot \dots$ Probability($V_r$ collides with $V_{r-1}$)
+
+1/M + 2/M + 3/M... n/M, where n is the $n_{th}$ element in the input list.
+
+FIX THISSSSSSSSSSSSSSSSSSSSSS
+
+the probability to have a collision is $\sim 1 - \frac{n}{M}$
+
 \end{questions}
 \end{problem}
 
@@ -64,8 +112,17 @@ Rearrange to see that there are only two values per mapping:
 Consider non-empty binary search trees $T_1$ and $T_2$ such that all values in $T_1$ are smaller than the values in $T_2$. The \AName{SetUnion} operation takes binary search trees $T_1$ and $T_2$ and returns a binary search trees holding all values originally in $T_1$ and $T_2$ (destroying $T_1$ and $T_2$ in the process). 
 \begin{questions}
 \item Assume the binary search trees storing $T_1$ and $T_2$ have the same height $h$. Show how to implement the \AName{SetUnion} operation in $\OOG{h}$ such that the resulting tree has a height of at-most $h+1$.
+
+
+
 \item Assume that $T_1$ and $T_2$ are red-black trees with the same black height $h$. Show how to implement a \AName{SetUnion} operation that returns a red-black tree in $\OOG{h}$.
+
+
+
 \item Assume that $T_1$ and $T_2$ are red-black trees with black heights $h_1 > h_2$. Show how to implement a \AName{SetUnion} operation that returns a red-black tree in $\OOG{h_1}$.
+
+
+
 \end{questions}
 \end{problem}
 

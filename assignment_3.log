@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2023.1.17)  28 FEB 2023 14:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2023.1.17)  1 MAR 2023 13:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -682,6 +682,27 @@ Package: tabto 2018/12/28  v 1.4  Another tabbing mechanism
 \ULC@box=\box69
 Package: ulem 2019/11/18
 \ULdepth=\dimen290
+) (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+) (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
+Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
+\multirow@colwidth=\skip61
+\multirow@cntb=\count320
+\multirow@dima=\skip62
+\bigstrutjot=\dimen291
+) (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/siunitx\siunitx.sty
+
+C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/siunitx\siunitx.sty:44: Package siunitx Error: Support package expl3 too old.
+
+See the siunitx package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.44   }
+        %
+You need to update your installation of the bundles 'l3kernel' and 'l3packages'.
+Loading\nobreakspace {}siunitx\nobreakspace {}will\nobreakspace {}abort!
+
 ) (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibraryshapes.multipart.code.tex
 File: tikzlibraryshapes.multipart.code.tex 2021/05/15 v3.1.9a (3.1.9a)
  (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/shapes\pgflibraryshapes.multipart.code.tex
@@ -706,88 +727,87 @@ File: pgflibraryshapes.multipart.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgfnodepartsevenbox=\box87
 \pgfnodepartsixbox=\box88
 \pgfnodepartfivebox=\box89
-))
-\c@problem=\count320
- (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibraryarrows.meta.code.tex
+)) (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibraryarrows.meta.code.tex
 File: pgflibraryarrows.meta.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgfarrowinset=\dimen291
-\pgfarrowlength=\dimen292
-\pgfarrowwidth=\dimen293
-\pgfarrowlinewidth=\dimen294
+\pgfarrowinset=\dimen292
+\pgfarrowlength=\dimen293
+\pgfarrowwidth=\dimen294
+\pgfarrowlinewidth=\dimen295
 ) (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarycalc.code.tex
 File: tikzlibrarycalc.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 ) (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarydecorations.pathreplacing.code.tex (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarydecorations.code.tex (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmoduledecorations.code.tex
-\pgfdecoratedcompleteddistance=\dimen295
-\pgfdecoratedremainingdistance=\dimen296
-\pgfdecoratedinputsegmentcompleteddistance=\dimen297
-\pgfdecoratedinputsegmentremainingdistance=\dimen298
-\pgf@decorate@distancetomove=\dimen299
+\pgfdecoratedcompleteddistance=\dimen296
+\pgfdecoratedremainingdistance=\dimen297
+\pgfdecoratedinputsegmentcompleteddistance=\dimen298
+\pgfdecoratedinputsegmentremainingdistance=\dimen299
+\pgf@decorate@distancetomove=\dimen300
 \pgf@decorate@repeatstate=\count321
-\pgfdecorationsegmentamplitude=\dimen300
-\pgfdecorationsegmentlength=\dimen301
+\pgfdecorationsegmentamplitude=\dimen301
+\pgfdecorationsegmentlength=\dimen302
 )
 \tikz@lib@dec@box=\box90
 ) (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/decorations\pgflibrarydecorations.pathreplacing.code.tex)) (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibraryshapes.geometric.code.tex
 File: tikzlibraryshapes.geometric.code.tex 2021/05/15 v3.1.9a (3.1.9a)
  (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/shapes\pgflibraryshapes.geometric.code.tex
 File: pgflibraryshapes.geometric.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-)) (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/aobs-tikz\tikzlibraryoverlay-beamer-styles.code.tex) (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/algorithms\algorithmic.sty
+)) (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/aobs-tikz\tikzlibraryoverlay-beamer-styles.code.tex)
+\c@problem=\count322
+ (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/algorithms\algorithmic.sty
 Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
-\c@ALC@unique=\count322
-\c@ALC@line=\count323
-\c@ALC@rem=\count324
-\c@ALC@depth=\count325
-\ALC@tlm=\skip61
-\algorithmicindent=\skip62
+\c@ALC@unique=\count323
+\c@ALC@line=\count324
+\c@ALC@rem=\count325
+\c@ALC@depth=\count326
+\ALC@tlm=\skip63
+\algorithmicindent=\skip64
 )
-\Algo@MyTabLength=\skip63
+\Algo@MyTabLength=\skip65
 ) (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2022-09-28 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count326
+\l__color_backend_stack_int=\count327
 \l__pdf_internal_box=\box91
 ) (assignment_3.aux)
 \openout1 = `assignment_3.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/nxlmi/m/it on input line 5.
-LaTeX Font Info:    Trying to load font information for OML+nxlmi on input line 5.
+LaTeX Font Info:    Checking defaults for OML/nxlmi/m/it on input line 6.
+LaTeX Font Info:    Trying to load font information for OML+nxlmi on input line 6.
  (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/newtx\omlnxlmi.fd
 File: omlnxlmi.fd 2013/11/19 Fontinst v1.933 font definitions for OML/nxlmi.
 )
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 5.
-LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 5.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 6.
+LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 6.
  (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/newtx\untxexa.fd
 File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
 )
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 5.
-LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line 5.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 6.
+LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line 6.
  (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/newtx\lmsntxsy.fd
 File: lmsntxsy.fd 2016/07/02 Fontinst v1.933 font definitions for LMS/ntxsy.
 )
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 5.
-LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input line 5.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 6.
+LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input line 6.
  (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/newtx\lmxntxexx.fd
 File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
 )
-LaTeX Font Info:    ... okay on input line 5.
-Package hyperref Info: Link coloring ON on input line 5.
- (assignment_3.out) (assignment_3.out)
+LaTeX Font Info:    ... okay on input line 6.
+Package hyperref Info: Link coloring ON on input line 6.
 \@outlinefile=\write4
 \openout4 = `assignment_3.out'.
 
@@ -826,20 +846,20 @@ Package hyperref Info: Link coloring ON on input line 5.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Command `\dddot' is already robust on input line 5.
-LaTeX Info: Command `\ddddot' is already robust on input line 5.
+LaTeX Info: Command `\dddot' is already robust on input line 6.
+LaTeX Info: Command `\ddddot' is already robust on input line 6.
 (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count327
-\scratchdimen=\dimen302
+\scratchcounter=\count328
+\scratchdimen=\dimen303
 \scratchbox=\box92
-\nofMPsegments=\count328
-\nofMParguments=\count329
+\nofMPsegments=\count329
+\nofMParguments=\count330
 \everyMPshowfont=\toks52
-\MPscratchCnt=\count330
-\MPscratchDim=\dimen303
-\MPnumerator=\count331
-\makeMPintoPDFobject=\count332
+\MPscratchCnt=\count331
+\MPscratchDim=\dimen304
+\MPnumerator=\count332
+\makeMPintoPDFobject=\count333
 \everyMPtoPDFconversion=\toks53
 ) (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -847,18 +867,18 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-LaTeX Info: Redefining \microtypecontext on input line 5.
-Package microtype Info: Applying patch `item' on input line 5.
-Package microtype Info: Applying patch `toc' on input line 5.
-Package microtype Info: Applying patch `eqnum' on input line 5.
-Package microtype Info: Applying patch `footnote' on input line 5.
+LaTeX Info: Redefining \microtypecontext on input line 6.
+Package microtype Info: Applying patch `item' on input line 6.
+Package microtype Info: Applying patch `toc' on input line 6.
+Package microtype Info: Applying patch `eqnum' on input line 6.
+Package microtype Info: Applying patch `footnote' on input line 6.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 5.
+LaTeX Info: Redefining \showhyphens on input line 6.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -866,108 +886,118 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `LinuxLibertineT-TLF' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-\c@mv@tabular=\count333
-\c@mv@boldtabular=\count334
+\c@mv@tabular=\count334
+\c@mv@boldtabular=\count335
  (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/upquote\upquote.sty
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verbatim
 )
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 17.28pt on input line 7.
+(Font)              scaled to size 17.28pt on input line 8.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 14.4pt on input line 7.
+(Font)              scaled to size 14.4pt on input line 8.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 7.
-LaTeX Font Info:    Trying to load font information for OT1+LinuxLibertineT-TLF on input line 7.
+(Font)              scaled to size 12.0pt on input line 8.
+LaTeX Font Info:    Trying to load font information for OT1+LinuxLibertineT-TLF on input line 8.
  (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/libertine\ot1linuxlibertinet-tlf.fd
 File: OT1LinuxLibertineT-TLF.fd 2017/03/20 (autoinst) Font definitions for OT1/LinuxLibertineT-TLF.
 )
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 7.
+(Font)              scaled to size 12.0pt on input line 8.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `LinuxLibertineT-TLF' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 8.8pt on input line 7.
+(Font)              scaled to size 8.8pt on input line 8.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 6.6pt on input line 7.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 7.
+(Font)              scaled to size 6.6pt on input line 8.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 8.
  (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 7.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 8.
  (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 7.
+LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 8.
  (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/newtx\untxmia.fd
 File: untxmia.fd 2018/04/14 Fontinst v1.933 font definitions for U/ntxmia.
 )
-LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 7.
+LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 8.
  (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/newtx\untxsym.fd
 File: untxsym.fd 2015/03/20 Fontinst v1.933 font definitions for U/ntxsym.
 )
-LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 7.
+LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 8.
  (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/newtx\untxsyc.fd
 File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
 )
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 7.
+(Font)              scaled to size 10.0pt on input line 8.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 10.0pt on input line 7.
+(Font)              scaled to size 10.0pt on input line 8.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 7.
+(Font)              scaled to size 10.0pt on input line 8.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.3pt on input line 7.
+(Font)              scaled to size 7.3pt on input line 8.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 5.5pt on input line 7.
+(Font)              scaled to size 5.5pt on input line 8.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/it' will be
-(Font)              scaled to size 10.0pt on input line 7.
+(Font)              scaled to size 10.0pt on input line 8.
 
-Underfull \hbox (badness 10000) in paragraph at lines 25--27
+Underfull \hbox (badness 10000) in paragraph at lines 35--37
 
  []
 
 [1
 
 {C:/Users/hadyi/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 81--86
+
+ []
+
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/sc' will be
-(Font)              scaled to size 10.0pt on input line 64.
- [2]
+(Font)              scaled to size 10.0pt on input line 112.
+[2]
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 14.4pt on input line 85.
-LaTeX Font Info:    Trying to load font information for T1+zi4 on input line 85.
+(Font)              scaled to size 14.4pt on input line 142.
+LaTeX Font Info:    Trying to load font information for T1+zi4 on input line 142.
  (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/inconsolata\t1zi4.fd
 File: t1zi4.fd 2018/01/14 T1/zi4 (Inconsolata)
 )
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
-(Font)              scaled to size 10.0pt on input line 85.
+(Font)              scaled to size 10.0pt on input line 142.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `zi4' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.3pt on input line 85.
+(Font)              scaled to size 7.3pt on input line 142.
  [3] (assignment_3.aux)
-Package rerunfilecheck Info: File `assignment_3.out' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+
+Package rerunfilecheck Warning: File `assignment_3.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `assignment_3.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 28727 strings out of 475385
- 550640 string characters out of 2776907
- 887640 words of memory out of 3000000
- 49324 multiletter control sequences out of 15000+600000
- 572570 words of font info for 243 fonts, out of 8000000 for 9000
+ 28836 strings out of 475385
+ 553110 string characters out of 2776907
+ 886037 words of memory out of 3000000
+ 49414 multiletter control sequences out of 15000+600000
+ 574950 words of font info for 254 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  105i,7n,107p,1047b,731s stack positions out of 10000i,1000n,20000p,200000b,80000s
-{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/inconsolata/i4-t1-4.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_ncsllp.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_oexx6f.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_ki75ao.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_nh77jq.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_7grukw.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_76gpa5.enc}<C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI7.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineT.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTB.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTBI.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTI.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/NewTXMI.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txmiaX.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/txfonts/txsyb.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txsys.pfb>
-Output written on assignment_3.pdf (3 pages, 343330 bytes).
+{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/inconsolata/i4-t1-4.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_ncsllp.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_oexx6f.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_ki75ao.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_nh77jq.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_7grukw.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_76gpa5.enc}<C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI7.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineT.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTB.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTBI.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTI.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/NewTXMI.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txexs.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txmiaX.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/txfonts/txsyb.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txsys.pfb>
+Output written on assignment_3.pdf (3 pages, 351899 bytes).
 PDF statistics:
- 119 PDF objects out of 1000 (max. 8388607)
+ 124 PDF objects out of 1000 (max. 8388607)
  27 named destinations out of 1000 (max. 500000)
  57869 words of extra memory for PDF output out of 61914 (max. 10000000)
 

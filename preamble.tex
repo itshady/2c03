@@ -12,7 +12,29 @@
 \usepackage{tabto}
 \usepackage[normalem]{ulem}
 
+\usepackage{amsmath,amssymb,amsthm,booktabs,tikz}
+\usepackage[final]{microtype}
+\usepackage{libertine}
+\usepackage[varqu]{zi4}
+\usepackage[libertine]{newtxmath}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow,tabto,siunitx}
+
 \usetikzlibrary{shapes.multipart}
+
+\usetikzlibrary{arrows.meta,calc,decorations.pathreplacing,shapes.geometric,shapes.multipart,overlay-beamer-styles}
+\tikzset{
+    >=Stealth,
+    dot/.style={circle,scale=0.25,draw=black,fill=black},
+    every node/.append style={align=center,font=\strut},
+    every node part/.append style={align=center},
+    lnode/.style={rectangle split,rectangle split parts=2,font=\strut,rectangle split part fill={black!10,cbYellow!10},rectangle split part align={center}},
+    hlisted/.style={right,rectangle split,rectangle split,draw,rectangle split parts=#1,font=\strut,rectangle split part fill={black!10},rectangle split part align={center},text width=0.5cm},
+}
+
+
+
 
 % Seven colors safe for use color blindness.
 % Colors taken from doi:10.1038/nmeth.1618.
