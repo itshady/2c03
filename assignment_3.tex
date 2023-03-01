@@ -16,28 +16,27 @@ Consider the sequence of values $S = [12, 44, 13, 88, 23, 94, 11, 39, 20, 16, 5]
 \begin{tikzpicture}
   \node[dot] (p) at (0, 0)       {};
   \node[dot] (l) at (-2, -1)     {}  edge[<-] (p);
-  \node[dot,cbReddischPurple] (ll) at (-3, -2)  {}  edge[<-,very thick,cbReddischPurple] (l);
-  \node[dot] (lll) at (-3.5, -3) {}  edge[<-] (ll);
-  \node[dot] (llr) at (-2.5, -3) {}  edge[<-] (ll);
-  \node[dot] (lr) at (-1, -2)  {}  edge[<-] (l);
-  \node[dot,cbReddischPurple] (lrl) at (-1.5, -3)  {}  edge[<-,very thick,cbReddischPurple] (lr);
+  \node[dot] (ll) at (-3, -2)  {}  edge[<-] (l);
   \node[dot] (r) at (2, -1)     {}  edge[<-] (p);
   \node[dot] (rl) at (1, -2)  {}  edge[<-] (r);
   \node[dot] (rr) at (3, -2) {} edge[<-] (r);
-  \node[dot,cbReddischPurple] (rrl) at (2.5, -3) {} edge[<-,very thick,cbReddischPurple] (rr);
+  \node[dot] (rrr) at (3.5, -3) {} edge[<-] (rr);
+  \node[dot] (rlr) at (1.5, -3) {} edge[<-] (rl);
+  \node[dot] (rlrr) at (2, -4) {} edge[<-] (rlr);
+  \node[dot] (rlrl) at (1, -4) {} edge[<-] (rlr);
+  \node[dot] (rlrll) at (0.5, -5) {} edge[<-] (rlrl);
 
-
-  \node[above left] at (p)  {23};
-  \node[above left] at (l)  {13};
-  \node[above left] at (ll) {11};
-  \node[above left] at (lll) {5};
-  \node[above right] at (llr) {12};
-  \node[below right] at (lrl) {16};
-  \node[above right] at (lr) {20};
+  \node[above left] at (p)  {12};
+  \node[above left] at (l)  {11};
+  \node[above left] at (ll) {5};
   \node[above right] at (r)  {44};
-  \node[above left] at (rl) {39};
-  \node[above right] at (rr) {94};
-  \node[above left] at (rrl) {88};
+  \node[above left] at (rl) {13};
+  \node[above right] at (rr) {88};
+  \node[above right] at (rrr) {94};
+  \node[above right] at (rlr) {23};
+  \node[above right] at (rlrr) {39};
+  \node[above left] at (rlrl) {20};
+  \node[above left] at (rlrll) {16};
 \end{tikzpicture}
 
 \item Draw the red-black tree obtained by adding the values in $S$ in sequence.
