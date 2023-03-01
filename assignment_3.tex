@@ -159,6 +159,34 @@ Consider the sequence of values $S = [12, 44, 13, 88, 23, 94, 11, 39, 20, 16, 5]
 
 \item Consider the hash-function $h(k) = (3k + 2) \bmod 11$ and a hash-table of $11$ table entries that uses hashing with linear probing. Draw the hash-table obtained by adding the values in $S$ in sequence.
 
+\begin{tikzpicture}
+  \node[hlisted=11,text width=1cm] (ar) {
+  16
+  \nodepart{two}5
+  \nodepart{three}44
+  \nodepart{four}88
+  \nodepart{five}11
+  \nodepart{six}12
+  \nodepart{seven}23
+  \nodepart{eight}20
+  \nodepart{nine}13
+  \nodepart{ten}94
+  \nodepart{eleven}39};
+  
+  \node[above] at (ar.north) {$L[0\dots11)$:};
+  \node[left] at (ar.one west) {0:};
+  \node[left] at (ar.two west) {1:};
+  \node[left] at (ar.three west) {2:};
+  \node[left] at (ar.four west) {3:};
+  \node[left] at (ar.five west) {4:};
+  \node[left] at (ar.six west) {5:};
+  \node[left] at (ar.seven west) {6:};
+  \node[left] at (ar.eight west) {7:};
+  \node[left] at (ar.nine west) {8:};
+  \node[left] at (ar.ten west) {9:};
+  \node[left] at (ar.eleven west) {10:};
+
+\end{tikzpicture}
 
 \end{questions}
 \end{problem}
