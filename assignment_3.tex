@@ -70,6 +70,92 @@ Consider the sequence of values $S = [12, 44, 13, 88, 23, 94, 11, 39, 20, 16, 5]
 
 \item Consider the hash-function $h(k) = (2k + 5) \bmod 11$ and a hash-table of $11$ table entries that uses hashing with separate chaining. Draw the hash-table obtained by adding the values in $S$ in sequence.
 
+\begin{tikzpicture}
+  \node[hlisted=11,text width=1cm] (ar) {
+  \Null{}
+  \nodepart{two}\At{A128}
+  \nodepart{three}\Null{}
+  \nodepart{four}\Null{}
+  \nodepart{five}\At{C923}
+  \nodepart{six}\At{9D21}
+  \nodepart{seven}\At{ADF3}
+  \nodepart{eight}\At{F923}
+  \nodepart{nine}\Null{}
+  \nodepart{ten}\At{E00F}
+  \nodepart{eleven}\Null{}};
+  
+  \node[above] at (ar.north) {$L[0\dots11)$:};
+  \node[left] at (ar.one west) {0:};
+  \node[left] at (ar.two west) {1:};
+  \node[left] at (ar.three west) {2:};
+  \node[left] at (ar.four west) {3:};
+  \node[left] at (ar.five west) {4:};
+  \node[left] at (ar.six west) {5:};
+  \node[left] at (ar.seven west) {6:};
+  \node[left] at (ar.eight west) {7:};
+  \node[left] at (ar.nine west) {8:};
+  \node[left] at (ar.ten west) {9:};
+  \node[left] at (ar.eleven west) {10:};
+
+
+  \node[lnode,right=0.4cm,yshift=0cm,scale=0.65] (n3) at (ar.one east) {item: {20}\nodepart{two}next: \Null};
+  \node[above right,scale=0.65] at (n3.north west) {\At{A128}:};
+  \path (ar.two east) edge[->] (n3.north west);
+
+
+
+
+  \node[lnode,right=0.4cm,yshift=0cm,scale=0.65] (n1) at (ar.three east) {item: {5}\nodepart{two}next: \At{312C}};
+  \node[above right,scale=0.65] at (n1.north west) {\At{C923}:};
+  \path (ar.five east) edge[->] (n1.north west);
+
+  \node[lnode,right=0.4cm,scale=0.65] (n2) at (n1.east) {item: {16}\nodepart{two}next: \Null};
+  \node[above right,scale=0.65] at (n2.north west) {\At{312C}:};
+  \draw[->] (n1.two east) -| ($(n1.text split)!0.5!(n2.text split)$) |- (n2.north west);
+
+
+
+
+  \node[lnode,right=0.4cm,yshift=0cm,scale=0.65] (n4) at (ar.five east) {item: {11}\nodepart{two}next: \At{1D23}};
+  \node[above right,scale=0.65] at (n4.north west) {\At{9D21}:};
+  \path (ar.six east) edge[->] (n4.north west);
+
+  \node[lnode,right=0.4cm,scale=0.65] (n5) at (n4.east) {item: {88}\nodepart{two}next: \At{5283}};
+  \node[above right,scale=0.65] at (n5.north west) {\At{1D23}:};
+  \draw[->] (n4.two east) -| ($(n4.text split)!0.5!(n5.text split)$) |- (n5.north west);
+
+  \node[lnode,right=0.4cm,scale=0.65] (n6) at (n5.east) {item: {44}\nodepart{two}next: \Null};
+  \node[above right,scale=0.65] at (n6.north west) {\At{5283}:};
+  \draw[->] (n5.two east) -| ($(n5.text split)!0.5!(n6.text split)$) |- (n6.north west);
+
+
+
+  \node[lnode,right=0.4cm,yshift=0cm,scale=0.65] (n7) at (ar.seven east) {item: {39}\nodepart{two}next: \At{DE92}};
+  \node[above right,scale=0.65] at (n7.north west) {\At{ADF3}:};
+  \path (ar.seven east) edge[->] (n7.north west);
+
+  \node[lnode,right=0.4cm,scale=0.65] (n8) at (n7.east) {item: {94}\nodepart{two}next: \Null};
+  \node[above right,scale=0.65] at (n8.north west) {\At{DE92}:};
+  \draw[->] (n7.two east) -| ($(n7.text split)!0.5!(n8.text split)$) |- (n8.north west);
+  
+
+
+
+  \node[lnode,right=0.4cm,yshift=0cm,scale=0.65] (n9) at (ar.nine east) {item: {23}\nodepart{two}next: \At{6A43}};
+  \node[above right,scale=0.65] at (n9.north west) {\At{F923}:};
+  \path (ar.eight east) edge[->] (n9.north west);
+
+  \node[lnode,right=0.4cm,scale=0.65] (n10) at (n9.east) {item: {12}\nodepart{two}next: \Null};
+  \node[above right,scale=0.65] at (n10.north west) {\At{6A43}:};
+  \draw[->] (n9.two east) -| ($(n9.text split)!0.5!(n10.text split)$) |- (n10.north west);
+
+
+
+  \node[lnode,right=0.4cm,yshift=0cm,scale=0.65] (n11) at (ar.eleven east) {item: {13}\nodepart{two}next: \Null};
+  \node[above right,scale=0.65] at (n11.north west) {\At{E00F}:};
+  \path (ar.ten east) edge[->] (n11.north west);
+
+\end{tikzpicture}
 
 \item Consider the hash-function $h(k) = (3k + 2) \bmod 11$ and a hash-table of $11$ table entries that uses hashing with linear probing. Draw the hash-table obtained by adding the values in $S$ in sequence.
 

@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1677703040 "c:/Users/hadyi/Documents/coding/latex/assignment_3.tex" "assignment_3.pdf" "assignment_3" 1677703043 2
+["pdflatex"] 1677705371 "c:/Users/hadyi/Documents/coding/latex/assignment_3.tex" "assignment_3.pdf" "assignment_3" 1677705375 2
   "C:/Users/hadyi/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1677114680 180288 9d755a16380af9d5f7638a7df1a752f2 ""
   "C:/Users/hadyi/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1673978299 10788010 a10daea7488c3b8878009af959880011 ""
   "C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/inconsolata/i4-t1-4.enc" 1557958141 7693 0f2dce6d313c82989ec3a67fc24df2a0 ""
@@ -252,11 +252,11 @@
   "C:/Users/hadyi/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/hadyi/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1656236890 56148 51a9a8571c07b9921892ae11063ae853 ""
   "C:/Users/hadyi/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
-  "assignment_3.aux" 1677703043 554 3a9fad3b6f2576a50b1e2f7054735a66 "pdflatex"
-  "assignment_3.out" 1677703042 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "assignment_3.tex" 1677703038 10377 7e363f50d23b284b5a07e125f529699d ""
-  "c:/Users/hadyi/Documents/coding/latex/assignment_3.tex" 1677703038 10377 7e363f50d23b284b5a07e125f529699d ""
-  "preamble.tex" 1677694085 6630 249ee46046b0981bbd89e80692b11686 ""
+  "assignment_3.aux" 1677705374 554 3a9fad3b6f2576a50b1e2f7054735a66 "pdflatex"
+  "assignment_3.out" 1677705373 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "assignment_3.tex" 1677705365 13940 8661723b243c8c80f612f92866bb55c7 ""
+  "c:/Users/hadyi/Documents/coding/latex/assignment_3.tex" 1677705365 13940 8661723b243c8c80f612f92866bb55c7 ""
+  "preamble.tex" 1677703245 6699 33959b4b2a18621860d2fd0290a98045 ""
   (generated)
   "assignment_3.aux"
   "assignment_3.log"
