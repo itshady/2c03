@@ -278,7 +278,21 @@ Consider non-empty binary search trees $T_1$ and $T_2$ such that all values in $
 \begin{questions}
 \item Assume the binary search trees storing $T_1$ and $T_2$ have the same height $h$. Show how to implement the \AName{SetUnion} operation in $\OOG{h}$ such that the resulting tree has a height of at-most $h+1$.
 
+- Remove max value in $T_1$ and store it in variable m\\
+$h$ is worst-case time complexity, where the max value is at the $h_{th}$ level in the tree. $T_1$ will still have a height of $h$ or $h-1$ if max value m was the only value in level $h$ of the tree.
 
+- Add the max value m as the root of $T_1$\\
+$\sim 1$ time complexity, as it just takes a little pointer logic. Make m node root of $T_1$ and make m.left be the old root of $T_1$. This will lead the tree be max height $h+1$ as we are only added 1 level (the new root) to the tree.
+Also, we know all values in $T_1$ are smaller than m, so BST properties remain as we add $T_1$ as the left subtree of the new root, m.
+At this point, $T_1$ is of height $ \leq h+1$ and $T_2$ is of height $h$
+
+- Take the root of $T_2$ and make it right subtree of new $T_1$\\
+Again $\sim 1$ time complexity, as it just requires to make m.right $ = T_2$. We know the left subtree of m is max $h$ height and the right subtree is $h$ since we just added $T_2$ which is a tree of height $h$.
+We also know that all values in $T_2$ are greater than the values in the current $T_1$, including the root. This allows us to put the root of $T_2$ as the right child of m, ensuring we keep BST properties.
+
+- return $T_1$\\
+
+To conclude, the resulting tree will be of height $h+1$ since we took 2 tree of height $h$ and added 1 level to it (the root). We also know it keeps BST properties as we know all values in $T_2$ are larger than the maximum value in $T_1$, which allows us to put $T_2$ in the right subtree of the root of new $T_1$
 
 \item Assume that $T_1$ and $T_2$ are red-black trees with the same black height $h$. Show how to implement a \AName{SetUnion} operation that returns a red-black tree in $\OOG{h}$.
 
