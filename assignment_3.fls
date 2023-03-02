@@ -1104,6 +1104,16 @@ INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex\latex\newtx\lmxntxexx.fd
 INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex\latex\newtx\lmxntxexx.fd
 INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex\latex\newtx\lmxntxexx.fd
 INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex\latex\graphics\color.sty
+INPUT .\assignment_3.out
+INPUT assignment_3.out
+INPUT .\assignment_3.out
+INPUT assignment_3.out
+INPUT .\assignment_3.out
+INPUT assignment_3.out
+INPUT .\assignment_3.out
+INPUT assignment_3.out
+INPUT .\assignment_3.out
+INPUT .\assignment_3.out
 OUTPUT assignment_3.out
 OUTPUT assignment_3.pdf
 INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex\context\base\mkii\supp-pdf.mkii
@@ -1290,9 +1300,9 @@ INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\fonts\tfm\public\newtx\txmiaX
 INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-sc-t1.vf
 INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-sc-t1--base.tfm
 INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTB-tlf-t1.tfm
-INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1.tfm
 INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineTB-tlf-t1.vf
 INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTB-tlf-t1--base.tfm
+INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1.tfm
 INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-t1.vf
 INPUT C:\Users\hadyi\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1--base.tfm
 INPUT assignment_3.aux

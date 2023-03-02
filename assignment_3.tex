@@ -296,6 +296,15 @@ To conclude, the resulting tree will be of height $h+1$ since we took 2 tree of 
 
 \item Assume that $T_1$ and $T_2$ are red-black trees with the same black height $h$. Show how to implement a \AName{SetUnion} operation that returns a red-black tree in $\OOG{h}$.
 
+- Remove min value in $T_2$ and store it in variable m\\
+Removing the min value is an $h$ complexity function. This can make the tree $T_2$ a height of either $h$ or $h-1$
+If left child is black and his parent is black then you can 
+
+- Calculate black height of $T_2$ and store it as $h_new$
+
+
+- Make the min value of $T_2$ (m) the root of our new tree $T_3$
+
 
 
 \item Assume that $T_1$ and $T_2$ are red-black trees with black heights $h_1 > h_2$. Show how to implement a \AName{SetUnion} operation that returns a red-black tree in $\OOG{h_1}$.
@@ -310,11 +319,85 @@ To conclude, the resulting tree will be of height $h+1$ since we took 2 tree of 
 Consider \emph{binary strings} (sequences of zeros and ones). 
 \begin{questions}
 \item Design a data structure \AName{BSSet} that can be used to represent \emph{sets of binary strings} such that any binary string $W$ of length $\abs{W} = N$ can be added or removed in $\OOG{N}$ and such that one can check whether $W$ is in the data structure in $\OOG{N}$. Sketch why your data structure  \AName{BSSet} supports the stated operations in $\OOG{N}$.
+
+The data structure would be a binary tree where any left child is a 0 and any right child is a 1. Each bitstring is stored as a path down the tree. Each node has a flag (represented by red), which represents if the node is the terminal bit of a string.
+
+In the following example tree, this would represent the data structure holding the following bitstrings: "00", "001", "10", "100"
+
+\begin{tikzpicture}
+  \node[dot] (p) at (0, 0)       {};
+  \node[dot] (l) at (-2, -1)     {}  edge[<-] (p);
+  \node[dot,cbReddischPurple] (ll) at (-3, -2)  {}  edge[<-] (l);
+  \node[dot,cbReddischPurple] (llr) at (-2.5, -3) {}  edge[<-] (ll);
+  \node[dot] (r) at (2, -1)     {}  edge[<-] (p);
+  \node[dot,cbReddischPurple] (rl) at (1, -2)  {}  edge[<-] (r);
+  \node[dot,cbReddischPurple] (rll) at (0.5, -3) {} edge[<-] (rl);
+
+
+  \node[above left] at (p)  {root};
+  \node[above left] at (l)  {0};
+  \node[above left] at (ll) {0};
+  \node[above right] at (llr) {1};
+  \node[above right] at (r)  {1};
+  \node[above left] at (rl) {0};
+  \node[above left] at (rll) {0};
+\end{tikzpicture}
+
+Adding:
+
+To add a bitstring, you must traverse the path in relation to the new bitstring, and for any bit that isn't already in the data structure, add it. Once reaching the terminal bit of the bitstring, make the last node a red node.
+This traverses the tree only for the amount of bits in the bitstring, making it $\sim N$ complexity.
+
+ex. Adding bitstring "1100", traverse tree 1->1->0->0, and for any non-existance node, create it. Make the last 0 a red node.
+
+\begin{tikzpicture}
+  \node[dot] (p) at (0, 0)       {};
+  \node[dot] (l) at (-2, -1)     {}  edge[<-] (p);
+  \node[dot,cbReddischPurple] (ll) at (-3, -2)  {}  edge[<-] (l);
+  \node[dot,cbReddischPurple] (llr) at (-2.5, -3) {}  edge[<-] (ll);
+  \node[dot] (r) at (2, -1)     {}  edge[<-] (p);
+  \node[dot,cbReddischPurple] (rl) at (1, -2)  {}  edge[<-] (r);
+  \node[dot,cbReddischPurple] (rll) at (0.5, -3) {} edge[<-] (rl);
+  \node[dot] (rr) at (3, -2) {} edge[<-] (r);
+  \node[dot] (rrl) at (2.5, -3) {} edge[<-] (rr);
+  \node[dot,cbReddischPurple] (rrll) at (2, -4) {} edge[<-] (rrl);
+
+
+  \node[above left] at (p)  {root};
+  \node[above left] at (l)  {0};
+  \node[above left] at (ll) {0};
+  \node[above right] at (llr) {1};
+  \node[above right] at (r)  {1};
+  \node[above left] at (rl) {0};
+  \node[above left] at (rll) {0};
+  \node[above right] at (rr) {1};
+  \node[above left] at (rrl) {0};
+  \node[above left] at (rrll) {0};
+\end{tikzpicture}
+
+Removing:
+
+To remove a bitstring, you traverse the path representing the bitstring to remove and for every node where its only child is the next bit in the bistring, remove the node and go to the next down the path. Once reaching the last node, remove that node only if it has no children, else turn it from a red to black node and terminate.
+
+The previous method was the more neat way to keep the tree clean, however, it suffices to just traverse the tree and turn the terminal bit from a red node to a black one. In either case, you go down the tree once, making it $\sim N$ complexity.
+
+Contains:
+
+Traverse the tree representing the bitstring to check. If there is any element in the bitstring that does not exist in the path, return false. If all bitstrings are in the tree, once you reach the last node, check if the node is red. If it is red, return true, else return false.
+
+This is a $\sim N$ complexity as you only need to traverse one path of the tree as long as the bitstring you are checking. 
+
 \item Let $W$ of length $\abs{W} = N$ be a binary string and let $S$ be a \AName{BSSet} set. Provide an algorithm that prints all strings $V \in S$ that start with the prefix $W$ (the first $\abs{W}$ characters of $S$ are equivalent to $W$). Your algorithm should have a worst-case complexity of $\OOG{N + k}$ in which $k$ is the number of characters printed to the output.
+
+
+
 \item Professor X claims to have developed a data structure \AName{BSSetX} to which any binary string $W$ of length $\abs{W} = N$ can be added in $\OOG{N}$. Furthermore, Professor X claims that \AName{BSSetX}  provides \emph{ordered iteration}: one can iterate over all $M = \abs{S}$ strings in a set $S$, implemented via \AName{BSSetX}, in a lexicographical order in $\OOG{M + T}$ in which $T$ is the combined length of the $M$ strings. Professor X claims that this method of sorting binary strings proves that the worst-case lower bound for sorting $M$ binary strings is \emph{not} $\OOG{M \log_2(M)}$ comparisons. Argue why Professor X is wrong.
 
 We note that strings $S_1$ and $S_2$ are \emph{lexicographical ordered}, denoted by $S_1 \prec S_2$, if $S_1$ comes before $S_2$ in an alphabetical sort (e.g., as used in a dictionary). Next, we formalize $S_1 \prec S_2$ for binary strings: we have $S_1 \prec S_2$ if $S_1$ and $S_2$ are equivalent up to the $0\leq i \leq \min(\abs{S_1}, \abs{S_2})$-th character ($S_1[0] = S_2[0]$,
 \dots, $S_1[i-1] = S_2[i-1]$) and either $\abs{S_1} = i < \abs{S_2}$ or the $(i+1)$-th character of $S_1$ comes before the $(i+1)$-th character of $S_2$ (in which case $S_1[i] = 0$ and $S_2[i] = 1$). For example, $0 \prec 00$ and $00 \prec 01$, but not $100 \prec 10$. 
+
+
+
 \end{questions}
 \end{problem}
 
