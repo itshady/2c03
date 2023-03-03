@@ -258,7 +258,11 @@ As we provided an upper bound on the number of elements in $\mathcal{U}$ that ca
 \textbf{Answer: }
 
 No a general-purpose hash function cannot be n-perfect for any M because a general-purpose hash function must be able to take in any set of input and ensure each hash value contains $\leq n$ values from the input. 
-This means it needs to handle inputs such as lists that have near infinity values (huge M), which is impossible to be n-perfect as you'd have to have an unrealistic number of spots in the hash-table to put the values in.
+This means it needs to handle inputs such as lists that have an infinite number of values (huge M), which is impossible to be n-perfect as you'd have to have an unrealistic number of spots in the hash-table to put the values in. 
+
+In other words, since the general purpose hash function depends on the value of n and M, it is not possible. If there are $n*M+1$ inputs, then best case, each spot in the hash-table will have n values, but one spot will have $n+1$ values, which violates the n-perfect rule.
+
+
 
 Mathematically, the Probability a value $V_r$ in the input set collides with a previously hashed value is:
 
@@ -296,20 +300,74 @@ To conclude, the resulting tree will be of height $h+1$ since we took 2 tree of 
 
 \item Assume that $T_1$ and $T_2$ are red-black trees with the same black height $h$. Show how to implement a \AName{SetUnion} operation that returns a red-black tree in $\OOG{h}$.
 
-- Remove min value in $T_2$ and store it in variable m\\
-Removing the min value is an $h$ complexity function. This can make the tree $T_2$ a height of either $h$ or $h-1$
-If left child is black and his parent is black then you can 
+1) Remove min value in $T_2$ and store it in variable m
 
-- Calculate black height of $T_2$ and store it as $h_{new}$
+Removing the min value is max a $2h$ complexity function which is $\OOG{h}$. This is because you might need to traverse the longest path in the tree and given the tree can be 1 red node then 1 black, this could be of height $2h$.
+
+2a) Case where deletion of min child is easy to handle\\
+- If the min child is red without children, just remove the min child and you're done
+- If the min child is red with children (would be only right children), you can set the min node.right to take its place. 
+
+These are both $\OOG{1}$ operations.
+
+2b) Case where deletion of min child could mess up the black height property: Traverse $T_2$ recursively and do any rotations necessary to maintain RB property.\\
+Like 1), this is also $\OOG{h}$ for the same reasons: you need to traverse the tree downwards where the max height is $2h$.
+
+3) Calculate black height of $T_2$ and store it as $h_{new}$\\
+This is $\OOG{h_new}$ which is $\OOG{h}$ as you must traverse the entire tree once. $h_{new} \leq 2h$ since for every 3 node (height of 2) (think of 2-3 trees), you can only turn it into a tree of height 3. This means you can only multiply the height of the tree by $\frac{3}{2}$, which we round to 2 for simplicity. 
+
+4) Make the min value of $T_2$ (m) the root of our new tree $T_3$\\
+This is $\OOG{1}$ operation.
+
+5) 
 
 
-- Make the min value of $T_2$ (m) the root of our new tree $T_3$
+--- SKIPPPPP -----
 
+1) Remove min value in $T_2$ and store it in variable m
+
+Removing the min value is max a $2h$ complexity function which is $\OOG{h}$. This is because you might need to traverse the longest path in the tree and given the tree can be 1 red node then 1 black, this could be of height $2h$.
+Note: This may no longer be a RB Tree for the moment.
+
+2) Calculate black height of $T_2$ and store it as $h_{new}$\\
+This is $\OOG{h_new}$ which is $\OOG{h}$ as you must traverse the entire tree once. $h_{new} \leq 2h$ since for every 3 node (height of 2) (think of 2-3 trees), you can only turn it into a tree of height 3. This means you can only multiply the height of the tree by $\frac{3}{2}$, which we round to 2 for simplicity. 
+
+---- IGNORE 2 FOR NOW ------
+
+3) Make the min value of $T_2$ (m) the root of our new tree $T_3$\\
+This is $\OOG{1}$ operation.
+
+4) Add $T_1$ as the left subchild and $T_2$ as the right subchild of $T_3$\\
+This is $\OOG{1}$ operation.
+
+All values in $T_1$ are smaller than the root of $T_3$ since it is a value from $T_2$. All values from $T_2$ are larger than $T_3$ since the root was the min in $T_3$.
+We know the height of $T_3$ is $h+1$ currently as all we have done is add 1 level from $T_2$.
+
+5) Traverse $T_3$ recursively and do any rotations necessary to maintain RB property.\\
+Like 1), this is also $\OOG{h}$ for the same reasons: you need to traverse the tree downwards where the max height is $2(h+1)$.
 
 
 \item Assume that $T_1$ and $T_2$ are red-black trees with black heights $h_1 > h_2$. Show how to implement a \AName{SetUnion} operation that returns a red-black tree in $\OOG{h_1}$.
 
+1) Remove min value in $T_2$ and store it in variable m
 
+Removing the min value is max a $2h_2$ complexity function which is $\OOG{h_2} \leq \OOG{h_1}$. This is because you might need to traverse the longest path in the tree and given the tree can be 1 red node then 1 black, this could be of height $2h_2$.
+Note: This may no longer be a RB Tree for the moment.
+
+2) Calculate black height of $T_2$ and store it as $h_{new}$\\
+This is $\OOG{h_new}$ which is $\OOG{h}$ as you must traverse the entire tree once. $h_{new} \leq 2h$ since for every 3 node (height of 2) (think of 2-3 trees), you can only turn it into a tree of height 3. This means you can only multiply the height of the tree by $\frac{3}{2}$, which we round to 2 for simplicity. 
+
+3) Make the min value of $T_2$ (m) the root of our new tree $T_3$\\
+This is $\OOG{1}$ operation.
+
+4) Add $T_1$ as the left subchild and $T_2$ as the right subchild of $T_3$\\
+This is $\OOG{1}$ operation.
+
+All values in $T_1$ are smaller than the root of $T_3$ since it is a value from $T_2$. All values from $T_2$ are larger than $T_3$ since the root was the min in $T_3$.
+We know the height of $T_3$ is $h_1+1$ currently as all we have done is add 1 level from $T_1$ which is the larger tree.
+
+5) Traverse $T_3$ recursively and do any rotations necessary to maintain RB property.\\
+This is $\OOG{h_1}$ since you need to traverse the tree downwards where the max height is $2(h_1+1)$.
 
 \end{questions}
 \end{problem}
