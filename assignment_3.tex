@@ -377,9 +377,9 @@ ex. Adding bitstring "1100", traverse tree 1->1->0->0, and for any non-existance
 
 Removing:
 
-To remove a bitstring, you traverse the path representing the bitstring to remove and for every node where its only child is the next bit in the bistring, remove the node and go to the next down the path. Once reaching the last node, remove that node only if it has no children, else turn it from a red to black node and terminate.
+To remove a bitstring, you traverse the path representing the bitstring to remove. Once reaching the last node, remove that node only if it has no children, else turn it from a red to black node. This takes $\OOG{N}$ as you are traversing the tree downwards via length of the binary string. Then recursively retraverse the tree upwards and for every node that has no children, delete that node from the tree. This is also $\OOG{N}$ complexity as you are traversing the same path as before, which makes the entire thing $\OOG{2N}$ which equals $\OOG{N}$.
 
-The previous method was the more neat way to keep the tree clean, however, it suffices to just traverse the tree and turn the terminal bit from a red node to a black one. In either case, you go down the tree once, making it $\sim N$ complexity.
+The previous method was the more neat way to keep the tree clean, however, it suffices to just traverse the tree and turn the terminal bit from a red node to a black one. In either case, you go down/up the tree max twice, making it $\sim N$ complexity.
 
 Contains:
 
@@ -429,7 +429,7 @@ Assumption: The prefix exists in the tree. If needed, this can be checked before
   \ENDIF
 \end{myalgo}
 
-You can call the method via \AName{PrintPrefix}($\VAR{root}, prefix$). The complexity if $\sim N + k$ since the algorithm traverse the path of the given prefix which is $\sim N$. Then it traverses every path below it recursively. Anytime it gets to a red node, it prints out the path it took to get there, including the current node (note: it does not need to retraverse the graph backwards as it holds the path in a string). This second part is $~k$ as it checks only all characters after the prefix. 
+You can call the method via \AName{PrintPrefix}($\VAR{root}, prefix$). The complexity is $\sim N + k$ since the algorithm traverses the path of the given prefix which is $\sim N$. Then it traverses every path below it recursively. Anytime it gets to a red node, it prints out the path it took to get there, including the current node (note: it does not need to retraverse the graph backwards as it holds the path in a string). This second part is $\OOG{k}$ as it checks only all characters after the prefix. 
 As long as the data structure makes sure to only have paths that have a red node at the end (explained in q4.1 where deleting a string will remove all terminal black nodes), it will always be $\sim k$ since the longest path to traverse is as long as the largest binary string to print. 
 
 \item Professor X claims to have developed a data structure \AName{BSSetX} to which any binary string $W$ of length $\abs{W} = N$ can be added in $\OOG{N}$. Furthermore, Professor X claims that \AName{BSSetX}  provides \emph{ordered iteration}: one can iterate over all $M = \abs{S}$ strings in a set $S$, implemented via \AName{BSSetX}, in a lexicographical order in $\OOG{M + T}$ in which $T$ is the combined length of the $M$ strings. Professor X claims that this method of sorting binary strings proves that the worst-case lower bound for sorting $M$ binary strings is \emph{not} $\OOG{M \log_2(M)}$ comparisons. Argue why Professor X is wrong.
@@ -437,7 +437,13 @@ As long as the data structure makes sure to only have paths that have a red node
 We note that strings $S_1$ and $S_2$ are \emph{lexicographical ordered}, denoted by $S_1 \prec S_2$, if $S_1$ comes before $S_2$ in an alphabetical sort (e.g., as used in a dictionary). Next, we formalize $S_1 \prec S_2$ for binary strings: we have $S_1 \prec S_2$ if $S_1$ and $S_2$ are equivalent up to the $0\leq i \leq \min(\abs{S_1}, \abs{S_2})$-th character ($S_1[0] = S_2[0]$,
 \dots, $S_1[i-1] = S_2[i-1]$) and either $\abs{S_1} = i < \abs{S_2}$ or the $(i+1)$-th character of $S_1$ comes before the $(i+1)$-th character of $S_2$ (in which case $S_1[i] = 0$ and $S_2[i] = 1$). For example, $0 \prec 00$ and $00 \prec 01$, but not $100 \prec 10$. 
 
+a) Given a binary string of length $N$, adding takes $\OOG{N}$ time.
+Now given there is a list of $M$ binary strings all of length $N$, the complexity for adding all the binary strings to the data structure would be $\OOG{M} \cdot N$, where $N,M \in \mathbb{N}$. Let's say $N = M$, in that case, we can already see our complexity would be $\OOG{M^2}$ just to add the strings to the data structure, where $\OOG{M^2} \geq \OOG{M \log_2(M)}$.
+Furthermore, $T$ is the combined length of all binary strings to add, which would again be $M \cdot N$. Again we can see $\exists N, N>M \log_2(M)$ (ex. $N = M$), then this will be greater than the bound set by the Professor.
+Also the complexity of this algorithm relies on $T$ which is the combined length of the strings. Professor X assumes that $T < log_2{M}$, $\forall T,M \in \mathbb{N}$, which is not always the case, especially if you have large binary strings. 
 
+b) To prove a general-purpose sorting algorithm for $M$ binary strings can beat the worst-case lower bound, there must be a use of comparisons to determine sorted order. The lower bound is based solely on \# of comparisons.
+Professor X is suggesting to add the strings in an ordered fashion, then traverse the data structure in order. This contains no comparisons, thus cannot be a proof to contradict the worst-case lower bound for sorting.
 
 \end{questions}
 \end{problem}
