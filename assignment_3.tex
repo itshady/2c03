@@ -464,9 +464,30 @@ We note that strings $S_1$ and $S_2$ are \emph{lexicographical ordered}, denoted
 a) Given a binary string of length $N$, adding takes $\OOG{N}$ time.
 Now given there is a list of $M$ binary strings all of length $N$, the complexity for adding all the binary strings to the data structure would be $\OOG{M} \cdot N$, where $N,M \in \mathbb{N}$. Let's say $N = M$, in that case, we can already see our complexity would be $\OOG{M^2}$ just to add the strings to the data structure, where $\OOG{M^2} \geq \OOG{M \log_2(M)}$.
 Furthermore, $T$ is the combined length of all binary strings to add, which would again be $M \cdot N$. Again we can see $\exists N, N>M \log_2(M)$ (ex. $N = M$), then this will be greater than the bound set by the Professor.
-Also the complexity of this algorithm relies on $T$ which is the combined length of the strings. Professor X assumes that $T < log_2{M}$, $\forall T,M \in \mathbb{N}$, which is not always the case, especially if you have large binary strings. 
+Also the complexity of this algorithm relies on $T$ which is the combined length of the strings. Professor X assumes that $T < log_2{M}$, $\forall T,M \in \mathbb{N}$, which is not always the case, especially if you have larger binary strings. \\
 
-I can prove this for any input
+b) Now to tackle this for all inputs:
+
+We need to prove that $\sim M + MN \geq M log_2{M}$ for all cases, where $M$ is the number of binary strings in the input and $N$ is the length of a string. We will look into general cases where the length of all binary strings are the same. It doesn't change anything, since if you take the same argument for the smallest binary sting in the input, it would be the same.
+
+Since we are dealing with binary strings, we know the maximum M for any N is $2^N$ since there are 2 choices per each bit. We will say the minimum $M$ is 2 to make $log_2{M}$ easier.
+
+For the minimum $M=2$:\\
+$M + MN \geq M log_2{M}$\\
+$2 + 2N \geq 2 log_2{2}$\\
+$2 + 2N \geq 2$
+
+Which is always true for any positive $N$.
+
+For the maximum $M=2^N$:\\
+$M + MN \geq M log_2{M}$\\
+$2^N + 2^{N}N \geq 2^N log_2{2^N}$\\
+$\sim 2^{N}N \geq 2^{N} Nlog_2{2}$\\
+$\sim 2^{N}N \geq 2^{N} N$\\
+
+Which is also always true.
+
+To conclude, we have just proven for all lengths of binary strings, Professor X simply cannot beat $M log_2{M}$.
 
 \end{questions}
 \end{problem}
