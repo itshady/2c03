@@ -197,7 +197,6 @@ We say that a hash function $h : \mathcal{U} \rightarrow \mathbb{N}$ that maps v
 \begin{questions}
 \item Consider the hash function $h(k) = (2k + 5) \bmod 11$. Is this hash function $2$-perfect for the inputs $0, \dots, 21$? Explain why or why not.
 
-\textbf{Answer:}
 This function is 2-perfect for the inputs 0,...,21 since after computation, there is only 2 values mapped to one spot in the hash table. In summary, since the function has 2k, as you loop through the values, the new value will most often be 2 more than the previous. This is until you hit 11 as it is mod 11, then it will start back at either 0 or 1 depending on if the previous value was 9 or 10. The following is the computation.\\
 
 \begin{center}
@@ -232,8 +231,6 @@ Rearrange to see that there are only two values per mapping. We can see that if 
 
 \item Prove that a hash function $h : \mathcal{U} \rightarrow \mathbb{N}$ can only be $n$-perfect if $\abs{\mathcal{U}} \leq n \cdot M$.
 
-\textbf{Answer:}
-
 Assume $h : \mathcal{U} \rightarrow \mathbb{N}$ is n-perfect and let 
 $u_1, \dots, u_j$ be j distinct values in $\mathcal{U}$ such that $h(u_1) = \dots = h(u_j)$. Then we will have that $j \leq n$.
 
@@ -255,12 +252,10 @@ As we provided an upper bound on the number of elements in $\mathcal{U}$ that ca
 
 \item Can a general purpose hash function be $n$-perfect for any $M$? Argue why or why not.
 
-\textbf{Answer: }
-
 No a general-purpose hash function cannot be n-perfect for any M because a general-purpose hash function must be able to take in any set of input and ensure each hash value contains $\leq n$ values from the input. 
 This means it needs to handle inputs such as lists that have a near infinite number of values (huge, but finite M), which is nearly impossible to be n-perfect as you'd have to consider infinite different inputs.
 
-Let's take the set of all strings for example as what our hash function is hashing. There is no function we can provide that will perfectly distribute every string possible as even if our hash table is semi-filled, and we go to hash string x. I can append "a" (or any new string that will hash it to a collision) to x and that will mess up the function, thus resulting in a collision, violating the n-perfect rule.
+Let's take the set of all strings for example as what our hash function is hashing. There is no function we can provide that will perfectly distribute every string possible as even if our hash table is semi-filled, and we go to hash string x, I can append "a" (or any new string that will hash it to a collision) to x and that will mess up the function, thus resulting in a collision, violating the n-perfect rule. In other words, there are just too many possible inputs to need to handle/think of that no function can distribute all inputs evenly.
 
 
 \end{questions}
@@ -272,7 +267,7 @@ Consider non-empty binary search trees $T_1$ and $T_2$ such that all values in $
 \item Assume the binary search trees storing $T_1$ and $T_2$ have the same height $h$. Show how to implement the \AName{SetUnion} operation in $\OOG{h}$ such that the resulting tree has a height of at-most $h+1$.
 
 1) Remove max value in $T_1$ and store it in variable m\\
-$h$ is worst-case time complexity, where the max value is at the $h_{th}$ level in the tree. $T_1$ will still have a height of $h$ or $h-1$ if max value m was the only value in level $h$ of the tree.
+$h1$ is worst-case time complexity, where the max value is at the $h1_{th}$ level in the tree. $T_1$ will still have a height of $h$ or $h-1$ if max value m was the only value in level $h$ of the tree.
 
 2) Add the max value m as the root of $T_1$\\
 $\sim 1$ time complexity, as it just takes a little pointer logic. Make m node root of $T_1$ and make m.left be the old root of $T_1$. This will lead the tree be max height $h+1$ as we are only added 1 level (the new root) to the tree.
@@ -280,16 +275,16 @@ Also, we know all values in $T_1$ are smaller than m, so BST properties remain a
 At this point, $T_1$ is of height $ \leq h+1$ and $T_2$ is of height $h$
 
 3) Take the root of $T_2$ and make it right subtree of new $T_1$\\
-Again $\sim 1$ time complexity, as it just requires to make m.right $ = T_2$. We know the left subtree of m is max $h$ height and the right subtree is $h$ since we just added $T_2$ which is a tree of height $h$.
+Again $\sim 1$ time complexity, as it just requires to make m.right $ = T_2$. We know from the root down the left subtree is max $h+1$ height and the right subtree is $h+1$ since we just added $T_2$ to the root which is a tree of height $h$.
 We also know that all values in $T_2$ are greater than the values in the current $T_1$, including the root. This allows us to put the root of $T_2$ as the right child of m, ensuring we keep BST properties.
 
 4) return $T_1$\\
 
-To conclude, the resulting tree will be of height $h+1$ since we took 2 tree of height $h$ and added 1 level to it (the root). We also know it keeps BST properties as we know all values in $T_2$ are larger than the maximum value in $T_1$, which allows us to put $T_2$ in the right subtree of the root of new $T_1$
+To conclude, the resulting tree will be of height $h+1$ since we took 2 tree of height $h$ and added 1 level to it (the root). We also know it keeps BST properties as we know all values in $T_2$ are larger than the maximum value in $T_1$, which allows us to put $T_2$ in the right subtree of the root of new $T_1$ and the rest of the values of $T_1$ are smaller than the root, so they can all be in the left subtree.
 
 \item Assume that $T_1$ and $T_2$ are red-black trees with the same black height $h$. Show how to implement a \AName{SetUnion} operation that returns a red-black tree in $\OOG{h}$.
 
-1) Check height $h$ of tree, for step 5 (can be any since both are height $h$)\\
+1) Check height $h$ of tree (this is for step 5) (can check any tree since both are height $h$)\\
 Takes $\OOG{h}$ since you just traverse the tree downwards once.
 
 2) Remove min value in $T_2$ and store it in variable $m$\\
@@ -439,8 +434,8 @@ Assumption: The prefix exists in the tree. If needed, this can be checked before
       \PRINT $string$ \COMMENT{//this is to handle printing the prefix if it is in the tree.}
     \ENDIF
 
-    \STATE \AName{PrintPrefix($currNode.left, currNode.data+""$)} \COMMENT{//print all bitstrings in left subtree}
-    \STATE \AName{PrintPrefix($currNode.right, currNode.data+""$)} \COMMENT{//print all bitstrings in right subtree}
+    \STATE \AName{PrintPrefix($currNode.left, string$)} \COMMENT{//print all bitstrings in left subtree}
+    \STATE \AName{PrintPrefix($currNode.right, string$)} \COMMENT{//print all bitstrings in right subtree}
   \ELSE
     \STATE $\VAR{string}.append(node.data)$ \COMMENT{//Add current node data to string}
     \IF{$node.color = "red"$}
@@ -448,8 +443,8 @@ Assumption: The prefix exists in the tree. If needed, this can be checked before
       \PRINT $string$
     \ENDIF
 
-    \STATE \AName{PrintPrefix($currNode.left, currNode.data+""$)} \COMMENT{//print all bitstrings in left subtree}
-    \STATE \AName{PrintPrefix($currNode.right, currNode.data+""$)} \COMMENT{//print all bitstrings in right subtree}
+    \STATE \AName{PrintPrefix($currNode.left, string$)} \COMMENT{//print all bitstrings in left subtree}
+    \STATE \AName{PrintPrefix($currNode.right, string$)} \COMMENT{//print all bitstrings in right subtree}
   \ENDIF
 \end{myalgo}
 
