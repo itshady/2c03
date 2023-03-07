@@ -236,7 +236,7 @@ $u_1, \dots, u_j$ be j distinct values in $\mathcal{U}$ such that $h(u_1) = \dot
 
 $\mathcal{S}_i = \{x \in \mathcal{U}\:|\:h(x) = i\}$ --> In other words, $\mathcal{S}_i$ has elements in $\mathcal{U}$ that map to $i$
 
-This means, $\mathcal{U} = \sum_{i=0}^{M-1} \mathcal{S}_i$, since $\mathcal{U}$ is the sum of all elements that were mapped.
+This means, $\mathcal{U} = \sum_{i=0}^{M-1} \mathcal{S}_i$, since $\mathcal{U}$ is the sum of all elements that were mapped and $M$ is the amount of spots in the hash-table.
 
 since $h$ is n-perfect, we know $|\mathcal{S}_i| \leq n$
 
@@ -253,7 +253,7 @@ As we provided an upper bound on the number of elements in $\mathcal{U}$ that ca
 \item Can a general purpose hash function be $n$-perfect for any $M$? Argue why or why not.
 
 No a general-purpose hash function cannot be n-perfect for any M because a general-purpose hash function must be able to take in any set of input and ensure each hash value contains $\leq n$ values from the input. 
-This means it needs to handle inputs such as lists that have a near infinite number of values (huge, but finite M), which is nearly impossible to be n-perfect as you'd have to consider infinite different inputs.
+This means it needs to handle inputs such as lists that have a near infinite number of values (huge, but finite), which is nearly impossible to be n-perfect as you'd have to consider infinite different inputs. Also, there can always be more input values than there are hash values, meaning it is simply impossible to have max n values mapped to one hash value, as there aren't enough hash values to hold the inputs. As shown in 2.2, if we have an input list with $nM+1$ values, it is impossible to be n-perfect. 
 
 Let's take the set of all strings for example as what our hash function is hashing. There is no function we can provide that will perfectly distribute every string possible as even if our hash table is semi-filled, and we go to hash string x, I can append "a" (or any new string that will hash it to a collision) to x and that will mess up the function, thus resulting in a collision, violating the n-perfect rule. In other words, there are just too many possible inputs to need to handle/think of that no function can distribute all inputs evenly.
 
