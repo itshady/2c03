@@ -98,10 +98,42 @@ Let $n$ be a positive integer and consider two $n \times n$ matrices $M_1$ and $
 Now consider a directed graph $\Graph = (\Nodes, \Edges)$ implemented via the matrix representation $M$ with $n = \abs{\Nodes}$.
 \begin{questions}
 \item Let $M' = M \otimes M$. What does the value $M'[i,j]$ represent (when is it $\True$ and when is it $\False$)?
+
+The value $M'[i, j]$ represents whether there exists a path of length 2 from node $i$ to node $j$ in the directed graph G = (N, E) represented by matrix M.
+
+In other words, $M'[i, j]$ is true iff there exists a node $k$ such that $M[i, k]$ and $M[k, j]$ are true. This node $k$ is an intermediate node that connects $i$ and $j$.
+
+If there is no node $k$ that can connect $i$ and $j$, then $M'[i, j]$ is false.
+
 \item Consider paths of length $k$ in graph $G$. Provide an algorithm that uses the Boolean matrix product operations to compute a matrix $M_k$ such that, for every pair of nodes $n, m \in \Nodes$, $M_k[\ID{n}, \ID{m}]$ is $\True$ if and only if there is a path of length exact-$k$ from node $n$ to node $m$. Explain why your algorithm is correct and provide the complexity of your algorithm in terms of the number of Boolean matrix product operations used.
 
 \textit{Hint}. One can design an algorithm that performs at-most $\OOG{\log_2(k)}$ Boolean matrix product operations.
+
+Base case: If k = 1, then just return $M$ where $M_1[i,j]$ is 1 if there is an edge from node i to j. 
+
+General case: If k > 1, recursively compute $M_{\lfloor{k/2}\rfloor}$, and then set $M_k$ to be the Boolean matrix product of $M_{\lfloor{k/2}\rfloor}$ and itself ($M_k = M_{\lfloor{k/2}\rfloor} \otimes M_{\lfloor{k/2}\rfloor}$).
+If $k/2$ had a remainder, than after computing $M_{k2} = M_{\lfloor{k/2}\rfloor} \otimes M_{\lfloor{k/2}\rfloor}$, compute $M_k = M_{k2} \otimes M_1$.
+
+In other words, the Boolean matrix product of $M_p \otimes M_r = M_{p+r}$.
+
+
+\begin{myalgo}{\AName{BooleanProduct}($M, k$)}
+  \IF{$k == 1$}
+    \RETURN $M$
+  \ENDIF
+  \STATE $h = k//2$
+  \STATE $result = \AName{BooleanProduct}(M, h) \otimes \AName{BooleanProduct}(M, h)$ \COMMENT{Get Boolean Product of matrix}
+  \IF{$h \% 2 == 1$}  
+    \STATE $result \otimes M$ \COMMENT{If needed to floor the value, then compute the result with $M_1$ to add 1 to path length}
+  \ENDIF
+  \RETURN $result$
+\end{myalgo}
+
+
 \item The \emph{transitive closure} of $\Graph$ is a graph $\Graph' = (\Nodes, \Edges')$ such that $(n, m) \in \Edges'$ if and only if there is a path from node $n$ to node $m$ in graph $\Graph$. Provide an algorithm that uses the Boolean matrix product operations to compute a matrix $M'$ that represents graph $\Graph'$. Explain why your algorithm is correct and provide the complexity of your algorithm.
+
+
+
 \end{questions}
 \end{problem}
 
