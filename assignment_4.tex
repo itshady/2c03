@@ -132,7 +132,16 @@ In other words, the Boolean matrix product of $M_p \otimes M_r = M_{p+r}$.
 
 \item The \emph{transitive closure} of $\Graph$ is a graph $\Graph' = (\Nodes, \Edges')$ such that $(n, m) \in \Edges'$ if and only if there is a path from node $n$ to node $m$ in graph $\Graph$. Provide an algorithm that uses the Boolean matrix product operations to compute a matrix $M'$ that represents graph $\Graph'$. Explain why your algorithm is correct and provide the complexity of your algorithm.
 
+1. Compute the Boolean matrix product $M' = M \otimes M$.
 
+2. Store edges of $M'$ in a results Matrix
+
+3. Repeat the matrix multiplication $M' = M' \otimes M$ until $M'$ stops changing. Keep storing the edges in results Matrrix between each multiplication.
+
+4. The results Matrix $M'$ is the transitive closure of G.
+
+Complexity is as large as the longest path since each matrix multiplication adds 1 to the path. This means $\OOG{\mathcal{O}(|N-1|)}$. 
+This is added to the complexity of getting all edges in $M'$ and storing them in a resulting Matrix. Transferring this data is $\OOG{\mathcal{O}(|N|^2)}$ since you need to check every edge in $M'$.
 
 \end{questions}
 \end{problem}
