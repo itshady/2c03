@@ -1,0 +1,87 @@
+\input{preamble.tex}
+
+\Assignment{4}
+\Deadline{March 19, 2023}
+\begin{document}
+\maketitle
+\DEFAULTMSG{}
+
+\begin{problem}
+Consider a directed graph $\Graph = (\Nodes, \Edges)$. Breadth-first search and depth-first search both have a runtime complexity of $\OOG{\abs{\Nodes} + \abs{\Edges}}$ if we represent the graph with an adjacency list.
+\begin{questions}
+\item What is the runtime complexity of breadth-first search and depth-first search when we use the matrix representation? Explain your answer.
+\item Consider the \emph{ordered edge list} representation that represents a graph by an \emph{ordered} array $A$ that holds $\abs{\Edges}$ edges. The order of edges is as follows: edge $(n_1, m_1) \in A$ comes before $(n_2, m_2) \in A$ if $\ID{n_1} < \ID{n_2}$ or if $\ID{n_1} = \ID{n_1} \land \ID{m_1} \leq \ID{m_2}$. What is the runtime complexity of breadth-first search and depth-first search when we use the \emph{ordered edge list} representation? Explain your answer.
+\end{questions}
+\end{problem}
+
+\begin{problem}
+Consider a directed acyclic graph $\Graph = (\Nodes, \Edges)$ with a source node $m \in \Nodes$ and target node $n \in \Nodes$.
+\begin{questions}
+\item Provide an algorithm that computes the number of paths starting at $m$ and ending at $n$.
+
+Assuming an adjacency representation of the graph.
+
+\begin{myalgo}{\AName{DFS}($\VAR{start},\VAR{dest},\VAR{storedPaths}$)}
+  \IF{$\VAR{start}=1$}
+    \RETURN 1
+  \ENDIF
+  \STATE $path = 0$
+  \FOR{$n \in \VAR{adj[start]}$}
+    \IF{$(storedPaths.containsKey(n))$}
+      \STATE $path += storedPaths.get(n)$
+    \ELSE{}
+      \STATE $\VAR{paths} += $\AName{DFS}($\VAR{start},\VAR{dest},\VAR{storedPaths}$)
+    \ENDIF
+  \ENDFOR
+  \STATE $storedPaths.putIfAbsent(v, path)$
+  \RETURN $paths$
+\end{myalgo}
+
+Call this via 
+
+\begin{myalgo}{\AName{Main}()}
+  \STATE $graph \GETS new Graph()$  \COMMENT{initialized graph with edges and nodes already set}
+  \STATE $Map<Integer, Integer> storedPaths = new HashMap<>()$
+  \PRINT \AName{DFS}($start\_node\_id,destination\_node\_id,storedPaths$)
+\end{myalgo}
+
+Graph representation: adjacency representation. The algorithm runs DFS from the start node. For each node in its adjacency list (neighbours), it runs another DFS. This happens recursively.
+This algorithm goes over what is considered a "marked node" in normal DFS as we want to account for every single path, not only unique ones. Each DFS counts the number of paths to the destination node by summing the number of paths to the destination node all of its children have.
+The base case is when reaching the destination node, we have 1 path. Using this recursion, we can sum all the paths to the destination node and return that.
+
+As I use dynamic programming to keep track of the solution to "subproblems" (a subproblem being finding the paths to the destination node from specific node), we only ever need to compute the number of paths from a single node to the destination once. After that we can fetch that result from the storedPaths map.
+This means that for every node, we perform a DFS. We know DFS using adjacency represenation is $\OOG{|N| + |E|}$, so if we do this for each node, the complexity is $\OOG{|N|^2 + |N||E|}$
+
+\item We say that the directed acyclic graph $\Graph$ has a \emph{bottleneck} if there is a node $b$, distinct from source $m$ and target $n$, such that all paths from $m$ to $n$ go through node $b$. Write an algorithm that returns $\True$ if  and only if $\Graph$ has such a bottleneck. You may assume that there is at-least one path from $m$ to $n$.
+\end{questions}
+For each question, explain why your algorithm is correct, what the complexity of your algorithm is, and which graph representation you use.
+\end{problem}
+
+\begin{problem}
+Let $n$ be a positive integer and consider two $n \times n$ matrices $M_1$ and $M_2$. The \emph{Boolean matrix product} of $M_1$ and $M_2$, denoted by $M' \GETS M_1 \otimes M_2$, is the $n \times n$ matrix $M'$ in which $M'[i, j]$ is:
+\[ M'[i, j] = (M_1[i, 0] \land M_2[0, j]) \lor (M_1[i, 1] \land M_2[1, j]) \lor \dots \lor (M_1[i, n-1] \land M_2[n-1,j]). \]
+
+Now consider a directed graph $\Graph = (\Nodes, \Edges)$ implemented via the matrix representation $M$ with $n = \abs{\Nodes}$.
+\begin{questions}
+\item Let $M' = M \otimes M$. What does the value $M'[i,j]$ represent (when is it $\True$ and when is it $\False$)?
+\item Consider paths of length $k$ in graph $G$. Provide an algorithm that uses the Boolean matrix product operations to compute a matrix $M_k$ such that, for every pair of nodes $n, m \in \Nodes$, $M_k[\ID{n}, \ID{m}]$ is $\True$ if and only if there is a path of length exact-$k$ from node $n$ to node $m$. Explain why your algorithm is correct and provide the complexity of your algorithm in terms of the number of Boolean matrix product operations used.
+
+\textit{Hint}. One can design an algorithm that performs at-most $\OOG{\log_2(k)}$ Boolean matrix product operations.
+\item The \emph{transitive closure} of $\Graph$ is a graph $\Graph' = (\Nodes, \Edges')$ such that $(n, m) \in \Edges'$ if and only if there is a path from node $n$ to node $m$ in graph $\Graph$. Provide an algorithm that uses the Boolean matrix product operations to compute a matrix $M'$ that represents graph $\Graph'$. Explain why your algorithm is correct and provide the complexity of your algorithm.
+\end{questions}
+\end{problem}
+
+\begin{problem}
+Consider a directed graph $\Graph = (\Nodes, \Edges)$ and assume we have a weight function $\Weight : \Edges \rightarrow \{1, \dots, W\}$ with $W$ some maximum integer value $W$.
+\begin{questions}
+\item Assume $W = 1$ (all edges have weight $1$). Given node $n \in \Nodes$, provide an algorithm that can compute the shortest path from node $n$ to any other node $m$ in $\OOG{\abs{\Nodes} + \abs{\Edges}}$. In this case, the shortest path is the path with the fewest edges.
+\item Given node $n \in \Nodes$, provide an algorithm that can compute the shortest path (in terms of the sum of the weights of edges on the path) from node $n$ to any other node $m$ in $\OOG{\abs{\Nodes} + W\abs{\Edges}}$.
+\item Given node $n \in \Nodes$, provide an algorithm that can compute the shortest path (in terms of the sum of the weights of edges on the path) from node $n$ to any other node $m$ in $\OOG{W\abs{\Nodes} + \abs{\Edges}}$.
+\end{questions}
+For each question, explain why your algorithm is correct, why your algorithm achieves the stated complexity, and which graph representation you use.
+\end{problem}
+
+\SUBMITMSG{}
+\DEFAULTGRADING{}
+
+\end{document}
