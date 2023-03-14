@@ -53,6 +53,40 @@ As I use dynamic programming to keep track of the solution to "subproblems" (a s
 This means that for every node, we perform a DFS. We know DFS using adjacency represenation is $\OOG{|N| + |E|}$, so if we do this for each node, the complexity is $\OOG{|N|^2 + |N||E|}$
 
 \item We say that the directed acyclic graph $\Graph$ has a \emph{bottleneck} if there is a node $b$, distinct from source $m$ and target $n$, such that all paths from $m$ to $n$ go through node $b$. Write an algorithm that returns $\True$ if  and only if $\Graph$ has such a bottleneck. You may assume that there is at-least one path from $m$ to $n$.
+
+\begin{myalgo}{\AName{Bottleneck}($\VAR{m},\VAR{n}$)}
+  \STATE $G = Graph(V,E)$  \COMMENT{Initialized graph with all nodes V and edges E}
+  \STATE $S = G.DFS(m)$ \COMMENT{All nodes reachable from m}
+  \STATE $G_{rev} = (V, {e \in G | (n_1,n_2) \in E : (n_2,n_1)})$  \COMMENT{Same graph, but with all edges flipped}
+  \STATE $T = G_{rev}.DFS(n)$ \COMMENT{All nodes that can reach n}
+  \STATE $B = Intersection(S,T)$ \COMMENT{All nodes that are reachable from m and can reach n}
+  \FOR{$x \in B$}
+    \IF{$G.AllPathsContain(m,n,x) == false$} 
+      \STATE $B.remove(x)$  \COMMENT{Traverse all paths from m to n, and if it doesn't pass x, remove x from B}
+    \ENDIF
+  \ENDFOR
+  \IF{$B.empty$}
+    \RETURN FALSE
+  \ENDIF
+  \RETURN TRUE
+\end{myalgo}
+
+I am using adjacency representation again.
+
+DFS on line 2: Is a $\mathcal{O}(\OOG{|N|+|E|})$ as it is a normal DFS where we keep track of the nodes reachable from m and return them. As mentioned in lecture, DFS is $\mathcal{O}(\OOG{|N|+|E|})$.
+
+Reversing the edges on line 3: Is a $\mathcal{O}(\OOG{|E|})$ as you need to swap the nodes for every edge.
+
+DFS on line 4: With the reverse graph, do the same as line 2 where you find all reachable nodes. This will get all nodes that can reach n in $\mathcal{O}(\OOG{|N|+|E|})$.
+
+Intersection on line 5: Goes through all of $S$ and $T$ and adds nodes that are in both sets. This is $\mathcal{O}(\OOG{|N|})$ as worst-case, all nodes are in both sets, so we must traverse the sets fully.
+
+Traverse paths of lines 6-10: For every node in $B$, which we determined worst-case is $|N|$ nodes, we must traverse all paths, which can again be accomplished using DFS, which is $\mathcal{O}(\OOG{|N|+|E|})$. Thus the complexity here is $\mathcal{O}(\OOG{|N|^2+|N||E|})$
+
+Removing from B is an $\mathcal{O}(\OOG{|B|})$, which is worst-case $\mathcal{O}(\OOG{|N|})$, and checking if B is empty is $\mathcal{O}(\OOG{1})$.
+
+Thus we can see, lines 6-10 are the largest complexity, so the overall complexity for this algorithm is $\mathcal{O}(\OOG{|N|^2+|N||E|})$
+
 \end{questions}
 For each question, explain why your algorithm is correct, what the complexity of your algorithm is, and which graph representation you use.
 \end{problem}
