@@ -10,7 +10,39 @@
 Consider a directed graph $\Graph = (\Nodes, \Edges)$. Breadth-first search and depth-first search both have a runtime complexity of $\OOG{\abs{\Nodes} + \abs{\Edges}}$ if we represent the graph with an adjacency list.
 \begin{questions}
 \item What is the runtime complexity of breadth-first search and depth-first search when we use the matrix representation? Explain your answer.
+
+For BFS, we typically use a queue to store the vertices to be 
+processed. In each iteration, we remove a vertex from the front 
+of the queue, add its neighbors to the back of the queue if they 
+have not been visited yet, and mark the removed vertex as visited.
+ To determine the neighbors of a vertex, we need to examine the
+  corresponding row of the adjacency matrix. Thus, for each 
+  vertex, we need to scan the corresponding row of the adjacency
+   matrix to find its neighbors. Since there are $|N|$ vertices, 
+   each with $|N|$ entries in the adjacency matrix, the time 
+   complexity of BFS using the adjacency matrix representation 
+   is $O(|N|^2)$.
+
+For DFS, we typically use a stack to store the vertices to 
+be processed. In each iteration, we remove a vertex from the 
+top of the stack, add its unvisited neighbors to the stack, and 
+mark the removed vertex as visited. To determine the neighbors 
+of a vertex, we need to examine the corresponding row of the 
+adjacency matrix. Thus, for each vertex, we need to scan the 
+corresponding row of the adjacency matrix to find its neighbors. 
+Since there are $|N|$ vertices, each with $|N|$ entries in the
+ adjacency matrix, the time complexity of DFS using the adjacency 
+ matrix representation is also $O(|N|^2)$.
+
 \item Consider the \emph{ordered edge list} representation that represents a graph by an \emph{ordered} array $A$ that holds $\abs{\Edges}$ edges. The order of edges is as follows: edge $(n_1, m_1) \in A$ comes before $(n_2, m_2) \in A$ if $\ID{n_1} < \ID{n_2}$ or if $\ID{n_1} = \ID{n_1} \land \ID{m_1} \leq \ID{m_2}$. What is the runtime complexity of breadth-first search and depth-first search when we use the \emph{ordered edge list} representation? Explain your answer.
+
+
+In the ordered edge list represenation, since edges are sorted, we know all edges that start at $n_1$ will be at the start of the array, followed by $n_2$ and so on. We can then use binary search to find the first edge of the list of edges that start at $n_x$ where x is the node number. 
+
+For BFS, we know that we traverse every node once and every edge once (covered in class). Basically, we start by visiting the start node and then all its neighbours. To visit its neighbours, we need to search for the edges that have the starting node as the first node in the tuple. To find these nodes, it takes $\OOG{log_2{|E|}}$ time where the length of the list to search is $|E|$. We repeat this process for every node, meaning we visit every node once and every edge once and need to call a $\OOG{log_2{|E|}}$ operation once per node. This gives a complexity of $\OOG{|N|log_2|E| + |E|}$.
+
+For DFS, we also know that we traverse every node and edge once. We do this by starting at the start node and recursively visiting all its neighbours. Again, to visit the neighbours will require to find the edges in the ordered list, which requires the binary search of $\OOG{log_2{|E|}}$. We repeat this process for all nodes that are visited, thus meaning we use the binary search once per node. Since this is the case, the overall runtime complexity is also $\OOG{|N|log_2|E| + |E|}$ as we traverse every node and edge once and for every node, need to perform a $\OOG{log_2{|E|}}$ complexity search.
+
 \end{questions}
 \end{problem}
 
@@ -109,6 +141,8 @@ If there is no node $k$ that can connect $i$ and $j$, then $M'[i, j]$ is false.
 
 \textit{Hint}. One can design an algorithm that performs at-most $\OOG{\log_2(k)}$ Boolean matrix product operations.
 
+Assuming the graph is in matrix representation.
+
 Base case: If k = 1, then just return $M$ where $M_1[i,j]$ is 1 if there is an edge from node i to j. 
 
 General case: If k > 1, recursively compute $M_{\lfloor{k/2}\rfloor}$, and then set $M_k$ to be the Boolean matrix product of $M_{\lfloor{k/2}\rfloor}$ and itself ($M_k = M_{\lfloor{k/2}\rfloor} \otimes M_{\lfloor{k/2}\rfloor}$).
@@ -122,26 +156,36 @@ In other words, the Boolean matrix product of $M_p \otimes M_r = M_{p+r}$.
     \RETURN $M$
   \ENDIF
   \STATE $h = k//2$
-  \STATE $result = \AName{BooleanProduct}(M, h) \otimes \AName{BooleanProduct}(M, h)$ \COMMENT{Get Boolean Product of matrix}
+  \STATE $M_h = \AName{BooleanProduct}(M, h)$
+  \STATE $result = M_h \otimes M_h$ \COMMENT{Get Boolean Product of matrix}
   \IF{$h \% 2 == 1$}  
     \STATE $result \otimes M$ \COMMENT{If needed to floor the value, then compute the result with $M_1$ to add 1 to path length}
   \ENDIF
   \RETURN $result$
 \end{myalgo}
 
+Complexity: The complexity is $\OOG{log_2{k}}$ as you just divide the problem into 2 recursively until hitting the base case of 1.
+
+When k is even, we compute $M_{\frac{k}{2}}$ by splitting the paths of length k into two subpaths of length k/2. 
+When k is odd, we first compute $M_{k-1}$ for to find paths of length k-1, and then multiplying by $M_1$ to extend the paths by one edge.
+
 
 \item The \emph{transitive closure} of $\Graph$ is a graph $\Graph' = (\Nodes, \Edges')$ such that $(n, m) \in \Edges'$ if and only if there is a path from node $n$ to node $m$ in graph $\Graph$. Provide an algorithm that uses the Boolean matrix product operations to compute a matrix $M'$ that represents graph $\Graph'$. Explain why your algorithm is correct and provide the complexity of your algorithm.
 
-1. Compute the Boolean matrix product $M' = M \otimes M$.
+1. Create results matrix $N$ (initialized to all false) and OR it with matrix $M$. By OR, it means $N[i,j] = N[i,j] | M[i,j]$
 
-2. Store edges of $M'$ in a results Matrix
+2. Compute the Boolean matrix product $M' = M \otimes M$.
 
-3. Repeat the matrix multiplication $M' = M' \otimes M$ until $M'$ stops changing. Keep storing the edges in results Matrrix between each multiplication.
+3. Store edges of $M'$ in the results Matrix $N$.
 
-4. The results Matrix $M'$ is the transitive closure of G.
+4. Repeat the matrix multiplication $M' = M' \otimes M$ until $M'$ stops changing. Keep storing the edges in results Matrrix between each multiplication.
+
+5. The results Matrix $M'$ is the transitive closure of G.
 
 Complexity is as large as the longest path since each matrix multiplication adds 1 to the path. This means $\OOG{\mathcal{O}(|N-1|)}$. 
 This is added to the complexity of getting all edges in $M'$ and storing them in a resulting Matrix. Transferring this data is $\OOG{\mathcal{O}(|N|^2)}$ since you need to check every edge in $M'$.
+
+WRONG BC THERE COULD BE CYCLES
 
 \end{questions}
 \end{problem}
@@ -150,8 +194,32 @@ This is added to the complexity of getting all edges in $M'$ and storing them in
 Consider a directed graph $\Graph = (\Nodes, \Edges)$ and assume we have a weight function $\Weight : \Edges \rightarrow \{1, \dots, W\}$ with $W$ some maximum integer value $W$.
 \begin{questions}
 \item Assume $W = 1$ (all edges have weight $1$). Given node $n \in \Nodes$, provide an algorithm that can compute the shortest path from node $n$ to any other node $m$ in $\OOG{\abs{\Nodes} + \abs{\Edges}}$. In this case, the shortest path is the path with the fewest edges.
+
+\begin{myalgo}{\AName{SSSP}($G, s$)}
+  \STATE $predecessors = \{n -> \:? | n \in \mathcal{N}\}$
+  \STATE $distance[s] = s$
+  \STATE $Q = a queue$
+  \STATE $ENQUEUE(Q, s)$
+  \WHILE{$!EMPTY(Q)$}
+    \STATE $n = DEQUEUE(Q)$
+    \FORALL{ $(n,m) \in \Edges$}
+      \IF{$predecessors[m] = \: ?$}
+        \STATE $predecessors[m] = n$
+        \STATE $ENQUEUE(Q, m)$
+      \ENDIF
+    \ENDFOR
+  \ENDWHILE
+  \RETURN $predecessors$
+\end{myalgo}
+
+Complexity: We inspect each node once and traverse each edge once making it $\OOG{\abs{\Nodes} + \abs{\Edges}}$ complexity.
+
 \item Given node $n \in \Nodes$, provide an algorithm that can compute the shortest path (in terms of the sum of the weights of edges on the path) from node $n$ to any other node $m$ in $\OOG{\abs{\Nodes} + W\abs{\Edges}}$.
+
+
 \item Given node $n \in \Nodes$, provide an algorithm that can compute the shortest path (in terms of the sum of the weights of edges on the path) from node $n$ to any other node $m$ in $\OOG{W\abs{\Nodes} + \abs{\Edges}}$.
+
+
 \end{questions}
 For each question, explain why your algorithm is correct, why your algorithm achieves the stated complexity, and which graph representation you use.
 \end{problem}
