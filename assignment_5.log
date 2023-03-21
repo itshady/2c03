@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2023.1.17)  20 MAR 2023 00:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2023.1.17)  21 MAR 2023 16:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/hadyi/Documents/coding/latex/assignment_4.tex
-(c:/Users/hadyi/Documents/coding/latex/assignment_4.tex
+**c:/Users/hadyi/Documents/coding/latex/assignment_5.tex
+(c:/Users/hadyi/Documents/coding/latex/assignment_5.tex
 LaTeX2e <2022-06-01> patch level 5
 L3 programming layer <2022-09-28> (preamble.tex (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
@@ -766,8 +766,8 @@ Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
 File: l3backend-pdftex.def 2022-09-28 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count327
 \l__pdf_internal_box=\box91
-) (assignment_4.aux)
-\openout1 = `assignment_4.aux'.
+) (assignment_5.aux)
+\openout1 = `assignment_5.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/nxlmi/m/it on input line 5.
 LaTeX Font Info:    Trying to load font information for OML+nxlmi on input line 5.
@@ -809,7 +809,7 @@ File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
 LaTeX Font Info:    ... okay on input line 5.
 Package hyperref Info: Link coloring ON on input line 5.
 \@outlinefile=\write4
-\openout4 = `assignment_4.out'.
+\openout4 = `assignment_5.out'.
 
 
 *geometry* driver: auto-detecting
@@ -947,71 +947,47 @@ LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
 (Font)              scaled to size 5.5pt on input line 7.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/it' will be
 (Font)              scaled to size 10.0pt on input line 7.
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 7.3pt on input line 32.
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 5.5pt on input line 32.
  [1
 
 {C:/Users/hadyi/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/sc' will be
-(Font)              scaled to size 10.0pt on input line 56.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.3pt on input line 56.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 5.5pt on input line 56.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 8.0pt on input line 57.
- [2]
-LaTeX Font Info:    Trying to load font information for T1+zi4 on input line 88.
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
+(Font)              scaled to size 14.4pt on input line 45.
+LaTeX Font Info:    Trying to load font information for T1+zi4 on input line 45.
  (C:\Users\hadyi\AppData\Local\Programs\MiKTeX\tex/latex/inconsolata\t1zi4.fd
 File: t1zi4.fd 2018/01/14 T1/zi4 (Inconsolata)
 )
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
-(Font)              scaled to size 10.0pt on input line 88.
+(Font)              scaled to size 10.0pt on input line 45.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `zi4' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [3]
-Overfull \hbox (9.45566pt too wide) in paragraph at lines 177--178
-[] []$\OML/nxlmi/m/it/10 result \LMS/ntxsy/m/n/10 
- \OML/nxlmi/m/it/10 M$ [] 
- []
+ [2] (assignment_5.aux)
 
-[4] [5] [6]
-<assn 4.png, id=135, 563.85657pt x 311.66437pt>
-File: assn 4.png Graphic file (type png)
-<use assn 4.png>
-Package pdftex.def Info: assn 4.png  used on input line 306.
-(pdftex.def)             Requested size: 360.33354pt x 199.16928pt.
- [7 <./assn 4.png>]
-<assn 4_3.png, id=151, 606.01407pt x 456.20438pt>
-File: assn 4_3.png Graphic file (type png)
-<use assn 4_3.png>
-Package pdftex.def Info: assn 4_3.png  used on input line 314.
-(pdftex.def)             Requested size: 377.97186pt x 284.52756pt.
- [8 <./assn 4_3.png>]
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 14.4pt on input line 352.
- [9] (assignment_4.aux)
-
-Package rerunfilecheck Warning: File `assignment_4.out' has changed.
+Package rerunfilecheck Warning: File `assignment_5.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
 (rerunfilecheck)                or use package `bookmark'.
 
-Package rerunfilecheck Info: Checksums for `assignment_4.out':
+Package rerunfilecheck Info: Checksums for `assignment_5.out':
 (rerunfilecheck)             Before: <no file>
 (rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 29080 strings out of 475385
- 557188 string characters out of 2776907
- 882134 words of memory out of 3000000
- 49480 multiletter control sequences out of 15000+600000
- 609292 words of font info for 303 fonts, out of 8000000 for 9000
+ 28800 strings out of 475385
+ 552207 string characters out of 2776907
+ 881135 words of memory out of 3000000
+ 49424 multiletter control sequences out of 15000+600000
+ 582026 words of font info for 229 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 105i,7n,107p,1047b,1184s stack positions out of 10000i,1000n,20000p,200000b,80000s
-{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/inconsolata/i4-t1-4.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_ncsllp.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_oexx6f.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_ki75ao.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_nh77jq.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_7grukw.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_76gpa5.enc}<C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI5.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI7.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineT.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTB.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTBI.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTI.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/NewTXMI.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txmiaX.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txsys.pfb>
-Output written on assignment_4.pdf (9 pages, 421770 bytes).
+ 105i,7n,107p,1047b,625s stack positions out of 10000i,1000n,20000p,200000b,80000s
+{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/inconsolata/i4-t1-4.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_oexx6f.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_ki75ao.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_nh77jq.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_7grukw.enc}{C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_76gpa5.enc}<C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/LibertineMathMI7.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineT.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTB.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTBI.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/libertine/LinLibertineTI.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txexs.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txmiaX.pfb><C:/Users/hadyi/AppData/Local/Programs/MiKTeX/fonts/type1/public/newtx/txsys.pfb>
+Output written on assignment_5.pdf (2 pages, 330464 bytes).
 PDF statistics:
- 270 PDF objects out of 1000 (max. 8388607)
- 132 named destinations out of 1000 (max. 500000)
- 75287 words of extra memory for PDF output out of 89155 (max. 10000000)
+ 98 PDF objects out of 1000 (max. 8388607)
+ 19 named destinations out of 1000 (max. 500000)
+ 59917 words of extra memory for PDF output out of 61914 (max. 10000000)
 

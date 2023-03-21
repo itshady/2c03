@@ -1,0 +1,48 @@
+\input{preamble.tex}
+
+\Assignment{5}
+\Deadline{March 31, 2023}
+\begin{document}
+\maketitle
+\DEFAULTMSG{}
+
+\begin{problem}
+Consider a remote community of $N$ houses $h_1, \dots h_N$. We want to provide each house with internet access at minimal cost.
+
+We can make a local network between these houses by connecting them via long-range Wi-Fi using directional antennas. The cost to connect two houses $h_i, h_j$ is given by $C(h_i, h_j)$ and will depend on their distance and the terrain in between (e.g., long distances and hills require strong radios and repeaters).
+
+In addition, we can connect one or more houses directly to the internet via a new fiber connection.  For house $h_i$, the cost of this fiber connection is $F(h_i)$. If a house has a direct internet connection, then it can share this connection with all other houses that are reachable via a path of long-range Wi-Fi connections.
+
+The community wants to find how to connect all members of this community with internet at a minimal cost.
+\begin{questions}
+\item Model the above problem as a graph problem: what are the nodes and edges in your graph, do the edges have weights, and what problem are you trying to answer on your graph?
+\item Provide an efficient algorithm to find a way to connect all members of this community with internet at minimal cost. Explain why your algorithm is correct, what the complexity of your algorithm is, and which graph representation you use.
+\end{questions}
+\end{problem}
+
+\begin{problem}
+A company has several distribution centers. To simplify logistics, the company wants to figure out which distribution center is the ``most central'': the maximum time it takes to transport freight from this distribution center to any other distribution center is \emph{minimal}. Assume we know, for every pair of distribution centers $X$ and $Y$, the time it takes to transport freight from $X$ to $Y$.
+\begin{questions}
+\item Model the above problem as a graph problem: what are the nodes and edges in your graph, do the edges have weights, and what problem are you trying to answer on your graph?
+\item Provide an efficient algorithm to find the most central distribution center. Explain why your algorithm is correct, what the complexity of your algorithm is, and which graph representation you use.
+\end{questions}
+\end{problem}
+
+\begin{problem}
+Let $\Graph = (\Nodes, \Edges)$ be an undirected weighted graph with weight function $\Weight$. 
+\begin{questions}
+\item Consider a minimum spanning tree $T$ of $\Graph$ such that edge $(m, n) \in \Edges$ is part of $T$. Prove that $T$ is still a minimum spanning tree if we reduce the weight $\Weight{(m, n)}$ by $k \geq 0$ (hence, the new weight of edge $(m, n)$ is $\Weight{(m, n)} - k$).
+\item We say that a set of edges $\Edges' \subseteq \Edges$ is a \emph{connecting set} if there is a path between all pairs of nodes $(m, n) \in \Nodes\times\Nodes$ using only the edges in $\Edges'$. We say that a connecting set is minimal if the sum $\sum_{e \in \Edges'} \Weight(e)$ is minimal among all connecting sets. Argue in which cases a minimal connecting set is a minimal spanning tree.
+\end{questions}
+\end{problem}
+
+\begin{problem}
+Consider a communication network represented by a graph $\Graph = (\Nodes, \Edges)$ in which the nodes represents network devices (e.g., computers, wireless access points, switches, and routers) and the edges represent a communication channel (e.g., a network cable or a wireless connection). In this graph, every edge $(m, n) \in \Edges$ has a weight $0\leq\Weight{(m, n)}\leq 1$ that indicates the probability of \emph{failure-free delivery} when a message is sent from $m$ to $n$ (the reliability of the communication channel).
+
+You may assume that the probability that a message sent by $m$ to $n$ is delivered without failures is independent  of the rest of the network. Provide an efficient algorithm that computes the most reliable communication-path between two nodes (such that the probability of failure-free delivery is maximal and the probability of failures is minimal).
+\end{problem}
+
+\SUBMITMSG{}
+\DEFAULTGRADING{}
+
+\end{document}
