@@ -16,7 +16,17 @@ In addition, we can connect one or more houses directly to the internet via a ne
 The community wants to find how to connect all members of this community with internet at a minimal cost.
 \begin{questions}
 \item Model the above problem as a graph problem: what are the nodes and edges in your graph, do the edges have weights, and what problem are you trying to answer on your graph?
+
+The nodes in the graph represent the houses in the remote community, denoted by $h_1$, . . . $h_N$. The edges in the graph represent the potential connections between the houses via long-range Wi-Fi using directional antennas. The cost to connect two houses $h_i$, $h_j$ is given by $C$($h_i$, $h_j$), which represents the weight of the edge between nodes $h_i$ and $h_j$ in the graph.
+
+Additionally, some houses can be directly connected to the internet via a new fiber connection, and the cost of this fiber connection for house $h_i$ is given by $F(h_i)$. If a house has a direct internet connection, it can share this connection with all other houses that are reachable via a path of long-range Wi-Fi connections. Therefore, the edges in the graph can be either weighted or unweighted, depending on whether or not the houses have a direct internet connection.
+
+The problem we are trying to answer on this graph is to find a minimum-cost spanning tree that connects all the houses in the community to the internet. The minimum-cost spanning tree will ensure that all the houses are connected to the internet while minimizing the cost of the connections between them.
+
 \item Provide an efficient algorithm to find a way to connect all members of this community with internet at minimal cost. Explain why your algorithm is correct, what the complexity of your algorithm is, and which graph representation you use.
+
+
+
 \end{questions}
 \end{problem}
 
@@ -24,7 +34,23 @@ The community wants to find how to connect all members of this community with in
 A company has several distribution centers. To simplify logistics, the company wants to figure out which distribution center is the ``most central'': the maximum time it takes to transport freight from this distribution center to any other distribution center is \emph{minimal}. Assume we know, for every pair of distribution centers $X$ and $Y$, the time it takes to transport freight from $X$ to $Y$.
 \begin{questions}
 \item Model the above problem as a graph problem: what are the nodes and edges in your graph, do the edges have weights, and what problem are you trying to answer on your graph?
+
+To model the above problem as a graph problem, we can consider each distribution center as a node in the graph, and the time it takes to transport freight from one distribution center to another as the weight of the edge between the corresponding nodes.
+
+Nodes: Each distribution center
+
+Edges: The edges in the graph represent the time it takes to transport freight from one distribution center to another.
+
+Weights: The weight of each edge is the time it takes to transport freight from one distribution center to another.
+
+Problem: The problem we are trying to answer on the graph is to find the "most central" distribution center, which is the distribution center with the minimal maximum time it takes to transport freight to any other distribution center.
+MINIMUM SPANNING TREE PROBLEM
+
 \item Provide an efficient algorithm to find the most central distribution center. Explain why your algorithm is correct, what the complexity of your algorithm is, and which graph representation you use.
+
+MAYBE find minimum spanning tree, then iterate over all nodes and find the node with the minimum maximum distance to any other node, which would be the "most central" distribution center.
+
+
 \end{questions}
 \end{problem}
 
@@ -32,7 +58,37 @@ A company has several distribution centers. To simplify logistics, the company w
 Let $\Graph = (\Nodes, \Edges)$ be an undirected weighted graph with weight function $\Weight$. 
 \begin{questions}
 \item Consider a minimum spanning tree $T$ of $\Graph$ such that edge $(m, n) \in \Edges$ is part of $T$. Prove that $T$ is still a minimum spanning tree if we reduce the weight $\Weight{(m, n)}$ by $k \geq 0$ (hence, the new weight of edge $(m, n)$ is $\Weight{(m, n)} - k$).
+
+To prove that T is still a minimum spanning tree if we reduce the weight of edge (m, n) by $k \geq 0$, we need to show that:
+
+T is still a spanning tree of G, meaning it connects all the nodes of G and does not have any cycles.
+T is still a minimum spanning tree of G with the new weight function.
+First, let's prove that T is still a spanning tree of G after the weight reduction. Since we are only reducing the weight of edge (m, n), all other edges in the original minimum spanning tree T are still included in the new spanning tree. Hence, T still connects all the nodes of G.
+
+To show that T does not have any cycles, we can use a proof by contradiction. Suppose that after the weight reduction, T has a cycle C that includes the edge (m, n) with reduced weight. Then, we can remove any edge in C that is not in the path between m and n in T, and we obtain a new spanning tree with a smaller total weight than T, contradicting the assumption that T is a minimum spanning tree of G. Therefore, T is still a spanning tree of G with no cycles.
+
+Next, we need to show that T is still a minimum spanning tree of G with the new weight function. To do this, let T' be any other spanning tree of G with a total weight less than T after the weight reduction. Then, the sum of weights of all edges in T' is:
+
+sum(T') = sum(T) - k + weight(m, n) - k
+
+Since weight(m, n) is reduced by k, the total sum of weights of T' is less than that of T by 2k. Therefore, T is still a minimum spanning tree of G with the new weight function.
+
+Hence, we have proved that T is still a minimum spanning tree of G if we reduce the weight of edge (m, n) by $k \geq 0$.
+
+
+BASICALLY given any other spanning tree is the sum of all its edges. The most it can improve it its sum - k. But since T is minimal before the - k, then it still wins since its min(sum) - k
+
 \item We say that a set of edges $\Edges' \subseteq \Edges$ is a \emph{connecting set} if there is a path between all pairs of nodes $(m, n) \in \Nodes\times\Nodes$ using only the edges in $\Edges'$. We say that a connecting set is minimal if the sum $\sum_{e \in \Edges'} \Weight(e)$ is minimal among all connecting sets. Argue in which cases a minimal connecting set is a minimal spanning tree.
+
+A minimal connecting set is a minimal spanning tree if and only if the graph G is connected.
+
+Proof:
+
+First, suppose that G is connected. Then any minimal connecting set E' must include exactly |N| - 1 edges, where |N| is the number of nodes in G, in order to form a spanning tree. Since a minimal connecting set E' is a tree that connects all nodes in G, it has no cycles, and hence it is acyclic. Furthermore, since E' is a tree, it is connected, meaning that there is a unique path between any pair of nodes in E'. Finally, since E' is a minimal connecting set, it must be the case that there is no other set of edges that connects all nodes in G with a smaller total weight. Therefore, E' is a minimal spanning tree.
+
+Now suppose that G is not connected, and let G1, G2, ..., Gk be the connected components of G. Then any minimal connecting set E' must include exactly k - 1 edges, in order to connect all of the connected components. However, it is possible to construct a set of edges that connects all of the connected components with a smaller total weight than any spanning tree that includes edges within the connected components. Specifically, we can choose any edge (m, n) that connects two different connected components, and remove all edges within the connected components, keeping only the edges that connect to m and n. The resulting set of edges connects all of the connected components, and has smaller total weight than any spanning tree that includes edges within the connected components. Therefore, a minimal connecting set is not necessarily a minimal spanning tree when G is not connected.
+
+
 \end{questions}
 \end{problem}
 
