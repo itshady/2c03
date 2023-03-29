@@ -104,35 +104,38 @@ Let $\Graph = (\Nodes, \Edges)$ be an undirected weighted graph with weight func
 \begin{questions}
 \item Consider a minimum spanning tree $T$ of $\Graph$ such that edge $(m, n) \in \Edges$ is part of $T$. Prove that $T$ is still a minimum spanning tree if we reduce the weight $\Weight{(m, n)}$ by $k \geq 0$ (hence, the new weight of edge $(m, n)$ is $\Weight{(m, n)} - k$).
 
-To prove that T is still a minimum spanning tree if we reduce the weight of edge (m, n) by $k \geq 0$, we need to show that:
+To show that T is still the minimum spanning tree of $\Graph$ given one of its edges $(m, n)$ by $k \geq 0$, we must show that T is still a spanning tree and is still the minimum spanning tree.
 
-T is still a spanning tree of G, meaning it connects all the nodes of G and does not have any cycles.
-T is still a minimum spanning tree of G with the new weight function.
-First, let's prove that T is still a spanning tree of G after the weight reduction. Since we are only reducing the weight of edge (m, n), all other edges in the original minimum spanning tree T are still included in the new spanning tree. Hence, T still connects all the nodes of G.
+Since changing the weight function doesn't change what nodes the edges connect, nor does it change the nodes, we can see that T is still a spanning tree with $N-1$ edges.
 
-To show that T does not have any cycles, we can use a proof by contradiction. Suppose that after the weight reduction, T has a cycle C that includes the edge (m, n) with reduced weight. Then, we can remove any edge in C that is not in the path between m and n in T, and we obtain a new spanning tree with a smaller total weight than T, contradicting the assumption that T is a minimum spanning tree of G. Therefore, T is still a spanning tree of G with no cycles.
+Now to prove that T is still the minimum spanning tree, we will use contradiction.
 
-Next, we need to show that T is still a minimum spanning tree of G with the new weight function. To do this, let T' be any other spanning tree of G with a total weight less than T after the weight reduction. Then, the sum of weights of all edges in T' is:
+Assume T is a minimum spanning tree with the sum of its edges as $sum_T$. When you reduce one edge (m, n) in T by k, another spanning tree S is now the new minimum spanning tree.
 
-sum(T') = sum(T) - k + weight(m, n) - k
+Let's say that $sum_{min} \leq sum_T$ is the sum the edges of T with the one edge reduced by k. 
 
-Since weight(m, n) is reduced by k, the total sum of weights of T' is less than that of T by 2k. Therefore, T is still a minimum spanning tree of G with the new weight function.
+We know that to be a minimum spanning tree, it must also be a spanning tree. 
+Every spanning tree has the property of having N-1 edges. This also means there are 2 cases: 
+(i) the spanning tree S has edge (m, n) in it and (ii) the spanning tree S doesn't have edge (m, n) in it.
+In case (i) we know since that edge is reduced by k, the sum of its weights is also reduced by k. In case (ii), the sum of its weights would remain the same.
 
-Hence, we have proved that T is still a minimum spanning tree of G if we reduce the weight of edge (m, n) by $k \geq 0$.
+We also know that for all spanning trees in G, the sum of the weights of its edges $sum_s$ is greater (technically or equal to if there is more than 1 MST) than $sum_T$. This applies for S.
+This means in case (ii), $sum_{min} \leq sum_T \leq sum_s$ so S cannot be more minimal than T with reduced weight k.
+In case (i), we know that $sum_s \geq sum_T$ since T was the minimum spanning tree. Now if S also contains the edge with reduced weight k, we get
+$sum_s - k \geq sum_T - k$, which still holds, meaning T must still be the minimum spanning tree.
 
-
-BASICALLY given any other spanning tree is the sum of all its edges. The most it can improve it its sum - k. But since T is minimal before the - k, then it still wins since its min(sum) - k
+This is a contradiction with our claim, so we know that T must still be the minimum spanning tree.
 
 \item We say that a set of edges $\Edges' \subseteq \Edges$ is a \emph{connecting set} if there is a path between all pairs of nodes $(m, n) \in \Nodes\times\Nodes$ using only the edges in $\Edges'$. We say that a connecting set is minimal if the sum $\sum_{e \in \Edges'} \Weight(e)$ is minimal among all connecting sets. Argue in which cases a minimal connecting set is a minimal spanning tree.
 
-A minimal connecting set is a minimal spanning tree if and only if the graph G is connected.
+There is no constraint on how many edges a connecting set must have as long as its at minimum $N-1$ edges (you need that many to connect the graph).
+For a spanning tree, there must only be $N-1$ edges and it must be connected.
 
-Proof:
+We know that for a conneceting set, you can connect the graph with $N-1$ edges. If we are aiming for the minimal connecting set, then the sum of its edges must be minimal compared to all other connecting sets. 
+Assume we have a minimal connecting set with $N-1$ edges. If we add any single edge to it (given the weight $\geq 1$), then this new connecting set would not be minimal as it has a greater weight than the connecting set without this new edge.
+By this logic, we know that the minimal connecting set must have $N-1$ edges.
 
-First, suppose that G is connected. Then any minimal connecting set E' must include exactly |N| - 1 edges, where |N| is the number of nodes in G, in order to form a spanning tree. Since a minimal connecting set E' is a tree that connects all nodes in G, it has no cycles, and hence it is acyclic. Furthermore, since E' is a tree, it is connected, meaning that there is a unique path between any pair of nodes in E'. Finally, since E' is a minimal connecting set, it must be the case that there is no other set of edges that connects all nodes in G with a smaller total weight. Therefore, E' is a minimal spanning tree.
-
-Now suppose that G is not connected, and let G1, G2, ..., Gk be the connected components of G. Then any minimal connecting set E' must include exactly k - 1 edges, in order to connect all of the connected components. However, it is possible to construct a set of edges that connects all of the connected components with a smaller total weight than any spanning tree that includes edges within the connected components. Specifically, we can choose any edge (m, n) that connects two different connected components, and remove all edges within the connected components, keeping only the edges that connect to m and n. The resulting set of edges connects all of the connected components, and has smaller total weight than any spanning tree that includes edges within the connected components. Therefore, a minimal connecting set is not necessarily a minimal spanning tree when G is not connected.
-
+This means that in ALL cases, a minimal connecting set is the minimal spanning tree.
 
 \end{questions}
 \end{problem}
