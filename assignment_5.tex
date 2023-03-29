@@ -44,7 +44,8 @@ The graph passed into the algorithm is the graph described in 1.1.
   \RETURN $E$
 \end{myalgo}
 
-The graph representation is adjacency list representation. As seen in class this is just Prim's algorithm which is $|\Edges| log(|\Nodes|)$ as proven in class ($log(|\Nodes|)$ for getting min edge from min heap and you do this for each edge)
+The graph representation is adjacency list representation. As seen in class this is just Prim's algorithm which is $|\Edges| log(|\Nodes|)$ as proven in class ($log(|\Nodes|)$ for getting min edge from min heap and you do this for each edge).
+The algorithm is correct since getting the minimum spanning tree with the graph we set up in 1.1 will return the lowest cost to connect all houses with at least 1 fiber connection.
 
 \end{questions}
 \end{problem}
@@ -96,6 +97,12 @@ Problem: The problem we are trying to answer on the graph is to find the "most c
   \RETURN{$path_{max}$}
 \end{myalgo}
 
+I used an adjacency list graph representation. 
+
+The algortihm is correct because we run Dijkstra's on every node to find the shortest path to all nodes from that one node. By modifying it a bit, we can keep track of the maximum shortest path from that node to any other node. By doing this for every node, we can keep track of the lowest maximum shortest path for each node, which is the most central distribution center. 
+
+The complexity is $\sim |N| |\Edges| log(|\Nodes|)$ as Dijkstra's is $\sim |\Edges| log(|\Nodes|)$ and I run it once per node.
+
 \end{questions}
 \end{problem}
 
@@ -104,7 +111,7 @@ Let $\Graph = (\Nodes, \Edges)$ be an undirected weighted graph with weight func
 \begin{questions}
 \item Consider a minimum spanning tree $T$ of $\Graph$ such that edge $(m, n) \in \Edges$ is part of $T$. Prove that $T$ is still a minimum spanning tree if we reduce the weight $\Weight{(m, n)}$ by $k \geq 0$ (hence, the new weight of edge $(m, n)$ is $\Weight{(m, n)} - k$).
 
-To show that T is still the minimum spanning tree of $\Graph$ given one of its edges $(m, n)$ by $k \geq 0$, we must show that T is still a spanning tree and is still the minimum spanning tree.
+To show that T is still the minimum spanning tree of $\Graph$ given one of its edges $(m, n)$ is reduced by $k \geq 0$, we must show that T is still a spanning tree and is still the minimum spanning tree.
 
 Since changing the weight function doesn't change what nodes the edges connect, nor does it change the nodes, we can see that T is still a spanning tree with $N-1$ edges.
 
@@ -145,6 +152,29 @@ Consider a communication network represented by a graph $\Graph = (\Nodes, \Edge
 
 You may assume that the probability that a message sent by $m$ to $n$ is delivered without failures is independent  of the rest of the network. Provide an efficient algorithm that computes the most reliable communication-path between two nodes (such that the probability of failure-free delivery is maximal and the probability of failures is minimal).
 \end{problem}
+
+Assume s is the start node and d is the end node.
+
+\begin{myalgo}{\AName{Dijkstras}($\Graph = (\Nodes, \Edges), weight, s \in \Nodes, d \in \Nodes$)}
+  \STATE {$path, cost := [n \rightarrow ? | n \in \Nodes], [n \rightarrow 0 | n \in \Nodes]$}
+  \STATE {$path[s], cost[s] := s, 1$}
+  \STATE {$Q := \text{a minimum-priority queue that holds node } s \text { with priority 0}$}
+  \WHILE{$Q \ne \emptyset$}
+      \STATE {Pop node $m$ with lowest priority with from Q}
+      \FORALL{edges $(m,n) \in \Edges$}
+          \IF{$cost[m] * weight((m,n)) > cost[n]$}
+              \STATE{$path[n], cost[n] := m, weight((m,n))*cost[m]$}
+              \STATE {Update $n$ in $Q$ such that $n$ has priority $cost[n]$ in $Q$}
+          \ENDIF
+      \ENDFOR
+  \ENDWHILE
+  \RETURN{$\text{recursively return the path from s to d}$}
+\end{myalgo}
+
+This is just Dijkstra's algorithm as seen in class, but instead of calculating distances, we calculate probabilities.
+The probability of two events happening back to back is equal to multiplying the probability of one event with the probability of the second.
+The "better" probability, is the higher one. This means line 2 was edited to have the start node at a probability of 1. Then lines 7 and 8 changed to check if its greater than and multiplying the probabilities.
+This is an $\sim |\Edges| log(|\Nodes|)$ complexity.
 
 \SUBMITMSG{}
 \DEFAULTGRADING{}
