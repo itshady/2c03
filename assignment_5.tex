@@ -17,15 +17,30 @@ The community wants to find how to connect all members of this community with in
 \begin{questions}
 \item Model the above problem as a graph problem: what are the nodes and edges in your graph, do the edges have weights, and what problem are you trying to answer on your graph?
 
-The nodes in the graph represent the houses in the remote community, denoted by $h_1$, . . . $h_N$. The edges in the graph represent the potential connections between the houses via long-range Wi-Fi using directional antennas. The cost to connect two houses $h_i$, $h_j$ is given by $C$($h_i$, $h_j$), which represents the weight of the edge between nodes $h_i$ and $h_j$ in the graph.
+The nodes in the graph represent the houses in the remote community, denoted by $h_1$, . . . $h_N$. The edges in the graph represent the potential connections between the houses via long-range Wi-Fi using directional antennas. These edges will be undirected as the $C$($h_i$, $h_j$) relationship is symmetric (the cost to wire goes both ways, so if I'm wired to you, you're wired to me). The cost to connect two houses $h_i$, $h_j$ is given by $C$($h_i$, $h_j$), which represents the weight of the edge between nodes $h_i$ and $h_j$ in the graph.
 
-Additionally, some houses can be directly connected to the internet via a new fiber connection, and the cost of this fiber connection for house $h_i$ is given by $F(h_i)$. If a house has a direct internet connection, it can share this connection with all other houses that are reachable via a path of long-range Wi-Fi connections. Therefore, the edges in the graph can be either weighted or unweighted, depending on whether or not the houses have a direct internet connection.
+We will also add a node $F$ which denotes the fiber source. This node will have an edge to every house $h_i$ with a weight of $F$($h_i$). Note: Not all houses have the ability to connect to fiber or to another house. If it doesn't exist the edge wouldn't exist in the graph.
 
-The problem we are trying to answer on this graph is to find a minimum-cost spanning tree that connects all the houses in the community to the internet. The minimum-cost spanning tree will ensure that all the houses are connected to the internet while minimizing the cost of the connections between them.
+The problem we are trying to answer on this graph is to find a minimum-cost spanning tree that connects all the houses in the community to the internet. The minimum-cost spanning tree will ensure that all the houses are connected to the internet while minimizing the cost of the connections between them and also assuring there is at least 1 connection to the fiber source.
 
 \item Provide an efficient algorithm to find a way to connect all members of this community with internet at minimal cost. Explain why your algorithm is correct, what the complexity of your algorithm is, and which graph representation you use.
 
-
+\begin{myalgo}{\AName{ConnectCommunity}($\Graph = (\Nodes, \Edges), weight$)}
+  \STATE $E, M$ \GETS $\emptyset$, r where r is a node from M
+  \STATE $Q$ \GETS min priority queue initialized with neighbours n of r alongside their edges ($n$, ($r,n$) $\in \Edges$)
+  \WHILE{$M \neq N$}
+    \STATE Pop min weighted ($n$, ($m,n$)) from $Q$ $m \in M$ and $n \notin M$
+    \STATE $E, M$ \GETS $E \cup {(m,n)}, M \cup {n}$
+    \FOR{($n$, $w$) $\in \Edges$}
+      \IF{$w \in Q$}
+        \STATE if $weight((n,w)) < weight$($Q(w)$ edge) replace $Q$($w$) edge with (n,w)
+      \ELSE
+        \STATE add ($n$, $w$) to $Q$
+      \ENDIF
+    \ENDFOR
+  \ENDWHILE
+  \RETURN $E$
+\end{myalgo}
 
 \end{questions}
 \end{problem}
