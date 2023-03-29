@@ -25,6 +25,8 @@ The problem we are trying to answer on this graph is to find a minimum-cost span
 
 \item Provide an efficient algorithm to find a way to connect all members of this community with internet at minimal cost. Explain why your algorithm is correct, what the complexity of your algorithm is, and which graph representation you use.
 
+The graph passed into the algorithm is the graph described in 1.1.
+
 \begin{myalgo}{\AName{ConnectCommunity}($\Graph = (\Nodes, \Edges), weight$)}
   \STATE $E, M$ \GETS $\emptyset$, r where r is a node from M
   \STATE $Q$ \GETS min priority queue initialized with neighbours n of r alongside their edges ($n$, ($r,n$) $\in \Edges$)
@@ -42,6 +44,8 @@ The problem we are trying to answer on this graph is to find a minimum-cost span
   \RETURN $E$
 \end{myalgo}
 
+The graph representation is adjacency list representation. As seen in class this is just Prim's algorithm which is $|\Edges| log(|\Nodes|)$ as proven in class ($log(|\Nodes|)$ for getting min edge from min heap and you do this for each edge)
+
 \end{questions}
 \end{problem}
 
@@ -52,19 +56,45 @@ A company has several distribution centers. To simplify logistics, the company w
 
 To model the above problem as a graph problem, we can consider each distribution center as a node in the graph, and the time it takes to transport freight from one distribution center to another as the weight of the edge between the corresponding nodes.
 
-Nodes: Each distribution center
+Nodes: Each distribution center is represented as a node.
 
-Edges: The edges in the graph represent the time it takes to transport freight from one distribution center to another.
+Edges: The edges in the graph represent the time it takes to transport freight from one distribution center to another in a straight line. The weights of the edges are the actual times. These are undirected since, I should be able to traverse the same path both ways in the same time.
 
-Weights: The weight of each edge is the time it takes to transport freight from one distribution center to another.
-
-Problem: The problem we are trying to answer on the graph is to find the "most central" distribution center, which is the distribution center with the minimal maximum time it takes to transport freight to any other distribution center.
-MINIMUM SPANNING TREE PROBLEM
+Problem: The problem we are trying to answer on the graph is to find the "most central" distribution center, which is the distribution center with the minimal maximum time it takes to transport freight to any other distribution center. Therefore this is a shortest path algorithm problem for every single node, then finding the node with the minimum of its maximum shortest path.
 
 \item Provide an efficient algorithm to find the most central distribution center. Explain why your algorithm is correct, what the complexity of your algorithm is, and which graph representation you use.
 
-MAYBE find minimum spanning tree, then iterate over all nodes and find the node with the minimum maximum distance to any other node, which would be the "most central" distribution center.
+\begin{myalgo}{\AName{CentralDistribution}($\Graph = (\Nodes, \Edges), weight$)}
+  \STATE {$central_n, smallest_{max}$ \GETS $null$, $\infty$}
+  \FOR{$n \in \Nodes$}
+    \STATE{$path_{max}$ \GETS $\AName{Dijkstras}(\Graph, weight, n)$}
+    \IF{$path_{max}$ < $smallest_{max}$}
+      \STATE $central_n$ \GETS $n$
+      \STATE $smallest_{max}$ \GETS $path_{max}$
+    \ENDIF
+  \ENDFOR
+\end{myalgo}
 
+
+\begin{myalgo}{\AName{Dijkstras}($\Graph = (\Nodes, \Edges), weight, s \in \Nodes$)}
+  \STATE {$path, cost := [n \rightarrow ? | n \in \Nodes], [n \rightarrow \infty | n \in \Nodes]$}
+  \STATE {$path[s], cost[s] := s, 0$}
+  \STATE {$path_{max} := 0$}
+  \STATE {$Q := \text{a minimum-priority queue that holds node } s \text { with priority 0}.$}
+  \WHILE{$Q \ne \emptyset$}
+      \STATE {Pop node $m$ with lowest priority with from Q}
+      \FORALL{edges $(m,n) \in \Edges$}
+          \IF{$cost[m] + weight((m,n)) < cost[n]$}
+              \STATE{$path[n], cost[n] := m, weight((m,n))+cost[m]$}
+              \IF{$cost[n] > path_{max}$}
+                \STATE $path_{max}$ \GETS $cost[n]$
+              \ENDIF
+              \STATE {Update $n$ in $Q$ such that $n$ has priority $cost[n]$ in $Q$}
+          \ENDIF
+      \ENDFOR
+  \ENDWHILE
+  \RETURN{$path_{max}$}
+\end{myalgo}
 
 \end{questions}
 \end{problem}
