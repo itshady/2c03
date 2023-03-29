@@ -168,7 +168,7 @@ Assume s is the start node and d is the end node.
           \ENDIF
       \ENDFOR
   \ENDWHILE
-  \RETURN{$\text{recursively return the path from s to d}$}
+  \RETURN{$\text{the path from s to d found by calling path[d] and working backwards until reaching s}$}
 \end{myalgo}
 
 This is just Dijkstra's algorithm as seen in class, but instead of calculating distances, we calculate probabilities.
